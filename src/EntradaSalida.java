@@ -3,14 +3,22 @@ import java.util.Objects;
 public class EntradaSalida {
     private String ficheroEntrada = "";
     private String ficheroSalida = "";
+    private String ficheroClave = "";
     private boolean traza = false;
+
     public String leerEntrada() {
         return "";
     }
 
-    public void escribirSalida() {
+    public Integer[][] leerClave() {
+        Integer [][] clave = new Integer[3][3];
+        return clave;
+    }
+
+    public void escribirSalida(String salida) {
 
     }
+
     public String getFicheroEntrada() {
         return ficheroEntrada;
     }
@@ -35,24 +43,21 @@ public class EntradaSalida {
         this.traza = traza;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof EntradaSalida that)) return false;
-        return isTraza() == that.isTraza() && Objects.equals(getFicheroEntrada(), that.getFicheroEntrada()) && Objects.equals(getFicheroSalida(), that.getFicheroSalida());
+    public String getFicheroClave() {
+        return ficheroClave;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getFicheroEntrada(), getFicheroSalida(), isTraza());
+    public void setFicheroClave(String ficheroClave) {
+        this.ficheroClave = ficheroClave;
     }
-
-    @Override
-    public String toString() {
-        return "EntradaSalida{" +
-                "ficheroEntrada='" + ficheroEntrada + '\'' +
-                ", ficheroSalida='" + ficheroSalida + '\'' +
-                ", traza=" + traza +
-                '}';
+    /**
+     * Imprime un texto en la consola si la bandera "TRAZA" está activada.
+     *
+     * @param text El texto a imprimir.
+     */
+    public void print(String text) {
+        if (traza) {
+            System.out.println(text);
+        }
     }
 }

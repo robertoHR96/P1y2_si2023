@@ -7,19 +7,25 @@ public class Controller {
     // Variable de estado para la bandera "TRAZA" (inicializada en "true" por defecto)
     private boolean traza = true;
 
-    // Variable de estado para la bandera "CODIFICA" (inicializada en "false" por defecto)
-    private boolean codifica = false;
-
     // Objeto para gestionar Hill (inicializado con una nueva instancia)
     private Hill hill = new Hill();
-
-    // Objeto para gestionar Formateador (inicializado con una nueva instancia)
-    private Formateador formateador = new Formateador();
 
     // Objeto para gestionar EntradaSalida (inicializado con una nueva instancia)
     private EntradaSalida entradaSalida = new EntradaSalida();
 
+    /**
+     * Se ajustan lo valores a la configuración por defecto
+     */
+    public void ajustarDefault(){
+        this.traza = true;
+        hill.setTraza(true);
+        hill.setCodifica(true);
+        hill.setClaveDefault();
+        entradaSalida.setTraza(true);
+        entradaSalida.setFicheroEntrada("entrada.txt");
+        entradaSalida.setFicheroSalida("salida.txt");
 
+    }
     /**
      * Método que ejecuta un proceso de inicio a partir de un archivo de configuración.
      *
@@ -70,13 +76,72 @@ public class Controller {
         // Dividir la cadena en palabras separadas por espacios
         String[] splitLinea = strng.split(" ");
 
-        // Comprobar si el primer elemento es "@"
-        // Si es "@", llamar a la función updateBandera con los argumentos especificados
-        if (splitLinea[0].equals("@")) updateBandera(splitLinea[1], splitLinea[2]);
+        // Se comprueba que el comando que se quiera ejecutar sea válido
+        if (splitLinea.length >= 2) {
+            // Comprobar si el primer elemento es "@"
+            // Si es "@", llamar a la función updateBandera con los argumentos especificados
+            if (splitLinea[0].equals("@")) updateBandera(splitLinea[1], splitLinea[2]);
 
-        // Comprobar si el primer elemento es "&"
-        // Si es "&", imprimir "aspersan"
-        if (splitLinea[0].equals("&")) print("aspersan");
+            // Comprobar si el primer elemento es "&"
+            // Si es "&", llamar a la función seleccionarComando con el comando especificado
+            if (splitLinea[0].equals("&")) seleccionarComando(splitLinea);
+        }
+    }
+
+    /**
+     * Ejecuta el comando que según mande el fichero de configuración
+     *
+     * @param splitLinea Array de Strings con la línea del comando
+     */
+    public void seleccionarComando(String[] splitLinea) {
+        // Si es "hill", llamar a la función ejecutarHill
+        if (splitLinea[1].equals("hill")) ejecutarHill();
+        // Si es "ficherosalida" se selecciona el fichero de salida en la clase entradaSalia
+        if (splitLinea[1].equals("ficherosalida") && splitLinea.length == 3)
+            entradaSalida.setFicheroSalida(splitLinea[2]);
+        // Si es "ficheroentrada" se selecciona el fichero de entrada en la clase entradaSalia
+        if (splitLinea[1].equals("ficheroentrada") && splitLinea.length == 3)
+            entradaSalida.setFicheroEntrada(splitLinea[2]);
+        // Si es "clave" se llama a la función getFicheroFormateado con el fichero que contiene la clave
+        if (splitLinea[1].equals("clave") && splitLinea.length == 3) seleccionarClave(splitLinea[2]);
+        // Si es "formatearentrada" se llama a la función formatearEntrada
+        if (splitLinea[1].equals("formateaentrada")) formatearEntrada();
+    }
+
+    /**
+     * Lee los datos del fichero de entrada y los guarda formateados en el fichero de salida
+     */
+    public void formatearEntrada() {
+        // Se obtienen los datos del fichero de entrada
+        String dataFicheroEntrada = entradaSalida.leerEntrada();
+        // Se formatea el texto obtenido
+        dataFicheroEntrada = formatearTexto(dataFicheroEntrada);
+        // Se guarda el texto en el fichero de salida
+        entradaSalida.escribirSalida(dataFicheroEntrada);
+    }
+
+    /**
+     * Selecciona la clave para cifrar y descifrar desde un fichero
+     *
+     * @param ficheroClave String con el nombre del fichero que contiene la clave
+     */
+    public void seleccionarClave(String ficheroClave) {
+        // Se selecciona el fichero con la clave en el objeto entradaSalida
+        entradaSalida.setFicheroClave(ficheroClave);
+        // Se lee la clave de entradaSalida y se la asignamos a hill
+        hill.setClave(entradaSalida.leerClave());
+    }
+
+    /**
+     * Realiza el proceso de cifrado/descifrado, recoge la salida de este y la guarda en el fichero
+     * de salida.
+     */
+    public void ejecutarHill() {
+        // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
+        hill.setEntrada(entradaSalida.leerEntrada());
+
+        // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
+        entradaSalida.escribirSalida(hill.cifrar());
     }
 
     /**
@@ -98,7 +163,8 @@ public class Controller {
         if (bandera.equals("TRAZA")) updateEstadoTraza(estadoBnd);
 
         // Si la bandera es "CODIFICA", actualiza el estado correspondiente
-        if (bandera.equals("CODIFICA")) setCodifica(estadoBnd);
+        // de la instancia de la clase Hill
+        if (bandera.equals("CODIFICA")) hill.setCodifica(estadoBnd);
     }
 
     /**
@@ -107,12 +173,17 @@ public class Controller {
      * @param estadoBnd El nuevo estado de la bandera "TRAZA".
      */
     public void updateEstadoTraza(boolean estadoBnd) {
-        traza = estadoBnd;
+        // Se establece el valor de la variable traza propia
+        this.traza = estadoBnd;
+        // Se establece el valor del atributo traza de la instancia de la clase hill
         hill.setTraza(estadoBnd);
-        formateador.setTraza(estadoBnd);
+        // Se establece el valor del atributo traza de la instancia de la clase entradaSalida
         entradaSalida.setTraza(estadoBnd);
     }
 
+
+    /****************** Getter, Setter, hascode, equlas and toString *****************/
+    /******************************************************/
     /**
      * Obtiene el estado de la bandera "TRAZA".
      *
@@ -131,23 +202,6 @@ public class Controller {
         this.traza = traza;
     }
 
-    /**
-     * Obtiene el estado de la bandera "CODIFICA".
-     *
-     * @return El estado actual de la bandera "CODIFICA".
-     */
-    public boolean isCodifica() {
-        return codifica;
-    }
-
-    /**
-     * Establece el estado de la bandera "CODIFICA".
-     *
-     * @param codifica El nuevo estado de la bandera "CODIFICA".
-     */
-    public void setCodifica(boolean codifica) {
-        this.codifica = codifica;
-    }
 
 // ... (Métodos getter y setter para otras propiedades) ...
 
@@ -188,24 +242,6 @@ public class Controller {
     }
 
     /**
-     * Obtiene una instancia de la clase Formateador.
-     *
-     * @return Una instancia de la clase Formateador.
-     */
-    public Formateador getFormateador() {
-        return formateador;
-    }
-
-    /**
-     * Establece una instancia de la clase Formateador.
-     *
-     * @param formateador La instancia de la clase Formateador a establecer.
-     */
-    public void setFormateador(Formateador formateador) {
-        this.formateador = formateador;
-    }
-
-    /**
      * Obtiene una instancia de la clase EntradaSalida.
      *
      * @return Una instancia de la clase EntradaSalida.
@@ -223,6 +259,9 @@ public class Controller {
         this.entradaSalida = entradaSalida;
     }
 
+    public String formatearTexto(String texto) {
+        return texto;
+    }
 
     /**
      * Imprime un texto en la consola si la bandera "TRAZA" está activada.
