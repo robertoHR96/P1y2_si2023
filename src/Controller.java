@@ -164,6 +164,79 @@ public class Controller {
 // ... (Métodos getter y setter para otras propiedades) ...
 
     /**
+     * Obtiene el nombre del fichero de configuración.
+     *
+     * @return El nombre del fichero de configuración.
+     */
+    public String getFicheroConfig() {
+        return ficheroConfig;
+    }
+
+    /**
+     * Establece el nombre del fichero de configuración.
+     *
+     * @param ficheroConfig El nombre del fichero de configuración a establecer.
+     */
+    public void setFicheroConfig(String ficheroConfig) {
+        this.ficheroConfig = ficheroConfig;
+    }
+
+    /**
+     * Obtiene una instancia de la clase Hill.
+     *
+     * @return Una instancia de la clase Hill.
+     */
+    public Hill getHill() {
+        return hill;
+    }
+
+    /**
+     * Establece una instancia de la clase Hill.
+     *
+     * @param hill La instancia de la clase Hill a establecer.
+     */
+    public void setHill(Hill hill) {
+        this.hill = hill;
+    }
+
+    /**
+     * Obtiene una instancia de la clase Formateador.
+     *
+     * @return Una instancia de la clase Formateador.
+     */
+    public Formateador getFormateador() {
+        return formateador;
+    }
+
+    /**
+     * Establece una instancia de la clase Formateador.
+     *
+     * @param formateador La instancia de la clase Formateador a establecer.
+     */
+    public void setFormateador(Formateador formateador) {
+        this.formateador = formateador;
+    }
+
+    /**
+     * Obtiene una instancia de la clase EntradaSalida.
+     *
+     * @return Una instancia de la clase EntradaSalida.
+     */
+    public EntradaSalida getEntradaSalida() {
+        return entradaSalida;
+    }
+
+    /**
+     * Establece una instancia de la clase EntradaSalida.
+     *
+     * @param entradaSalida La instancia de la clase EntradaSalida a establecer.
+     */
+    public void setEntradaSalida(EntradaSalida entradaSalida) {
+        this.entradaSalida = entradaSalida;
+    }
+
+
+    /**
      * Imprime un texto en la consola si la bandera "TRAZA" está activada.
      *
      * @param text El texto a imprimir.
