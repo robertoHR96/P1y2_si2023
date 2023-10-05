@@ -71,16 +71,12 @@ public class Controller {
         String[] splitLinea = strng.split(" ");
 
         // Comprobar si el primer elemento es "@"
-        if (splitLinea[0].equals("@")) {
-            // Si es "@", llamar a la función updateBandera con los argumentos especificados
-            updateBandera(splitLinea[1], splitLinea[2]);
-        }
+        // Si es "@", llamar a la función updateBandera con los argumentos especificados
+        if (splitLinea[0].equals("@")) updateBandera(splitLinea[1], splitLinea[2]);
 
         // Comprobar si el primer elemento es "&"
-        if (splitLinea[0].equals("&")) {
-            // Si es "&", imprimir "aspersan"
-            print("aspersan");
-        }
+        // Si es "&", imprimir "aspersan"
+        if (splitLinea[0].equals("&")) print("aspersan");
     }
 
     /**
@@ -93,24 +89,16 @@ public class Controller {
         boolean estadoBnd = false;
 
         // Comprueba si el estado de la bandera es "ON"
-        if (estadoBandera.equals("ON")) {
-            estadoBnd = true;
-        }
+        if (estadoBandera.equals("ON")) estadoBnd = true;
 
         // Comprueba si el estado de la bandera es "OFF"
-        if (estadoBandera.equals("OFF")) {
-            estadoBnd = false;
-        }
+        if (estadoBandera.equals("OFF")) estadoBnd = false;
 
         // Si la bandera es "TRAZA", actualiza el estado correspondiente
-        if (bandera.equals("TRAZA")) {
-            updateEstadoTraza(estadoBnd);
-        }
+        if (bandera.equals("TRAZA")) updateEstadoTraza(estadoBnd);
 
         // Si la bandera es "CODIFICA", actualiza el estado correspondiente
-        if (bandera.equals("CODIFICA")) {
-            setCodifica(estadoBnd);
-        }
+        if (bandera.equals("CODIFICA")) setCodifica(estadoBnd);
     }
 
     /**

@@ -6,69 +6,29 @@ public class Main {
         Controller controller = new Controller();
         switch (args.length) {
             case 1:
-                if (args[0].equals("-h")) {
-                    mostrarAyuda();
-                } else {
-
-                    System.out.println("" +
-                            "Error de argumentos.\n" +
-                            "-f fichero: Para ejecutar el programa.\n" +
-                            "-h : Para obtener ayuda.\n" +
-                            "");
-                }
+                if (args[0].equals("-h")) mostrarAyuda();
+                else System.out.println("" +
+                        "Error de argumentos.\n" +
+                        "-f fichero: Para ejecutar el programa.\n" +
+                        "-h : Para obtener ayuda.\n" +
+                        "");
                 break;
             case 2:
                 if (args[0].equals("-f")) {
                     controller.setFicheroConfig(args[1]);
                     //controller.setFicheroConfig("ejemplo.txt");
                     controller.run();
-                } else {
-                    System.out.println("" +
-                            "Error de argumentos.\n" +
-                            "-f fichero: Para ejecutar el programa.\n" +
-                            "-h : Para obtener ayuda.\n" +
-                            "");
-                }
+                } else System.out.println("" +
+                        "Error de argumentos.\n" +
+                        "-f fichero: Para ejecutar el programa.\n" +
+                        "-h : Para obtener ayuda.\n" +
+                        "");
                 break;
 
         }
     }
-    static void mostrarAyuda() {
-        System.out.println("-- Ayuda --");
-    }
-}
-
-    /*
-
-
-
-    File doc = new File("./ejeamplo.txt");
-
-    BufferedReader obj = null;
-    String strng = null;
-        try
-
-    {
-        obj = new BufferedReader(new FileReader(doc));
-        while (true) {
-            try {
-                if (!((strng = obj.readLine()) != null)) break;
-            } catch (IOException e) {
-                System.err.println("Error al leer el fichero de entrada");
-            }
-            System.out.println(strng);
-        }
-    } catch(
-    FileNotFoundException e)
-
-    {
-        System.err.println("El fichero de entrada no es valido");
-    }
-
-}
 
     static void mostrarAyuda() {
         System.out.println("-- Ayuda --");
     }
 }
-     */
