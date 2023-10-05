@@ -1,15 +1,5 @@
-esto es un ejemplo de entrada
-esto es un ejemplo de entrada
-esto es un ejemplo de entrada hola como estas juas juas juas
-cuando oigo voces veo letras
-esto es un ejemplo de entrada
-hola como estas juas juas juas
-cuando oigo voces veo letras
-esto es un ejemplo de entrada
-hola como estas juas juas juas
-cuando oigo voces veo letras
-esto es un ejemplo de entrada
-esto es un ejemplo de entrada hola como estas juas juas juas
-cuando oigo voces veo letras
-esto es un ejemplo de entrada
+# Esto es un comentario
 
+@ Esto es una vandera
+
+& esto es un Comando

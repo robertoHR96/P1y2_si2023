@@ -9,32 +9,28 @@ public class Main {
                 if (args[0].equals("-h")) {
                     mostrarAyuda();
                 } else {
+
                     System.out.println("" +
-                            "Error de argumentos." +
-                            "-f fichero: Para ejecutar el programa." +
-                            "-h : Para obtener ayuda." +
+                            "Error de argumentos.\n" +
+                            "-f fichero: Para ejecutar el programa.\n" +
+                            "-h : Para obtener ayuda.\n" +
                             "");
                 }
                 break;
             case 2:
-                if(args[0].equals("-f")) {
+                if (args[0].equals("-f")) {
                     controller.setFicheroConfig(args[1]);
+                    //controller.setFicheroConfig("ejemplo.txt");
                     controller.run();
-                }else {
+                } else {
                     System.out.println("" +
-                            "Error de argumentos." +
-                            "-f fichero: Para ejecutar el programa." +
-                            "-h : Para obtener ayuda." +
+                            "Error de argumentos.\n" +
+                            "-f fichero: Para ejecutar el programa.\n" +
+                            "-h : Para obtener ayuda.\n" +
                             "");
                 }
                 break;
-            default:
-                System.out.println("" +
-                        "Error de argumentos." +
-                        "-f fichero: Para ejecutar el programa." +
-                        "-h : Para obtener ayuda." +
-                        "");
-                break;
+
         }
     }
     static void mostrarAyuda() {
