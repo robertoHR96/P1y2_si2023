@@ -9,7 +9,7 @@ public class Hill {
     // Variable de estado para la bandera "TRAZA" (inicializada en "true" por defecto)
     private boolean traza = false;
     // Matriz de números con la clave para cifrar los datos
-    private Integer [][] clave = new Integer[3][3];
+    private Integer[][] clave = new Integer[3][3];
     // Variable de estado para la bandera "CODIFICA" (inicializada en "false" por defecto)
     private boolean codifica = false;
 
@@ -19,7 +19,7 @@ public class Hill {
      * @return Texto cifrado/desCifrado.
      */
     public String cifrar() {
-        if(codifica) codificar();
+        if (codifica) codificar();
         else desCodificar();
         // si se va a descifrar la entrada tiene que se multiplos de 3
         return "";
@@ -28,13 +28,16 @@ public class Hill {
     /**
      * Cifra el contenido de la variable entrada
      */
-    public void codificar (){}
-    public void desCodificar() {}
+    public void codificar() {
+    }
+
+    public void desCodificar() {
+    }
 
     /**
      * Establece una clave por defecto
      */
-    public void setClaveDefault(){
+    public void setClaveDefault() {
         // Valores de la primera fila
         clave[0][0] = 1;
         clave[0][1] = 2;
@@ -71,6 +74,7 @@ public class Hill {
 
     /**
      * Obtiene la salida del texto cifrado
+     *
      * @return Texto cifrado
      */
     public String getSalida() {
@@ -85,6 +89,7 @@ public class Hill {
     public void setSalida(String salida) {
         this.salida = salida;
     }
+
     /**
      * Obtiene el estado de la bandera "TRAZA".
      *
@@ -139,6 +144,7 @@ public class Hill {
     public void setCodifica(boolean codifica) {
         this.codifica = codifica;
     }
+
     /**
      * Imprime un texto en la consola si la bandera "TRAZA" está activada.
      *

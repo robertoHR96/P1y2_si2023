@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="update controller and hill">
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="String Tokenizer en vez de split">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EntradaSalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntradaSalida.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hill.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +26,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/Hill.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/Hill.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2WKucNdQiEtbrHvyQ0kSg9YGA2P" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -82,7 +84,7 @@
       <workItem from="1696528635200" duration="59000" />
       <workItem from="1696529198072" duration="55000" />
       <workItem from="1696530634485" duration="8000" />
-      <workItem from="1696667754950" duration="975000" />
+      <workItem from="1696667754950" duration="1456000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -124,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696527896741</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="String Tokenizer en vez de split">
+      <option name="closed" value="true" />
+      <created>1696772357538</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1696772357538</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,7 +146,8 @@
     <MESSAGE value="update controller" />
     <MESSAGE value="update if s" />
     <MESSAGE value="update controller and hill" />
-    <option name="LAST_COMMIT_MESSAGE" value="update controller and hill" />
+    <MESSAGE value="String Tokenizer en vez de split" />
+    <option name="LAST_COMMIT_MESSAGE" value="String Tokenizer en vez de split" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

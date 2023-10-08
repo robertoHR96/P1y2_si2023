@@ -18,7 +18,7 @@ public class Controller {
     /**
      * Se ajustan lo valores a la configuración por defecto
      */
-    public void ajustarDefault(){
+    public void ajustarDefault() {
         this.traza = true;
         hill.setTraza(true);
         hill.setCodifica(true);
@@ -28,6 +28,7 @@ public class Controller {
         entradaSalida.setFicheroSalida("salida.txt");
 
     }
+
     /**
      * Método que ejecuta un proceso de inicio a partir de un archivo de configuración.
      *
@@ -69,7 +70,7 @@ public class Controller {
 
     /**
      * Ejecuta una orden basada en un comando en formato de cadena.
-     *
+     * <p>
      * Esta función analiza la cadena de entrada, divide los elementos separados por espacios
      * y ejecuta acciones según el comando especificado en la primera posición de la cadena.
      *
