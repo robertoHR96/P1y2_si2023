@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="update if s">
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="update controller and hill">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EntradaSalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntradaSalida.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Formateador.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +22,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Hill.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="2WKucNdQiEtbrHvyQ0kSg9YGA2P" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -49,7 +48,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.smartKeys&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -79,7 +78,11 @@
       <workItem from="1696493671616" duration="7985000" />
       <workItem from="1696501902645" duration="4891000" />
       <workItem from="1696508257148" duration="223000" />
-      <workItem from="1696521559587" duration="6299000" />
+      <workItem from="1696521559587" duration="7039000" />
+      <workItem from="1696528635200" duration="59000" />
+      <workItem from="1696529198072" duration="55000" />
+      <workItem from="1696530634485" duration="8000" />
+      <workItem from="1696667754950" duration="975000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -113,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696508406943</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update controller and hill">
+      <option name="closed" value="true" />
+      <created>1696527896741</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1696527896741</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,7 +135,8 @@
     <MESSAGE value="Add Controller" />
     <MESSAGE value="update controller" />
     <MESSAGE value="update if s" />
-    <option name="LAST_COMMIT_MESSAGE" value="update if s" />
+    <MESSAGE value="update controller and hill" />
+    <option name="LAST_COMMIT_MESSAGE" value="update controller and hill" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

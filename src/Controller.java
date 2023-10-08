@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Controller {
     // Variable para almacenar el nombre del archivo de configuración
@@ -64,17 +66,28 @@ public class Controller {
         }
     }
 
+
     /**
      * Ejecuta una orden basada en un comando en formato de cadena.
-     * <p>
+     *
      * Esta función analiza la cadena de entrada, divide los elementos separados por espacios
      * y ejecuta acciones según el comando especificado en la primera posición de la cadena.
      *
      * @param strng La cadena de entrada que contiene el comando y sus argumentos, separados por espacios.
      */
     public void ejecutarOrden(String strng) {
+        // Se estraen los tokens del string
+        StringTokenizer tokenizerStrng = new StringTokenizer(strng);
+        ArrayList<String> tokensList = new ArrayList<>();
+
+        // Agregar los tokens al ArrayList
+        while (tokenizerStrng.hasMoreTokens()) {
+            tokensList.add(tokenizerStrng.nextToken());
+        }
+
+        // Convertir el ArrayList a un array de strings
         // Dividir la cadena en palabras separadas por espacios
-        String[] splitLinea = strng.split(" ");
+        String[] splitLinea = tokensList.toArray(new String[tokensList.size()]);
 
         // Se comprueba que el comando que se quiera ejecutar sea válido
         if (splitLinea.length >= 2) {
