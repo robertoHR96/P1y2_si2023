@@ -1,4 +1,7 @@
+import java.io.*;
 import java.util.Objects;
+import java.util.StringTokenizer;
+
 
 public class EntradaSalida {
     /**
@@ -26,7 +29,17 @@ public class EntradaSalida {
      * @return El contenido del fichero de entrada.
      */
     public String leerEntrada() {
-        return "";
+        StringBuilder contenido = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(ficheroEntrada))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                contenido.append(linea);
+                contenido.append(System.lineSeparator()); // Agregar un separador de línea si es necesario
+            }
+        } catch (IOException e) {
+            print("Error: Fichero de entrada no valido");
+        }
+        return contenido.toString();
     }
 
     /**
@@ -34,8 +47,23 @@ public class EntradaSalida {
      * @return Una matriz de enteros 3x3 que representa la clave.
      */
     public Integer[][] leerClave() {
-        Integer[][] clave = new Integer[3][3];
-        return clave;
+        Integer [][] matriz = new Integer[3][3];
+        try (BufferedReader br = new BufferedReader(new FileReader(ficheroClave))) {
+            for (int i = 0; i < 3; i++) {
+                String linea = br.readLine();
+                StringTokenizer tokenizer = new StringTokenizer(linea);
+                for (int j = 0; j < 3; j++) {
+                    if (tokenizer.hasMoreTokens()) {
+                        matriz[i][j] = mod27(Integer.parseInt(tokenizer.nextToken()));
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            print("Error: Fichero de clave no valido");
+        } catch (IOException e) {
+            print("Error: Fichero de clave no valido");
+        }
+        return matriz;
     }
 
     /**
@@ -43,7 +71,10 @@ public class EntradaSalida {
      * @param salida La cadena a escribir en el fichero de salida.
      */
     public void escribirSalida(String salida) {
-
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroSalida))) {
+            bw.write(salida);
+        } catch (IOException e) {
+        }
     }
 
     /**
@@ -116,5 +147,22 @@ public class EntradaSalida {
      */
     public void print(String text) {
         if (traza) System.out.println(text);
+    }
+
+    /**
+     * Calcula el módulo 26 de un número entero.
+     *
+     * @param numero El número entero del cual se calculará el módulo 26.
+     * @return El resultado del cálculo del módulo 26.
+     */
+    public Integer mod27(Integer numero) {
+        // Utilizamos el operador de módulo (%) para calcular el módulo 26.
+        // Aseguramos que el resultado esté en el rango [0, 25] inclusive.
+        Integer resultado = numero % 27;
+        if (resultado < 0) {
+            // Si el resultado es negativo, lo ajustamos sumando 26.
+            resultado += 27;
+        }
+        return resultado;
     }
 }
