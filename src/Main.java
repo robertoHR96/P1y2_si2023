@@ -17,7 +17,6 @@ public class Main {
                 if (args[0].equals("-f")) {
                     controller.setFicheroConfig(args[1]);
                     //controller.setFicheroConfig("ejemplo.txt");
-                    controller.ajustarDefault();
                     controller.run();
                 } else System.out.println("" +
                         "Error de argumentos.\n" +

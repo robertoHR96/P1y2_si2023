@@ -151,8 +151,6 @@ public class Hill {
      * @param text El texto a imprimir.
      */
     public void print(String text) {
-        if (traza) {
-            System.out.println(text);
-        }
+        if (traza) System.out.println(text);
     }
 }

@@ -15,10 +15,7 @@ public class Controller {
     // Objeto para gestionar EntradaSalida (inicializado con una nueva instancia)
     private EntradaSalida entradaSalida = new EntradaSalida();
 
-    /**
-     * Se ajustan lo valores a la configuración por defecto
-     */
-    public void ajustarDefault() {
+    public Controller (){
         this.traza = true;
         hill.setTraza(true);
         hill.setCodifica(true);
@@ -26,7 +23,6 @@ public class Controller {
         entradaSalida.setTraza(true);
         entradaSalida.setFicheroEntrada("entrada.txt");
         entradaSalida.setFicheroSalida("salida.txt");
-
     }
 
     /**
@@ -92,13 +88,21 @@ public class Controller {
 
         // Se comprueba que el comando que se quiera ejecutar sea válido
         if (splitLinea.length >= 2) {
-            // Comprobar si el primer elemento es "@"
-            // Si es "@", llamar a la función updateBandera con los argumentos especificados
-            if (splitLinea[0].equals("@")) updateBandera(splitLinea[1], splitLinea[2]);
+            // Si no es ningun comando válido se muestra el mensaje de error
+            // En caso contrario se ejecuta el comando seleccionado
+            if (!splitLinea[0].equals("@") && !splitLinea[0].equals("&")) print("Error: Bandera no valido");
+            else {
+                // Comprobar si el primer elemento es "@"
+                // Si es "@", llamar a la función updateBandera con los argumentos especificados
+                if (splitLinea[0].equals("@")) updateBandera(splitLinea[1], splitLinea[2]);
 
-            // Comprobar si el primer elemento es "&"
-            // Si es "&", llamar a la función seleccionarComando con el comando especificado
-            if (splitLinea[0].equals("&")) seleccionarComando(splitLinea);
+                // Comprobar si el primer elemento es "&"
+                // Si es "&", llamar a la función seleccionarComando con el comando especificado
+                if (splitLinea[0].equals("&")) seleccionarComando(splitLinea);
+            }
+
+        } else {
+            print("Error: Instrucción no valida");
         }
     }
 
@@ -108,19 +112,44 @@ public class Controller {
      * @param splitLinea Array de Strings con la línea del comando
      */
     public void seleccionarComando(String[] splitLinea) {
-        // Si es "hill", llamar a la función ejecutarHill
-        if (splitLinea[1].equals("hill")) ejecutarHill();
-        // Si es "ficherosalida" se selecciona el fichero de salida en la clase entradaSalia
-        if (splitLinea[1].equals("ficherosalida") && splitLinea.length == 3)
-            entradaSalida.setFicheroSalida(splitLinea[2]);
-        // Si es "ficheroentrada" se selecciona el fichero de entrada en la clase entradaSalia
-        if (splitLinea[1].equals("ficheroentrada") && splitLinea.length == 3)
-            entradaSalida.setFicheroEntrada(splitLinea[2]);
-        // Si es "clave" se llama a la función getFicheroFormateado con el fichero que contiene la clave
-        if (splitLinea[1].equals("clave") && splitLinea.length == 3) seleccionarClave(splitLinea[2]);
-        // Si es "formatearentrada" se llama a la función formatearEntrada
-        if (splitLinea[1].equals("formateaentrada")) formatearEntrada();
+        // Verifica si el array splitLinea tiene al menos 2 elementos
+        if (splitLinea.length < 2) {
+            print("Error: Comando no válido");
+            return;
+        }
+        // Obtiene el segundo elemento del array como el comando
+        String comando = splitLinea[1];
+
+        // Utiliza un switch para manejar diferentes comandos
+        switch (comando) {
+            case "hill":
+                ejecutarHill();
+                break;
+            case "ficherosalida":
+                // Establece el fichero de salida en la clase entradaSalida
+                if (splitLinea.length == 3) entradaSalida.setFicheroSalida(splitLinea[2]);
+                else print("Error: Comando 'ficherosalida' requiere 2 argumentos");
+                break;
+            case "ficheroentrada":
+                // Establece el fichero de entrada en la clase entradaSalida
+                if (splitLinea.length == 3) entradaSalida.setFicheroEntrada(splitLinea[2]);
+                else print("Error: Comando 'ficheroentrada' requiere 2 argumentos");
+                break;
+            case "clave":
+                // Llama a la función seleccionarClave con el tercer argumento
+                if (splitLinea.length == 3) seleccionarClave(splitLinea[2]);
+                else print("Error: Comando 'clave' requiere 2 argumentos");
+                break;
+            case "formateaentrada":
+                // Llama a la función formatearEntrada
+                formatearEntrada();
+                break;
+            default:
+                // Maneja cualquier otro comando desconocido
+                print("Error: Comando no válido");
+        }
     }
+
 
     /**
      * Lee los datos del fichero de entrada y los guarda formateados en el fichero de salida
@@ -165,21 +194,36 @@ public class Controller {
      * @param estadoBandera El estado de la bandera ("ON" o "OFF").
      */
     public void updateBandera(String bandera, String estadoBandera) {
-        boolean estadoBnd = false;
+        boolean estadoBnd;
 
-        // Comprueba si el estado de la bandera es "ON"
+        // Verifica si el estado de la bandera es "ON"
         if (estadoBandera.equals("ON")) estadoBnd = true;
+            // Si no es "ON", verifica si el estado de la bandera es "OFF"
+        else if (estadoBandera.equals("OFF")) estadoBnd = false;
+        else {
+            // Si el estado de la bandera no es válido, muestra un mensaje de error y retorna
+            print("Error: Estado de bandera no válido");
+            return;
+        }
 
-        // Comprueba si el estado de la bandera es "OFF"
-        if (estadoBandera.equals("OFF")) estadoBnd = false;
-
-        // Si la bandera es "TRAZA", actualiza el estado correspondiente
-        if (bandera.equals("TRAZA")) updateEstadoTraza(estadoBnd);
-
-        // Si la bandera es "CODIFICA", actualiza el estado correspondiente
-        // de la instancia de la clase Hill
-        if (bandera.equals("CODIFICA")) hill.setCodifica(estadoBnd);
+        // Utiliza un switch para manejar diferentes banderas
+        switch (bandera) {
+            case "TRAZA":
+                // Actualiza el estado correspondiente y muestra un mensaje de actualización
+                updateEstadoTraza(estadoBnd);
+                print("Actualizando estado de la bandera TRAZA: " + estadoBandera);
+                break;
+            case "CODIFICA":
+                // Actualiza el estado correspondiente de la instancia de la clase Hill y muestra un mensaje de actualización
+                hill.setCodifica(estadoBnd);
+                print("Actualizando estado de la bandera CODIFICA: " + estadoBandera);
+                break;
+            default:
+                // Maneja cualquier otro tipo de bandera no válida y muestra un mensaje de error
+                print("Error: Tipo de bandera no válido");
+        }
     }
+
 
     /**
      * Cambia el estado de la bandera "TRAZA" y actualiza objetos relacionados.
@@ -283,9 +327,7 @@ public class Controller {
      * @param text El texto a imprimir.
      */
     public void print(String text) {
-        if (traza) {
-            System.out.println(text);
-        }
+        if (traza) System.out.println(text);
     }
 
 };
