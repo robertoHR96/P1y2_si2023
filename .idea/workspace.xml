@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Optimizaciones varias">
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Avances">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EntradaSalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntradaSalida.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +86,7 @@
       <workItem from="1696530634485" duration="8000" />
       <workItem from="1696667754950" duration="2108000" />
       <workItem from="1696929383794" duration="28000" />
-      <workItem from="1697475166870" duration="4191000" />
+      <workItem from="1697475166870" duration="5621000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -151,7 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697477451481</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Avances">
+      <option name="closed" value="true" />
+      <created>1697479652442</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1697479652442</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,7 +175,8 @@
     <MESSAGE value="String Tokenizer en vez de split" />
     <MESSAGE value="Comentarios and documentación" />
     <MESSAGE value="Optimizaciones varias" />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimizaciones varias" />
+    <MESSAGE value="Avances" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avances" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

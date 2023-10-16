@@ -172,7 +172,8 @@ public class Controller {
         // Se selecciona el fichero con la clave en el objeto entradaSalida
         entradaSalida.setFicheroClave(ficheroClave);
         // Se lee la clave de entradaSalida y se la asignamos a hill
-        hill.setClave(entradaSalida.leerClave());
+        if (hill.isCodifica()) hill.setClave(entradaSalida.leerClave());
+        else hill.setClave(entradaSalida.leerClaveInversa());
     }
 
     /**
