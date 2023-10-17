@@ -49,24 +49,34 @@ public class EntradaSalida {
      * @return Una matriz de enteros 3x3 que representa la clave.
      */
     public Integer[][] leerClave() {
+        // Crea una matriz de 3x3 para almacenar la clave
         Integer[][] matriz = new Integer[3][3];
+
         try (BufferedReader br = new BufferedReader(new FileReader(ficheroClave))) {
+            // Lee el fichero de clave línea por línea
+            String linea = br.readLine();
+            StringTokenizer tokenizer = new StringTokenizer(linea);
             for (int i = 0; i < 3; i++) {
-                String linea = br.readLine();
-                StringTokenizer tokenizer = new StringTokenizer(linea);
+                // Procesa cada token en la línea y llena la matriz
                 for (int j = 0; j < 3; j++) {
                     if (tokenizer.hasMoreTokens()) {
+                        // Convierte el token a un entero y aplica la función mod27
                         matriz[i][j] = mod27(Integer.parseInt(tokenizer.nextToken()));
                     }
                 }
             }
         } catch (FileNotFoundException e) {
-            print("Error: Fichero de clave no valido");
+            // Maneja la excepción si el fichero de clave no se encuentra
+            print("Error: Fichero de clave no válido");
         } catch (IOException e) {
-            print("Error: Fichero de clave no valido");
+            // Maneja la excepción si ocurre un error de lectura en el fichero de clave
+            print("Error: Fichero de clave no válido");
         }
+
+        // Devuelve la matriz de clave procesada
         return matriz;
     }
+
 
     public Integer[][] leerClaveInversa() {
         return calcularMatrizInversa(leerClave());
@@ -96,7 +106,7 @@ public class EntradaSalida {
             // Calcula los elementos de la matriz inversa dividiendo los elementos de la adjunta por el determinante.
             for (int i = 0; i < matriz.length; i++) {
                 for (int j = 0; j < matriz[0].length; j++) {
-                    inversa[i][j] = adjunta[i][j] / det;
+                    inversa[i][j] = mod27(adjunta[i][j] / det);
                 }
             }
         }
@@ -117,12 +127,11 @@ public class EntradaSalida {
             print("Error: (Calculo determinante) La matriz ha de ser de 3x3");
         else {
             // Calcula el determinante usando la fórmula específica para matrices 3x3.
-            det = matriz[0][0] * (matriz[1][1] * matriz[2][2] - matriz[1][2] * matriz[2][1])
-                    - matriz[0][1] * (matriz[1][0] * matriz[2][2] - matriz[1][2] * matriz[2][0])
-                    + matriz[0][2] * (matriz[1][0] * matriz[2][1] - matriz[1][1] * matriz[2][0]);
+            det = matriz[0][0] * mod27(matriz[1][1] * matriz[2][2] - matriz[1][2] * matriz[2][1])
+                    - matriz[0][1] * mod27((matriz[1][0]) * (matriz[2][2]) - (matriz[1][2]) * (matriz[2][0]))
+                    + matriz[0][2] * mod27((matriz[1][0]) * (matriz[2][1]) - (matriz[1][1]) * (matriz[2][0]));
         }
-
-        return det;
+        return mod27(det);
     }
 
     /**
@@ -136,18 +145,19 @@ public class EntradaSalida {
         if (matriz.length != 3 || matriz[0].length != 3) print("Error: (Calculo adjunta) La matriz ha de ser de 3x3");
         else {
             // Calcula la matriz adjunta utilizando la fórmula específica para matrices 3x3.
-            matrizAdjunta[0][0] = matriz[1][1] * matriz[2][2] - matriz[1][2] * matriz[2][1];
-            matrizAdjunta[0][1] = -(matriz[0][1] * matriz[2][2] - matriz[0][2] * matriz[2][1]);
-            matrizAdjunta[0][2] = matriz[0][1] * matriz[1][2] - matriz[0][2] * matriz[1][1];
+            matrizAdjunta[0][0] = mod27(matriz[1][1] * matriz[2][2] - matriz[1][2] * matriz[2][1]);
+            matrizAdjunta[0][1] = -mod27(matriz[0][1] * matriz[2][2] - matriz[0][2] * matriz[2][1]);
+            matrizAdjunta[0][2] = mod27(matriz[0][1] * matriz[1][2] - matriz[0][2] * matriz[1][1]);
 
-            matrizAdjunta[1][0] = -(matriz[1][0] * matriz[2][2] - matriz[1][2] * matriz[2][0]);
-            matrizAdjunta[1][1] = matriz[0][0] * matriz[2][2] - matriz[0][2] * matriz[2][0];
-            matrizAdjunta[1][2] = -(matriz[0][0] * matriz[1][2] - matriz[0][2] * matriz[1][0]);
+            matrizAdjunta[1][0] = -mod27(matriz[1][0] * matriz[2][2] - matriz[1][2] * matriz[2][0]);
+            matrizAdjunta[1][1] = mod27(matriz[0][0] * matriz[2][2] - matriz[0][2] * matriz[2][0]);
+            matrizAdjunta[1][2] = -mod27(matriz[0][0] * matriz[1][2] - matriz[0][2] * matriz[1][0]);
 
-            matrizAdjunta[2][0] = matriz[1][0] * matriz[2][1] - matriz[1][1] * matriz[2][0];
-            matrizAdjunta[2][1] = -(matriz[0][0] * matriz[2][1] - matriz[0][1] * matriz[2][0]);
-            matrizAdjunta[2][2] = matriz[0][0] * matriz[1][1] - matriz[0][1] * matriz[1][0];
+            matrizAdjunta[2][0] = mod27(matriz[1][0] * matriz[2][1] - matriz[1][1] * matriz[2][0]);
+            matrizAdjunta[2][1] = -mod27(matriz[0][0] * matriz[2][1] - matriz[0][1] * matriz[2][0]);
+            matrizAdjunta[2][2] = mod27(matriz[0][0] * matriz[1][1] - matriz[0][1] * matriz[1][0]);
         }
+
         return matrizAdjunta;
     }
 

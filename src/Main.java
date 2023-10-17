@@ -3,6 +3,17 @@
 
 public class Main {
     public static void main(String[] args) {
+        EntradaSalida ES = new EntradaSalida();
+        ES.setFicheroClave("clave");
+        Integer [][] inversa = ES.leerClaveInversa();
+
+        for (int i = 0; i<3; i++){
+            for (int e = 0; e<3; e++){
+                System.out.print(inversa[i][e].toString()+" ");
+            }
+            System.out.println("");
+        }
+        /*
         Controller controller = new Controller();
         switch (args.length) {
             case 1:
@@ -26,6 +37,7 @@ public class Main {
                 break;
 
         }
+         */
     }
 
     static void mostrarAyuda() {
