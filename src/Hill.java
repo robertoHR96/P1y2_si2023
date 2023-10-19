@@ -22,16 +22,117 @@ public class Hill {
         if (codifica) codificar();
         else desCodificar();
         // si se va a descifrar la entrada tiene que se multiplos de 3
-        return "";
+        return this.salida;
     }
 
     /**
      * Cifra el contenido de la variable entrada
      */
     public void codificar() {
+
+        Integer[][] matrizCifrar = new Integer[3][3];
+
+        print(this.entrada);
+        matrizCifrar[0][0] = 4;
+        matrizCifrar[0][1] = 12;
+        matrizCifrar[0][2] = 15;
+
+        // Valores de la segunda fila
+        matrizCifrar[1][0] = 9;
+        matrizCifrar[1][1] = 16;
+        matrizCifrar[1][2] = 19;
+
+        // valores de la tercera fila
+        matrizCifrar[2][0] = 4;
+        matrizCifrar[2][1] = 11;
+        matrizCifrar[2][2] = 0;
+
+
+        print("-------------------------------------");
+        print("Multiplicando matrices para cifrar texto...");
+
+        Integer[][] resultadoMultiplicarMatrices = multiplicarMatrices(matrizCifrar);
+        print("-------------------------------------");
+        print("Texto  x  Clave = matriz cifrada");
+        if(this.traza) mostrarMatrices(matrizCifrar, resultadoMultiplicarMatrices);
+        setSalida(this.entrada);
     }
 
+    /**
+     * Muestra tres matrices en formato especial, con una 'x' y un '=' en la fila del medio,
+     * para visualizar la multiplicación de matrices.
+     *
+     * @param resultadoMultiplicarMatrices La matriz resultante de la multiplicación.
+     * @param matrizCifrar La primera matriz la perteneciente al texto plano.
+     */
+    public void mostrarMatrices(Integer [][] resultadoMultiplicarMatrices, Integer [][] matrizCifrar) {
+        for (int i = 0; i < 3; i++) {
+            // Imprimir la fila de la matriz 1
+            for (int j = 0; j < 3; j++) {
+                System.out.print(matrizCifrar[i][j] + " ");
+            }
+
+            // Imprimir una 'x' en la fila del medio
+            if (i == 1) {
+                System.out.print("x ");
+            } else {
+                System.out.print("  "); // Espacio en blanco en lugar de números
+            }
+
+            // Imprimir la fila de la matriz 2
+            for (int j = 0; j < 3; j++) {
+                System.out.print(this.clave[i][j] + " ");
+            }
+
+            // Imprimir un '=' en la fila del medio
+            if (i == 1) {
+                System.out.print("= ");
+            } else {
+                System.out.print("  "); // Espacio en blanco en lugar de números
+            }
+
+            // Imprimir la fila de la matriz 3
+            for (int j = 0; j < 3; j++) {
+                System.out.print(resultadoMultiplicarMatrices[i][j] + " ");
+            }
+
+            // Ir a la siguiente línea para la siguiente fila
+            System.out.println();
+        }
+    }
+
+    /**
+     * Descifra el contenido de la variable de entrada
+     */
     public void desCodificar() {
+    }
+
+    /**
+     * Realiza la multiplicación de dos matrices cuadradas de enteros.
+     * <p>
+     * Esta función toma una matriz cuadrada de enteros y la multiplica por sí misma.
+     * La matriz resultante tendrá el mismo tamaño que la matriz de entrada y contendrá
+     * el producto de las dos matrices.
+     *
+     * @param matrizCifrar La matriz cuadrada de enteros que se va a multiplicar.
+     * @return Una nueva matriz cuadrada que representa el resultado de la multiplicación.
+     * Si la matriz de entrada no es de tamaño 3x3, se devuelve una matriz vacía de 3x3.
+     */
+    public Integer[][] multiplicarMatrices(Integer[][] matrizCifrar) {
+
+        Integer[][] matrizMultiplicada = new Integer[3][3];
+        int contador = 0;
+
+        for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 3; i++) {
+                int val1 = 0;
+                for (int e = 0; e < 3; e++) {
+                    val1 = ( matrizCifrar[e][i] * this.clave[j][e] ) + val1;
+                }
+                matrizMultiplicada[j][i] = mod27(val1);
+            }
+        }
+        return matrizMultiplicada;
     }
 
     /**
@@ -39,6 +140,7 @@ public class Hill {
      */
     public void setClaveDefault() {
         // Valores de la primera fila
+
         clave[0][0] = 1;
         clave[0][1] = 2;
         clave[0][2] = 3;
@@ -123,7 +225,11 @@ public class Hill {
      * @param clave
      */
     public void setClave(Integer[][] clave) {
-        this.clave = clave;
+        for (int i = 0; i < 3; i++) {
+            for (int e = 0; e < 3; e++) {
+                this.clave[i][e] = clave[i][e];
+            }
+        }
     }
 
 
@@ -150,10 +256,28 @@ public class Hill {
      *
      * @param text El texto a imprimir.
      */
+    public void printS(String text) {
+        if (traza) System.out.print(text);
+    }
+    /**
+     * Imprime un texto en la consola si la bandera "TRAZA" está activada.
+     *
+     * @param text El texto a imprimir.
+     */
     public void print(String text) {
         if (traza) System.out.println(text);
     }
 
 
+    public Integer mod27(Integer numero) {
+        // Utilizamos el operador de módulo (%) para calcular el módulo 26.
+        // Aseguramos que el resultado esté en el rango [0, 25] inclusive.
+        Integer resultado = numero % 27;
+        if (resultado < 0) {
+            // Si el resultado es negativo, lo ajustamos sumando 26.
+            resultado += 27;
+        }
+        return resultado;
+    }
 
 }

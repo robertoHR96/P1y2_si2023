@@ -36,7 +36,7 @@ public class EntradaSalida {
     public String leerEntrada() {
         StringBuilder contenido = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(this.ficheroEntrada))) {
-            print("Leyendo fichero de entrada: "+ficheroEntrada);
+            print("Leyendo fichero de entrada: " + ficheroEntrada);
             String linea;
             while ((linea = br.readLine()) != null) {
                 contenido.append(linea);
@@ -193,8 +193,6 @@ public class EntradaSalida {
     }
 
 
-
-
     /**
      * Obtiene el nombre del fichero de entrada.
      *
@@ -210,6 +208,7 @@ public class EntradaSalida {
      * @param ficheroEntrada El nombre del fichero de entrada a establecer.
      */
     public void setFicheroEntrada(String ficheroEntrada) {
+        this.ficheroEntrada = ficheroEntrada;
     }
 
     /**

@@ -1,11 +1,17 @@
 @ TRAZA ON
 
-& ficheroentrada ficheroEntrada
+@ CODIFICA ON
 
-& ficherosalida ficheroSalida
+& ficheroentrada ficheroEntrada
+& ficherosalida ficheroEntradaGood
 
 & formateaentrada
 
-@ CODIFICA ON
+& clave clave
+
+& ficheroentrada ficheroEntradaGood
+& ficherosalida ficheroSalid
+& hill
+
 
 
