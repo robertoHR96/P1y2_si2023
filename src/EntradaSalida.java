@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.Objects;
 import java.util.StringTokenizer;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class EntradaSalida {
@@ -31,7 +35,8 @@ public class EntradaSalida {
      */
     public String leerEntrada() {
         StringBuilder contenido = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(ficheroEntrada))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(this.ficheroEntrada))) {
+            print("Leyendo fichero de entrada: "+ficheroEntrada);
             String linea;
             while ((linea = br.readLine()) != null) {
                 contenido.append(linea);
@@ -41,6 +46,32 @@ public class EntradaSalida {
             print("Error: Fichero de entrada no valido");
         }
         return contenido.toString();
+    }
+
+    /**
+     * Escribe una cadena en el fichero de salida.
+     *
+     * @param salida La cadena a escribir en el fichero de salida.
+     */
+    public void escribirSalida(String salida) {
+        print("Escribiendo en fichero de salia: " + ficheroSalida);
+        try {
+            File archivo = new File(this.ficheroSalida);
+
+            // Si el archivo ya existe, lo borramos
+            if (archivo.exists()) {
+                archivo.delete();
+            }
+
+            // Creamos un nuevo archivo
+            archivo.createNewFile();
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+                bw.write(salida);
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejo de excepciones
+        }
     }
 
     /**
@@ -161,17 +192,8 @@ public class EntradaSalida {
         return matrizAdjunta;
     }
 
-    /**
-     * Escribe una cadena en el fichero de salida.
-     *
-     * @param salida La cadena a escribir en el fichero de salida.
-     */
-    public void escribirSalida(String salida) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroSalida))) {
-            bw.write(salida);
-        } catch (IOException e) {
-        }
-    }
+
+
 
     /**
      * Obtiene el nombre del fichero de entrada.
@@ -188,7 +210,6 @@ public class EntradaSalida {
      * @param ficheroEntrada El nombre del fichero de entrada a establecer.
      */
     public void setFicheroEntrada(String ficheroEntrada) {
-        this.ficheroEntrada = ficheroEntrada;
     }
 
     /**

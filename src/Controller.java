@@ -31,6 +31,7 @@ public class Controller {
      * @throws IOException Excepción lanzada en caso de error de lectura o cierre de archivos.
      */
     public void run() {
+        //formatearConfig();
         // Crear un objeto File que representa el archivo de configuración.
         File doc = new File(ficheroConfig);
         BufferedReader obj = null;
@@ -127,12 +128,18 @@ public class Controller {
                 break;
             case "ficherosalida":
                 // Establece el fichero de salida en la clase entradaSalida
-                if (splitLinea.length == 3) entradaSalida.setFicheroSalida(splitLinea[2]);
+                if (splitLinea.length == 3){
+                    print("Seleccionado fichero de salida: "+splitLinea[2]);
+                    entradaSalida.setFicheroSalida(splitLinea[2]);
+                }
                 else print("Error: Comando 'ficherosalida' requiere 2 argumentos");
                 break;
             case "ficheroentrada":
                 // Establece el fichero de entrada en la clase entradaSalida
-                if (splitLinea.length == 3) entradaSalida.setFicheroEntrada(splitLinea[2]);
+                if (splitLinea.length == 3){
+                    print("Seleccionado fichero de entrada: "+splitLinea[2]);
+                    entradaSalida.setFicheroEntrada(splitLinea[2]);
+                }
                 else print("Error: Comando 'ficheroentrada' requiere 2 argumentos");
                 break;
             case "clave":
@@ -146,7 +153,7 @@ public class Controller {
                 break;
             default:
                 // Maneja cualquier otro comando desconocido
-                print("Error: Comando no válido");
+                print("Error: Comando no válido: "+ comando);
         }
     }
 
@@ -158,6 +165,7 @@ public class Controller {
         // Se obtienen los datos del fichero de entrada
         String dataFicheroEntrada = entradaSalida.leerEntrada();
         // Se formatea el texto obtenido
+        print("Formateando entrada del fichero: "+entradaSalida.getFicheroEntrada());
         dataFicheroEntrada = formatearTexto(dataFicheroEntrada);
         // Se guarda el texto en el fichero de salida
         entradaSalida.escribirSalida(dataFicheroEntrada);
@@ -239,8 +247,22 @@ public class Controller {
         // Se establece el valor del atributo traza de la instancia de la clase entradaSalida
         entradaSalida.setTraza(estadoBnd);
     }
+    public void formatearConfig(){
+        entradaSalida.setFicheroEntrada(ficheroConfig);
+        entradaSalida.setFicheroSalida(ficheroConfig);
+        formatearEntrada();
+        this.traza = true;
+        hill.setTraza(true);
+        hill.setCodifica(true);
+        hill.setClaveDefault();
+        entradaSalida.setTraza(true);
+        entradaSalida.setFicheroEntrada("entrada.txt");
+        entradaSalida.setFicheroSalida("salida.txt");
+    }
 
-
+    public String formatearTexto(String texto) {
+        return texto.replaceAll("\\s+", "").toUpperCase();
+    }
     /****************** Getter, Setter, hascode, equlas and toString *****************/
     /******************************************************/
     /**
@@ -318,9 +340,7 @@ public class Controller {
         this.entradaSalida = entradaSalida;
     }
 
-    public String formatearTexto(String texto) {
-        return texto;
-    }
+
 
     /**
      * Imprime un texto en la consola si la bandera "TRAZA" está activada.
