@@ -46,7 +46,7 @@ public class Controller {
                     if ((strng = obj.readLine()) == null) break; // Si no hay más líneas, salir del bucle.
 
                     // Ejecutar la orden contenida en la línea leída.
-                    ejecutarOrden(strng);
+                    if(!strng.equals("")) ejecutarOrden(strng);
                 } catch (IOException e) {
                     System.err.println("Error al leer el fichero de entrada");
                 }

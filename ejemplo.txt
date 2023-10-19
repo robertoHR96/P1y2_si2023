@@ -1,5 +1,14 @@
-# Esto es un comentario
+@ TRAZA ON
 
-@ Esto es una vandera
+@ CODIFICA ON
 
-& esto es un Comando
+@ TRAZA OFF
+
+@ CODIFICA OFF
+@ TRAZA ON
+
+@ CODIFICA ON
+
+@ TRAZA OFF
+
+@ CODIFICA OFF

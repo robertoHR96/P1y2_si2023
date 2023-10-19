@@ -106,7 +106,7 @@ public class EntradaSalida {
             // Calcula los elementos de la matriz inversa dividiendo los elementos de la adjunta por el determinante.
             for (int i = 0; i < matriz.length; i++) {
                 for (int j = 0; j < matriz[0].length; j++) {
-                    inversa[i][j] = mod27(adjunta[i][j] / det);
+                    inversa[i][j] = mod27(adjunta[i][j] / det); // multiplico por el inverso del determinante (algoritmo extendido de uclides)
                 }
             }
         }
