@@ -15,7 +15,7 @@ public class Controller {
     // Objeto para gestionar EntradaSalida (inicializado con una nueva instancia)
     private EntradaSalida entradaSalida = new EntradaSalida();
 
-    public Controller (){
+    public Controller() {
         this.traza = true;
         hill.setTraza(true);
         hill.setCodifica(true);
@@ -47,7 +47,7 @@ public class Controller {
                     if ((strng = obj.readLine()) == null) break; // Si no hay más líneas, salir del bucle.
 
                     // Ejecutar la orden contenida en la línea leída.
-                    if(!strng.equals("")) ejecutarOrden(strng);
+                    if (!strng.equals("")) ejecutarOrden(strng);
                 } catch (IOException e) {
                     System.err.println("Error al leer el fichero de entrada");
                 }
@@ -128,19 +128,17 @@ public class Controller {
                 break;
             case "ficherosalida":
                 // Establece el fichero de salida en la clase entradaSalida
-                if (splitLinea.length == 3){
-                    print("Seleccionado fichero de salida: "+splitLinea[2]);
+                if (splitLinea.length == 3) {
+                    print("Seleccionado fichero de salida: " + splitLinea[2]);
                     entradaSalida.setFicheroSalida(splitLinea[2]);
-                }
-                else print("Error: Comando 'ficherosalida' requiere 2 argumentos");
+                } else print("Error: Comando 'ficherosalida' requiere 2 argumentos");
                 break;
             case "ficheroentrada":
                 // Establece el fichero de entrada en la clase entradaSalida
-                if (splitLinea.length == 3){
-                    print("Seleccionado fichero de entrada: "+splitLinea[2]);
+                if (splitLinea.length == 3) {
+                    print("Seleccionado fichero de entrada: " + splitLinea[2]);
                     entradaSalida.setFicheroEntrada(splitLinea[2]);
-                }
-                else print("Error: Comando 'ficheroentrada' requiere 2 argumentos");
+                } else print("Error: Comando 'ficheroentrada' requiere 2 argumentos");
                 break;
             case "clave":
                 // Llama a la función seleccionarClave con el tercer argumento
@@ -153,23 +151,10 @@ public class Controller {
                 break;
             default:
                 // Maneja cualquier otro comando desconocido
-                print("Error: Comando no válido: "+ comando);
+                print("Error: Comando no válido: " + comando);
         }
     }
 
-
-    /**
-     * Lee los datos del fichero de entrada y los guarda formateados en el fichero de salida
-     */
-    public void formatearEntrada() {
-        // Se obtienen los datos del fichero de entrada
-        String dataFicheroEntrada = entradaSalida.leerEntrada();
-        // Se formatea el texto obtenido
-        print("Formateando entrada del fichero: "+entradaSalida.getFicheroEntrada());
-        dataFicheroEntrada = formatearTexto(dataFicheroEntrada);
-        // Se guarda el texto en el fichero de salida
-        entradaSalida.escribirSalida(dataFicheroEntrada);
-    }
 
     /**
      * Selecciona la clave para cifrar y descifrar desde un fichero
@@ -247,22 +232,60 @@ public class Controller {
         // Se establece el valor del atributo traza de la instancia de la clase entradaSalida
         entradaSalida.setTraza(estadoBnd);
     }
-    public void formatearConfig(){
+
+    /**
+     * Lee los datos del fichero de entrada y los guarda formateados en el fichero de salida
+     */
+    public void formatearEntrada() {
+        // Se obtienen los datos del fichero de entrada
+        String dataFicheroEntrada = entradaSalida.leerEntrada();
+        // Se formatea el texto obtenido
+        print("Formateando entrada del fichero: " + entradaSalida.getFicheroEntrada());
+        dataFicheroEntrada = formatearTexto(dataFicheroEntrada);
+        // Se guarda el texto en el fichero de salida
+        entradaSalida.escribirSalida(dataFicheroEntrada);
+    }
+
+    /**
+     * Formatea la configuración predeterminada del programa.
+     * Configura los archivos de entrada y salida, habilita trazas,
+     * y establece valores predeterminados para un algoritmo de Hill Cipher.
+     */
+    public void formatearConfig() {
+        // Configurar archivos de entrada y salida con el archivo de configuración
         entradaSalida.setFicheroEntrada(ficheroConfig);
         entradaSalida.setFicheroSalida(ficheroConfig);
+
+        // Formatear la entrada de datos
         formatearEntrada();
+
+        // Habilitar la traza global
         this.traza = true;
         hill.setTraza(true);
+
+        // Configurar el algoritmo Hill Cipher
         hill.setCodifica(true);
         hill.setClaveDefault();
+
+        // Habilitar la traza para las operaciones de entrada y salida
         entradaSalida.setTraza(true);
+
+        // Establecer archivos de entrada y salida predeterminados
         entradaSalida.setFicheroEntrada("entrada.txt");
         entradaSalida.setFicheroSalida("salida.txt");
     }
 
+    /**
+     * Formatea un texto eliminando espacios en blanco y convirtiéndolo a mayúsculas.
+     *
+     * @param texto El texto que se va a formatear.
+     * @return El texto formateado sin espacios en blanco y en mayúsculas.
+     */
     public String formatearTexto(String texto) {
+        // Eliminar espacios en blanco y convertir a mayúsculas
         return texto.replaceAll("\\s+", "").toUpperCase();
     }
+
     /****************** Getter, Setter, hascode, equlas and toString *****************/
     /******************************************************/
     /**
@@ -339,7 +362,6 @@ public class Controller {
     public void setEntradaSalida(EntradaSalida entradaSalida) {
         this.entradaSalida = entradaSalida;
     }
-
 
 
     /**
