@@ -31,20 +31,28 @@ public class EntradaSalida {
     /**
      * Lee la entrada desde un fichero.
      *
-     * @return El contenido del fichero de entrada.
+     * @return El contenido del fichero de entrada como una cadena.
      */
     public String leerEntrada() {
+        // StringBuilder para almacenar el contenido del archivo
         StringBuilder contenido = new StringBuilder();
+
         try (BufferedReader br = new BufferedReader(new FileReader(this.ficheroEntrada))) {
+            // Imprime un mensaje informando que se está leyendo el archivo de entrada
+            print("-------------------------------------");
             print("Leyendo fichero de entrada: " + ficheroEntrada);
+
             String linea;
+            // Lee cada línea del archivo y la agrega al StringBuilder
             while ((linea = br.readLine()) != null) {
                 contenido.append(linea);
-                contenido.append(System.lineSeparator()); // Agregar un separador de línea si es necesario
             }
         } catch (IOException e) {
-            print("Error: Fichero de entrada no valido");
+            // En caso de un error de lectura, imprime un mensaje de error
+            print("Error: Fichero de entrada no válido");
         }
+
+        // Convierte el contenido del archivo en una cadena y la devuelve
         return contenido.toString();
     }
 
@@ -54,6 +62,7 @@ public class EntradaSalida {
      * @param salida La cadena a escribir en el fichero de salida.
      */
     public void escribirSalida(String salida) {
+        print("-------------------------------------");
         print("Escribiendo en fichero de salia: " + ficheroSalida);
         try {
             File archivo = new File(this.ficheroSalida);

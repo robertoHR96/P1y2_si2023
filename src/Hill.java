@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Objects;
 
 public class Hill {
@@ -12,6 +14,9 @@ public class Hill {
     private Integer[][] clave = new Integer[3][3];
     // Variable de estado para la bandera "CODIFICA" (inicializada en "false" por defecto)
     private boolean codifica = false;
+    // Lista de letras par ael cifrado
+    private String[] listaLetras = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+
 
     /**
      * Ejecuta el cifrado/descifrado de la variable entrada y la deja en salida
@@ -30,46 +35,113 @@ public class Hill {
      */
     public void codificar() {
 
-        Integer[][] matrizCifrar = new Integer[3][3];
 
-        print(this.entrada);
-        matrizCifrar[0][0] = 4;
-        matrizCifrar[0][1] = 12;
-        matrizCifrar[0][2] = 15;
+        LinkedList<Integer[][]> listaMatrices = new LinkedList<Integer[][]>();
+        LinkedList<Integer[][]> listaMatricesCifradas = new LinkedList<Integer[][]>();
 
-        // Valores de la segunda fila
-        matrizCifrar[1][0] = 9;
-        matrizCifrar[1][1] = 16;
-        matrizCifrar[1][2] = 19;
+        print("-------------------------------------");
+        print("Calculando matrices para cifrar texto...");
 
-        // valores de la tercera fila
-        matrizCifrar[2][0] = 4;
-        matrizCifrar[2][1] = 11;
-        matrizCifrar[2][2] = 0;
-
+        calculoDeMatrices(listaMatrices);
 
         print("-------------------------------------");
         print("Multiplicando matrices para cifrar texto...");
 
-        Integer[][] resultadoMultiplicarMatrices = multiplicarMatrices(matrizCifrar);
+        Iterator it = listaMatrices.iterator();
+        while (it.hasNext()) {
+            Integer[][] matriz = (Integer[][]) it.next();
+            Integer[][] matrizCifrada = multiplicarMatrices(matriz);
+            listaMatricesCifradas.add(matrizCifrada);
+            print("-------------------------------------");
+            print("Texto  x  Clave = matriz cifrada");
+            if (this.traza) mostrarMatrices(matriz, matrizCifrada);
+        }
+
+        this.salida = generarTextoSalida(listaMatricesCifradas);
+
         print("-------------------------------------");
-        print("Texto  x  Clave = matriz cifrada");
-        if(this.traza) mostrarMatrices(matrizCifrar, resultadoMultiplicarMatrices);
-        setSalida(this.entrada);
+        print("Texto sin cifrado: "+this.entrada);
+        print("-------------------------------------");
+        print("Texto cifrado: "+this.salida);
+
     }
+
+    public String generarTextoSalida(LinkedList<Integer[][]> listaMatricesCifradas) {
+        String exit = "";
+        Iterator it = listaMatricesCifradas.iterator();
+        while (it.hasNext()) {
+            Integer[][] matriz = (Integer[][]) it.next();
+            for (int e = 0; e < 3; e++) {
+                for (int j = 0; j < 3; j++) {
+                    exit=exit+this.listaLetras[matriz[j][e]];
+                }
+            }
+        }
+        return exit;
+    }
+
+    /**
+     * Realiza un cálculo de matrices a partir de una entrada de texto y almacena las matrices en una lista.
+     *
+     * @param listaMatrices Una lista en la que se almacenarán las matrices calculadas.
+     */
+    public void calculoDeMatrices(LinkedList<Integer[][]> listaMatrices) {
+        // Divide la entrada en caracteres individuales
+        String[] splitTexto = this.entrada.split("");
+
+        // Asegura que la longitud de splitTexto sea un múltiplo de 9, rellenando con 'A' si es necesario
+        while ((splitTexto.length % 9) != 0) {
+            this.entrada = this.entrada + "A";
+            splitTexto = this.entrada.split("");
+        }
+
+        // Matriz auxiliar para almacenar temporalmente las submatrices
+        Integer[][] matrizAux = new Integer[3][3];
+
+        // Procesa el texto dividido en matrices de 3x3 y las agrega a la lista de matrices
+        int contador = 0;
+        for (int i = 0; i < splitTexto.length; i = i + 9) {
+            for (int e = 0; e < 3; e++) {
+                for (int j = 0; j < 3; j++) {
+                    // Convierte el carácter en un valor entero y lo almacena en la matriz auxiliar
+                    matrizAux[j][e] = pasarCaracterMod27(splitTexto[contador]);
+                    contador++;
+                }
+            }
+            listaMatrices.add(matrizAux);
+        }
+    }
+
+    /**
+     * Convierte un carácter en un valor entero modulo 27.
+     *
+     * @param str El carácter a convertir en entero.
+     * @return El valor entero resultante, 0 si el carácter no se encuentra en la lista de letras.
+     */
+    public Integer pasarCaracterMod27(String str) {
+        // Busca el carácter en la lista de letras y devuelve su índice como entero
+        for (Integer i = 0; i < listaLetras.length; i++) {
+            if (listaLetras[i].equals(str)) {
+                return i;
+            }
+        }
+        // Si el carácter no se encuentra en la lista, devuelve 0
+        return 0;
+    }
+
 
     /**
      * Muestra tres matrices en formato especial, con una 'x' y un '=' en la fila del medio,
      * para visualizar la multiplicación de matrices.
      *
-     * @param resultadoMultiplicarMatrices La matriz resultante de la multiplicación.
-     * @param matrizCifrar La primera matriz la perteneciente al texto plano.
+     * @param matriz La matriz del texto plano.
+     * @param matrizCifrada La matriz cifrada.
      */
-    public void mostrarMatrices(Integer [][] resultadoMultiplicarMatrices, Integer [][] matrizCifrar) {
+    public void mostrarMatrices(Integer[][] matriz, Integer[][] matrizCifrada) {
         for (int i = 0; i < 3; i++) {
             // Imprimir la fila de la matriz 1
             for (int j = 0; j < 3; j++) {
-                System.out.print(matrizCifrar[i][j] + " ");
+                System.out.print(matriz[i][j] + " ");
             }
 
             // Imprimir una 'x' en la fila del medio
@@ -93,7 +165,7 @@ public class Hill {
 
             // Imprimir la fila de la matriz 3
             for (int j = 0; j < 3; j++) {
-                System.out.print(resultadoMultiplicarMatrices[i][j] + " ");
+                System.out.print(matrizCifrada[i][j] + " ");
             }
 
             // Ir a la siguiente línea para la siguiente fila
@@ -110,7 +182,7 @@ public class Hill {
     /**
      * Realiza la multiplicación de dos matrices cuadradas de enteros.
      * <p>
-     * Esta función toma una matriz cuadrada de enteros y la multiplica por sí misma.
+     * Esta función toma una matriz cuadrada de enteros y la multiplica por la matriz clave.
      * La matriz resultante tendrá el mismo tamaño que la matriz de entrada y contendrá
      * el producto de las dos matrices.
      *
@@ -120,15 +192,20 @@ public class Hill {
      */
     public Integer[][] multiplicarMatrices(Integer[][] matrizCifrar) {
 
+        // Matriz para almacenar el resultado de la multiplicación
         Integer[][] matrizMultiplicada = new Integer[3][3];
+
+        // Contador para iterar a través de las filas de la matriz resultado
         int contador = 0;
 
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 3; i++) {
                 int val1 = 0;
+                // Realiza la multiplicación y acumula el resultado en val1
                 for (int e = 0; e < 3; e++) {
-                    val1 = ( matrizCifrar[e][i] * this.clave[j][e] ) + val1;
+                    val1 = (matrizCifrar[e][i] * this.clave[j][e]) + val1;
                 }
+                // Aplica módulo 27 al resultado y almacénalo en la matriz resultado
                 matrizMultiplicada[j][i] = mod27(val1);
             }
         }
@@ -252,6 +329,24 @@ public class Hill {
     }
 
     /**
+     * Obtine la lista de letras para el cifrado/descifrado
+     *
+     * @return Lista de letras del abecedario en mayusculas
+     */
+    public String[] getListaLetras() {
+        return listaLetras;
+    }
+
+    /**
+     * Define la lista de letras
+     *
+     * @param listaLetras Lista de caracteres que se pueden cifrar
+     */
+    public void setListaLetras(String[] listaLetras) {
+        this.listaLetras = listaLetras;
+    }
+
+    /**
      * Imprime un texto en la consola si la bandera "TRAZA" está activada.
      *
      * @param text El texto a imprimir.
@@ -259,6 +354,7 @@ public class Hill {
     public void printS(String text) {
         if (traza) System.out.print(text);
     }
+
     /**
      * Imprime un texto en la consola si la bandera "TRAZA" está activada.
      *

@@ -129,6 +129,7 @@ public class Controller {
             case "ficherosalida":
                 // Establece el fichero de salida en la clase entradaSalida
                 if (splitLinea.length == 3) {
+                    print("-------------------------------------");
                     print("Seleccionado fichero de salida: " + splitLinea[2]);
                     entradaSalida.setFicheroSalida(splitLinea[2]);
                 } else print("Error: Comando 'ficherosalida' requiere 2 argumentos");
@@ -136,6 +137,7 @@ public class Controller {
             case "ficheroentrada":
                 // Establece el fichero de entrada en la clase entradaSalida
                 if (splitLinea.length == 3) {
+                    print("-------------------------------------");
                     print("Seleccionado fichero de entrada: " + splitLinea[2]);
                     entradaSalida.setFicheroEntrada(splitLinea[2]);
                 } else print("Error: Comando 'ficheroentrada' requiere 2 argumentos");
@@ -205,11 +207,13 @@ public class Controller {
             case "TRAZA":
                 // Actualiza el estado correspondiente y muestra un mensaje de actualización
                 updateEstadoTraza(estadoBnd);
+                print("-------------------------------------");
                 print("Actualizando estado de la bandera TRAZA: " + estadoBandera);
                 break;
             case "CODIFICA":
                 // Actualiza el estado correspondiente de la instancia de la clase Hill y muestra un mensaje de actualización
                 hill.setCodifica(estadoBnd);
+                print("-------------------------------------");
                 print("Actualizando estado de la bandera CODIFICA: " + estadoBandera);
                 break;
             default:
@@ -240,6 +244,7 @@ public class Controller {
         // Se obtienen los datos del fichero de entrada
         String dataFicheroEntrada = entradaSalida.leerEntrada();
         // Se formatea el texto obtenido
+        print("-------------------------------------");
         print("Formateando entrada del fichero: " + entradaSalida.getFicheroEntrada());
         dataFicheroEntrada = formatearTexto(dataFicheroEntrada);
         // Se guarda el texto en el fichero de salida

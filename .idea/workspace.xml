@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Comentarios y javaDoc">
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Multiplicacion de matrices">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config" beforeDir="false" afterPath="$PROJECT_DIR$/config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ficheroEntrada" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EntradaSalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntradaSalida.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hill.java" afterDir="false" />
     </list>
@@ -95,7 +94,7 @@
       <workItem from="1697554963364" duration="720000" />
       <workItem from="1697558883464" duration="975000" />
       <workItem from="1697613940014" duration="25000" />
-      <workItem from="1697731099439" duration="6010000" />
+      <workItem from="1697731099439" duration="10193000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -201,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697714500324</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Multiplicacion de matrices">
+      <option name="closed" value="true" />
+      <created>1697737167617</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1697737167617</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,7 +239,8 @@
     <MESSAGE value="Mod27 en calcula de matrizes" />
     <MESSAGE value="Update entrada y salida de datos" />
     <MESSAGE value="Comentarios y javaDoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Comentarios y javaDoc" />
+    <MESSAGE value="Multiplicacion de matrices" />
+    <option name="LAST_COMMIT_MESSAGE" value="Multiplicacion de matrices" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
