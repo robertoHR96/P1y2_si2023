@@ -6,7 +6,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Clase que gestiona la entrada y salida de datos, incluyendo la lectura de ficheros y escritura en ficheros.
+ * Además, proporciona funcionalidad para trabajar con ficheros de clave.txt y realizar cálculos relacionados con el cifrado Hill Cipher.
+ */
 public class EntradaSalida {
     /**
      * Representa el nombre del fichero de entrada.
@@ -27,12 +30,17 @@ public class EntradaSalida {
      * Indica si la traza está habilitada o deshabilitada.
      */
     private boolean traza = true;
-    public EntradaSalida(){
+
+    /**
+     * Constructor por defecto de la clase
+     */
+    public EntradaSalida() {
         this.traza = true;
-        this.ficheroEntrada="entrada.txt";
-        this.ficheroSalida="salida.txt";
+        this.ficheroEntrada = "entrada.txt";
+        this.ficheroSalida = "salida.txt";
 
     }
+
     /**
      * Lee la entrada desde un fichero.
      *
@@ -115,20 +123,31 @@ public class EntradaSalida {
                         matriz[i][j] = mod27(Integer.parseInt(tokenizer.nextToken()));
                     }
                 }
+
+            }
+            if (calcularDeterminante(matriz) == 0) {
+                System.out.println("  -- Error: La matriz no es invertible, el determinante es 0");
+                return null;
+
             }
         } catch (FileNotFoundException e) {
             // Maneja la excepción si el fichero de clave.txt no se encuentra
-            print("Error: Fichero de clave.txt no válido");
+            print("Error: Fichero de clave "+ficheroClave+" no válido");
         } catch (IOException e) {
             // Maneja la excepción si ocurre un error de lectura en el fichero de clave.txt
-            print("Error: Fichero de clave.txt no válido");
+            print("Error: Fichero de clave "+ficheroClave+" no válido");
         }
+
 
         // Devuelve la matriz de clave.txt procesada
         return matriz;
     }
 
-
+    /**
+     * Lee una matriz de enteros (clave.txt) desde un fichero.
+     *
+     * @return Una matriz de enteros 3x3 que representa la clave.txt.
+     */
     public Integer[][] leerClaveInversa() {
         return calcularMatrizInversa(leerClave());
     }
@@ -141,6 +160,10 @@ public class EntradaSalida {
      */
     public Integer[][] calcularMatrizInversa(Integer[][] matriz) {
         // Calcula el determinante de la matriz de entrada.
+        if (matriz[0][0] == null) {
+            System.out.println("  -- Error: La matriz no es invertible, el determinante es 0");
+            return null;
+        }
         int det = calcularDeterminante(matriz);
 
         // Calcula la matriz adjunta de la matriz de entrada.
@@ -151,7 +174,7 @@ public class EntradaSalida {
 
         // Verifica si la matriz es invertible (determinante no igual a 0).
         if (det == 0) {
-            System.out.println("Error: La matriz no es invertible, el determinante es 0");
+            System.out.println("  -- Error: La matriz no es invertible, el determinante es 0");
             return null; // La matriz no es invertible, por lo que no se puede calcular la inversa.
         } else {
             // Calcula los elementos de la matriz inversa dividiendo los elementos de la adjunta por el determinante.

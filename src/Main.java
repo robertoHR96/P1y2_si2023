@@ -1,5 +1,7 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+/**
+ * La clase `Main` es la clase principal del programa que inicia la aplicación de cifrado/descifrado
+ * basada en el cifrado Hill. Acepta argumentos de línea de comandos para configurar y ejecutar el programa.
+ */
 public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller();

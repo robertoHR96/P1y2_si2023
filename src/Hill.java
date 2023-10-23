@@ -3,6 +3,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Random;
+
+/**
+ * La clase `Hill` implementa un cifrado y descifrado de texto utilizando el cifrado Hill.
+ * Este cifrado opera en bloques de texto y utiliza matrices como parte del proceso.
+ * La clase proporciona métodos para cifrar y descifrar texto, así como configurar claves y controlar opciones de traza.
+ */
 public class Hill {
     // Texto plano sin cifrar/descifrar
     private String entrada = "";
@@ -12,20 +18,23 @@ public class Hill {
     private boolean traza = true;
     // Matriz de números con la clave.txt para cifrar los datos
     private Integer[][] clave = new Integer[3][3];
-    // Matriz de números con la clave.txt para cifrar los datos
+    // Matriz inversa de números con la clave.txt para cifrar los datos
     private Integer[][] claveInversa = new Integer[3][3];
-
     // Variable de estado para la bandera "CODIFICA" (inicializada en "false" por defecto)
     private boolean codifica = true;
     // Lista de letras par ael cifrado
     private String[] listaLetras = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
-    public Hill (){
-        this.codifica=true;
-        this.traza=true;
-        this.salida="";
-        this.entrada="";
+    /**
+     * Constructor por defecto de la clase
+     */
+    public Hill() {
+        this.codifica = true;
+        this.traza = true;
+        this.salida = "";
+        this.entrada = "";
     }
+
     /**
      * Ejecuta el cifrado/descifrado de la variable entrada y la deja en salida
      *
@@ -38,7 +47,13 @@ public class Hill {
     }
 
     /**
-     * Cifra el contenido de la variable entrada
+     * Realiza la codificación o descodificación de un texto utilizando matrices y una clave de cifrado.
+     * <p>
+     * Este método lleva a cabo la codificación o descodificación de un texto de entrada utilizando matrices y una clave de cifrado.
+     * El proceso implica el cálculo de matrices, la multiplicación de estas matrices y la generación del texto de salida.
+     * <p>
+     * Si la variable de clase 'codifica' es verdadera, se realizará una codificación. Si es falsa, se llevará a cabo
+     * una descodificación. El resultado se almacena en la variable de instancia 'salida'.
      */
     public void codificar() {
 
@@ -47,13 +62,13 @@ public class Hill {
         LinkedList<Integer[][]> listaMatricesCifradas = new LinkedList<Integer[][]>();
 
         print("-------------------------------------");
-        if(codifica) print("Calculando matrices para cifrar texto...");
+        if (codifica) print("Calculando matrices para cifrar texto...");
         else print("Calculando matrices para des-cifrar texto...");
 
         calculoDeMatrices(listaMatrices);
 
         print("-------------------------------------");
-        if(codifica) print("Multiplicando matrices para cifrar texto...");
+        if (codifica) print("Multiplicando matrices para cifrar texto...");
         else print("Multiplicando matrices para des-cifrar texto...");
 
         Iterator it = listaMatrices.iterator();
@@ -69,14 +84,24 @@ public class Hill {
         this.salida = generarTextoSalida(listaMatricesCifradas);
 
         print("-------------------------------------");
-        if(codifica) print("Texto sin cifrado: "+this.entrada);
-        else print("Texto sin des-cifrado: "+this.entrada);
+        if (codifica) print("Texto sin cifrado: " + this.entrada);
+        else print("Texto sin des-cifrado: " + this.entrada);
         print("-------------------------------------");
-        if(codifica) print("Texto cifrado: "+this.salida);
-        else print("Texto des-cifrado: "+this.salida);
+        if (codifica) print("Texto cifrado: " + this.salida);
+        else print("Texto des-cifrado: " + this.salida);
 
     }
 
+    /**
+     * Genera un texto de salida a partir de una lista de matrices cifradas.
+     * <p>
+     * Este método toma una lista de matrices cifradas, donde cada matriz es una matriz de enteros 3x3,
+     * y convierte estas matrices en un texto de salida. Cada elemento de la matriz se usa como índice para
+     * acceder a un arreglo de letras, y estas letras se concatenan para formar el texto de salida.
+     *
+     * @param listaMatricesCifradas Una lista de matrices cifradas. Cada matriz debe ser de tamaño 3x3 y contener enteros.
+     * @return El texto de salida generado a partir de las matrices cifradas.
+     */
     public String generarTextoSalida(LinkedList<Integer[][]> listaMatricesCifradas) {
         String exit = "";
         Iterator it = listaMatricesCifradas.iterator();
@@ -84,7 +109,7 @@ public class Hill {
             Integer[][] matriz = (Integer[][]) it.next();
             for (int e = 0; e < 3; e++) {
                 for (int j = 0; j < 3; j++) {
-                    exit=exit+this.listaLetras[matriz[j][e]];
+                    exit = exit + this.listaLetras[matriz[j][e]];
                 }
             }
         }
@@ -150,7 +175,7 @@ public class Hill {
      * Muestra tres matrices en formato especial, con una 'x' y un '=' en la fila del medio,
      * para visualizar la multiplicación de matrices.
      *
-     * @param matriz La matriz del texto plano.
+     * @param matriz        La matriz del texto plano.
      * @param matrizCifrada La matriz cifrada.
      */
     public void mostrarMatrices(Integer[][] matriz, Integer[][] matrizCifrada) {
@@ -169,7 +194,7 @@ public class Hill {
 
             // Imprimir la fila de la matriz 2
             for (int j = 0; j < 3; j++) {
-                if(codifica) System.out.print(this.clave[i][j] + " ");
+                if (codifica) System.out.print(this.clave[i][j] + " ");
                 else System.out.print(this.claveInversa[i][j] + " ");
             }
 
@@ -190,11 +215,6 @@ public class Hill {
         }
     }
 
-    /**
-     * Descifra el contenido de la variable de entrada
-     */
-    public void desCodificar() {
-    }
 
     /**
      * Realiza la multiplicación de dos matrices cuadradas de enteros.
@@ -220,7 +240,7 @@ public class Hill {
                 int val1 = 0;
                 // Realiza la multiplicación y acumula el resultado en val1
                 for (int e = 0; e < 3; e++) {
-                    if(codifica) val1 = (matrizCifrar[e][i] * this.clave[j][e]) + val1;
+                    if (codifica) val1 = (matrizCifrar[e][i] * this.clave[j][e]) + val1;
                     else val1 = (matrizCifrar[e][i] * this.claveInversa[j][e]) + val1;
                 }
                 // Aplica módulo 27 al resultado y almacénalo en la matriz resultado
@@ -236,21 +256,24 @@ public class Hill {
     public void setClaveDefault() {
         // Valores de la primera fila
 
-        clave[0][0] = 1;
-        clave[0][1] = 2;
-        clave[0][2] = 3;
+        this.clave[0][0] = 1;
+        this.clave[0][1] = 2;
+        this.clave[0][2] = 3;
 
         // Valores de la segunda fila
-        clave[1][0] = 0;
-        clave[1][1] = 4;
-        clave[1][2] = 5;
+        this.clave[1][0] = 0;
+        this.clave[1][1] = 4;
+        this.clave[1][2] = 5;
 
         // valores de la tercera fila
-        clave[2][0] = 1;
-        clave[2][1] = 0;
-        clave[2][2] = 6;
+        this.clave[2][0] = 1;
+        this.clave[2][1] = 0;
+        this.clave[2][2] = 6;
         EntradaSalida es = new EntradaSalida();
-        setClaveInversa(es.calcularMatrizInversa(this.clave));
+        Integer[][] clavein = es.calcularMatrizInversa(this.clave);
+        if (clavein != null) {
+            setClaveInversa(clavein);
+        }
     }
 
     /**
@@ -265,7 +288,7 @@ public class Hill {
     /**
      * Establece el valor de la variable entrada
      *
-     * @param entrada
+     * @param entrada Cadena de entrada de texto a cifrar/descifrar
      */
     public void setEntrada(String entrada) {
         this.entrada = entrada;
@@ -283,7 +306,7 @@ public class Hill {
     /**
      * Establece el valor de la variable salida
      *
-     * @param salida
+     * @param salida Cadena de texto cifrado/descifrar a devolver
      */
     public void setSalida(String salida) {
         this.salida = salida;
@@ -319,15 +342,16 @@ public class Hill {
     /**
      * Establece el valor de la clave.txt de cifrado y descifrado
      *
-     * @param clave
+     * @param clave Clave con la que se va a cifrar el texto
      */
     public void setClave(Integer[][] clave) {
-        for (int i = 0; i < 3; i++) {
-            for (int e = 0; e < 3; e++) {
-                this.clave[i][e] = clave[i][e];
+            for (int i = 0; i < 3; i++) {
+                for (int e = 0; e < 3; e++) {
+                    this.clave[i][e] = clave[i][e];
+                }
             }
-        }
     }
+
     /**
      * Obtiene la clave.txt de cifrado y descifrado
      *
@@ -340,7 +364,7 @@ public class Hill {
     /**
      * Establece el valor de la clave.txt de cifrado y descifrado
      *
-     * @param clave
+     * @param clave Clave con la que se va a descifrar el texto
      */
     public void setClaveInversa(Integer[][] clave) {
         for (int i = 0; i < 3; i++) {
@@ -405,6 +429,12 @@ public class Hill {
     }
 
 
+    /**
+     * Devuelve un entero en módulo 27
+     *
+     * @param numero Numero que se le quiere aplicar
+     * @return Número en módulo 27
+     */
     public Integer mod27(Integer numero) {
         // Utilizamos el operador de módulo (%) para calcular el módulo 26.
         // Aseguramos que el resultado esté en el rango [0, 25] inclusive.

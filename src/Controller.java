@@ -2,6 +2,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+/**
+ * Clase que gestiona la configuración y la ejecución de un algoritmo de cifrado Hill Cipher.
+ * Permite la lectura de un archivo de configuración para definir acciones y ajustes de cifrado.
+ */
 public class Controller {
     // Variable para almacenar el nombre del archivo de configuración
     private String ficheroConfig = "";
@@ -15,6 +19,9 @@ public class Controller {
     // Objeto para gestionar EntradaSalida (inicializado con una nueva instancia)
     private EntradaSalida entradaSalida = new EntradaSalida();
 
+    /**
+     * Constructor por defecto de la clase
+     */
     public Controller() {
         this.traza = true;
         hill.setTraza(true);
@@ -170,8 +177,13 @@ public class Controller {
         // Se selecciona el fichero con la clave.txt en el objeto entradaSalida
         entradaSalida.setFicheroClave(ficheroClave);
         // Se lee la clave.txt de entradaSalida y se las asignamos a hill
-        hill.setClave(entradaSalida.leerClave());
-        hill.setClaveInversa(entradaSalida.leerClaveInversa());
+        Integer[][] clave = entradaSalida.leerClave();
+        if (clave != null) {
+            if (clave[0][0] != null) {
+                hill.setClave(clave);
+                hill.setClaveInversa(entradaSalida.leerClaveInversa());
+            }
+        }
     }
 
     /**
@@ -209,15 +221,15 @@ public class Controller {
         switch (bandera) {
             case "traza":
                 // Actualiza el estado correspondiente y muestra un mensaje de actualización
-                updateEstadoTraza(estadoBnd);
                 print("-------------------------------------");
                 print("Actualizando estado de la bandera TRAZA: " + estadoBandera);
+                updateEstadoTraza(estadoBnd);
                 break;
             case "codifica":
                 // Actualiza el estado correspondiente de la instancia de la clase Hill y muestra un mensaje de actualización
-                hill.setCodifica(estadoBnd);
                 print("-------------------------------------");
                 print("Actualizando estado de la bandera CODIFICA: " + estadoBandera);
+                hill.setCodifica(estadoBnd);
                 break;
             default:
                 // Maneja cualquier otro tipo de bandera no válida y muestra un mensaje de error
