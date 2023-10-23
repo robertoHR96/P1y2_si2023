@@ -9,11 +9,14 @@ public class Hill {
     // Texto cifrado/desCifrado
     private String salida = "";
     // Variable de estado para la bandera "TRAZA" (inicializada en "true" por defecto)
-    private boolean traza = false;
-    // Matriz de números con la clave para cifrar los datos
+    private boolean traza = true;
+    // Matriz de números con la clave.txt para cifrar los datos
     private Integer[][] clave = new Integer[3][3];
+    // Matriz de números con la clave.txt para cifrar los datos
+    private Integer[][] claveInversa = new Integer[3][3];
+
     // Variable de estado para la bandera "CODIFICA" (inicializada en "false" por defecto)
-    private boolean codifica = false;
+    private boolean codifica = true;
     // Lista de letras par ael cifrado
     private String[] listaLetras = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
@@ -24,8 +27,7 @@ public class Hill {
      * @return Texto cifrado/desCifrado.
      */
     public String cifrar() {
-        if (codifica) codificar();
-        else desCodificar();
+        codificar();
         // si se va a descifrar la entrada tiene que se multiplos de 3
         return this.salida;
     }
@@ -40,12 +42,14 @@ public class Hill {
         LinkedList<Integer[][]> listaMatricesCifradas = new LinkedList<Integer[][]>();
 
         print("-------------------------------------");
-        print("Calculando matrices para cifrar texto...");
+        if(codifica) print("Calculando matrices para cifrar texto...");
+        else print("Calculando matrices para des-cifrar texto...");
 
         calculoDeMatrices(listaMatrices);
 
         print("-------------------------------------");
-        print("Multiplicando matrices para cifrar texto...");
+        if(codifica) print("Multiplicando matrices para cifrar texto...");
+        else print("Multiplicando matrices para des-cifrar texto...");
 
         Iterator it = listaMatrices.iterator();
         while (it.hasNext()) {
@@ -60,9 +64,11 @@ public class Hill {
         this.salida = generarTextoSalida(listaMatricesCifradas);
 
         print("-------------------------------------");
-        print("Texto sin cifrado: "+this.entrada);
+        if(codifica) print("Texto sin cifrado: "+this.entrada);
+        else print("Texto sin des-cifrado: "+this.entrada);
         print("-------------------------------------");
-        print("Texto cifrado: "+this.salida);
+        if(codifica) print("Texto cifrado: "+this.salida);
+        else print("Texto des-cifrado: "+this.salida);
 
     }
 
@@ -108,7 +114,7 @@ public class Hill {
                     contador++;
                 }
             }
-            listaMatrices.add(matrizAux);
+            listaMatrices.addFirst(matrizAux);
         }
     }
 
@@ -153,7 +159,8 @@ public class Hill {
 
             // Imprimir la fila de la matriz 2
             for (int j = 0; j < 3; j++) {
-                System.out.print(this.clave[i][j] + " ");
+                if(codifica) System.out.print(this.clave[i][j] + " ");
+                else System.out.print(this.claveInversa[i][j] + " ");
             }
 
             // Imprimir un '=' en la fila del medio
@@ -182,7 +189,7 @@ public class Hill {
     /**
      * Realiza la multiplicación de dos matrices cuadradas de enteros.
      * <p>
-     * Esta función toma una matriz cuadrada de enteros y la multiplica por la matriz clave.
+     * Esta función toma una matriz cuadrada de enteros y la multiplica por la matriz clave.txt.
      * La matriz resultante tendrá el mismo tamaño que la matriz de entrada y contendrá
      * el producto de las dos matrices.
      *
@@ -203,7 +210,8 @@ public class Hill {
                 int val1 = 0;
                 // Realiza la multiplicación y acumula el resultado en val1
                 for (int e = 0; e < 3; e++) {
-                    val1 = (matrizCifrar[e][i] * this.clave[j][e]) + val1;
+                    if(codifica) val1 = (matrizCifrar[e][i] * this.clave[j][e]) + val1;
+                    else val1 = (matrizCifrar[e][i] * this.claveInversa[j][e]) + val1;
                 }
                 // Aplica módulo 27 al resultado y almacénalo en la matriz resultado
                 matrizMultiplicada[j][i] = mod27(val1);
@@ -213,7 +221,7 @@ public class Hill {
     }
 
     /**
-     * Establece una clave por defecto
+     * Establece una clave.txt por defecto
      */
     public void setClaveDefault() {
         // Valores de la primera fila
@@ -288,16 +296,16 @@ public class Hill {
     }
 
     /**
-     * Obtiene la clave de cifrado y descifrado
+     * Obtiene la clave.txt de cifrado y descifrado
      *
-     * @return Una matriz con la clave de cifrado
+     * @return Una matriz con la clave.txt de cifrado
      */
     public Integer[][] getClave() {
         return clave;
     }
 
     /**
-     * Establece el valor de la clave de cifrado y descifrado
+     * Establece el valor de la clave.txt de cifrado y descifrado
      *
      * @param clave
      */
@@ -308,7 +316,27 @@ public class Hill {
             }
         }
     }
+    /**
+     * Obtiene la clave.txt de cifrado y descifrado
+     *
+     * @return Una matriz con la clave.txt de cifrado
+     */
+    public Integer[][] getClaveInversa() {
+        return claveInversa;
+    }
 
+    /**
+     * Establece el valor de la clave.txt de cifrado y descifrado
+     *
+     * @param clave
+     */
+    public void setClaveInversa(Integer[][] clave) {
+        for (int i = 0; i < 3; i++) {
+            for (int e = 0; e < 3; e++) {
+                this.claveInversa[i][e] = clave[i][e];
+            }
+        }
+    }
 
     /**
      * Obtiene el estado de la bandera "CODIFICA".

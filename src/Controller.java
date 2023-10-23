@@ -45,8 +45,6 @@ public class Controller {
                 try {
                     // Leer una línea del archivo.
                     if ((strng = obj.readLine()) == null) break; // Si no hay más líneas, salir del bucle.
-
-                    // Ejecutar la orden contenida en la línea leída.
                     if (!strng.equals("")) ejecutarOrden(strng);
                 } catch (IOException e) {
                     System.err.println("Error al leer el fichero de entrada");
@@ -74,6 +72,7 @@ public class Controller {
      * @param strng La cadena de entrada que contiene el comando y sus argumentos, separados por espacios.
      */
     public void ejecutarOrden(String strng) {
+        print(strng);
         // Se estraen los tokens del string
         StringTokenizer tokenizerStrng = new StringTokenizer(strng);
         ArrayList<String> tokensList = new ArrayList<>();
@@ -91,8 +90,7 @@ public class Controller {
         if (splitLinea.length >= 2) {
             // Si no es ningun comando válido se muestra el mensaje de error
             // En caso contrario se ejecuta el comando seleccionado
-            if (!splitLinea[0].equals("@") && !splitLinea[0].equals("&")) print("Error: Bandera no valido");
-            else {
+            if (splitLinea[0].equals("@") || splitLinea[0].equals("&")) {
                 // Comprobar si el primer elemento es "@"
                 // Si es "@", llamar a la función updateBandera con los argumentos especificados
                 if (splitLinea[0].equals("@")) updateBandera(splitLinea[1], splitLinea[2]);
@@ -101,9 +99,10 @@ public class Controller {
                 // Si es "&", llamar a la función seleccionarComando con el comando especificado
                 if (splitLinea[0].equals("&")) seleccionarComando(splitLinea);
             }
-
         } else {
-            print("Error: Instrucción no valida");
+            if (!strng.equals("")) {
+                print("Error: Instrucción no valida: " + strng);
+            }
         }
     }
 
@@ -145,7 +144,7 @@ public class Controller {
             case "clave":
                 // Llama a la función seleccionarClave con el tercer argumento
                 if (splitLinea.length == 3) seleccionarClave(splitLinea[2]);
-                else print("Error: Comando 'clave' requiere 2 argumentos");
+                else print("Error: Comando 'clave.txt' requiere 2 argumentos");
                 break;
             case "formateaentrada":
                 // Llama a la función formatearEntrada
@@ -159,16 +158,16 @@ public class Controller {
 
 
     /**
-     * Selecciona la clave para cifrar y descifrar desde un fichero
+     * Selecciona la clave.txt para cifrar y descifrar desde un fichero
      *
-     * @param ficheroClave String con el nombre del fichero que contiene la clave
+     * @param ficheroClave String con el nombre del fichero que contiene la clave.txt
      */
     public void seleccionarClave(String ficheroClave) {
-        // Se selecciona el fichero con la clave en el objeto entradaSalida
+        // Se selecciona el fichero con la clave.txt en el objeto entradaSalida
         entradaSalida.setFicheroClave(ficheroClave);
-        // Se lee la clave de entradaSalida y se la asignamos a hill
-        if (hill.isCodifica()) hill.setClave(entradaSalida.leerClave());
-        else hill.setClave(entradaSalida.leerClaveInversa());
+        // Se lee la clave.txt de entradaSalida y se las asignamos a hill
+        hill.setClave(entradaSalida.leerClave());
+        hill.setClaveInversa(entradaSalida.leerClaveInversa());
     }
 
     /**
@@ -204,13 +203,13 @@ public class Controller {
 
         // Utiliza un switch para manejar diferentes banderas
         switch (bandera) {
-            case "TRAZA":
+            case "traza":
                 // Actualiza el estado correspondiente y muestra un mensaje de actualización
                 updateEstadoTraza(estadoBnd);
                 print("-------------------------------------");
                 print("Actualizando estado de la bandera TRAZA: " + estadoBandera);
                 break;
-            case "CODIFICA":
+            case "codifica":
                 // Actualiza el estado correspondiente de la instancia de la clase Hill y muestra un mensaje de actualización
                 hill.setCodifica(estadoBnd);
                 print("-------------------------------------");

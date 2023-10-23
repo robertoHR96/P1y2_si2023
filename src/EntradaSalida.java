@@ -19,14 +19,14 @@ public class EntradaSalida {
     private String ficheroSalida = "";
 
     /**
-     * Representa el nombre del fichero de clave.
+     * Representa el nombre del fichero de clave.txt.
      */
     private String ficheroClave = "";
 
     /**
      * Indica si la traza está habilitada o deshabilitada.
      */
-    private boolean traza = false;
+    private boolean traza = true;
 
     /**
      * Lee la entrada desde un fichero.
@@ -46,6 +46,10 @@ public class EntradaSalida {
             // Lee cada línea del archivo y la agrega al StringBuilder
             while ((linea = br.readLine()) != null) {
                 contenido.append(linea);
+                // Verifica si se ha alcanzado el límite de 1000 caracteres y sale del bucle si es así
+                if (contenido.length() >= 1000) {
+                    break;
+                }
             }
         } catch (IOException e) {
             // En caso de un error de lectura, imprime un mensaje de error
@@ -84,16 +88,16 @@ public class EntradaSalida {
     }
 
     /**
-     * Lee una matriz de enteros (clave) desde un fichero.
+     * Lee una matriz de enteros (clave.txt) desde un fichero.
      *
-     * @return Una matriz de enteros 3x3 que representa la clave.
+     * @return Una matriz de enteros 3x3 que representa la clave.txt.
      */
     public Integer[][] leerClave() {
-        // Crea una matriz de 3x3 para almacenar la clave
+        // Crea una matriz de 3x3 para almacenar la clave.txt
         Integer[][] matriz = new Integer[3][3];
 
         try (BufferedReader br = new BufferedReader(new FileReader(ficheroClave))) {
-            // Lee el fichero de clave línea por línea
+            // Lee el fichero de clave.txt línea por línea
             String linea = br.readLine();
             StringTokenizer tokenizer = new StringTokenizer(linea);
             for (int i = 0; i < 3; i++) {
@@ -106,14 +110,14 @@ public class EntradaSalida {
                 }
             }
         } catch (FileNotFoundException e) {
-            // Maneja la excepción si el fichero de clave no se encuentra
-            print("Error: Fichero de clave no válido");
+            // Maneja la excepción si el fichero de clave.txt no se encuentra
+            print("Error: Fichero de clave.txt no válido");
         } catch (IOException e) {
-            // Maneja la excepción si ocurre un error de lectura en el fichero de clave
-            print("Error: Fichero de clave no válido");
+            // Maneja la excepción si ocurre un error de lectura en el fichero de clave.txt
+            print("Error: Fichero de clave.txt no válido");
         }
 
-        // Devuelve la matriz de clave procesada
+        // Devuelve la matriz de clave.txt procesada
         return matriz;
     }
 
@@ -144,16 +148,31 @@ public class EntradaSalida {
             return null; // La matriz no es invertible, por lo que no se puede calcular la inversa.
         } else {
             // Calcula los elementos de la matriz inversa dividiendo los elementos de la adjunta por el determinante.
+            det = modInverse(det);
             for (int i = 0; i < matriz.length; i++) {
                 for (int j = 0; j < matriz[0].length; j++) {
-                    inversa[i][j] = mod27(adjunta[i][j] / det); // multiplico por el inverso del determinante (algoritmo extendido de uclides)
+                    inversa[i][j] = mod27(adjunta[i][j] * det); // multiplico por el inverso del determinante (algoritmo extendido de uclides)
                 }
             }
         }
 
         return inversa;
     }
-
+    /**
+     * Calcula el inverso del determinante utilizando el algoritmo extendido de Euclides.
+     *
+     * @param det El determinante de la matriz.
+     * @return El inverso del determinante.
+     */
+    public int modInverse(int det) {
+        det = mod27(det);
+        for (int x = 1; x < 27; x++) {
+            if (mod27(det * x) == 1) {
+                return x;
+            }
+        }
+        return -1; // Inverso no encontrado (matriz no invertible).
+    }
 
     /**
      * Calcula el determinante de una matriz 3x3.
@@ -257,18 +276,18 @@ public class EntradaSalida {
     }
 
     /**
-     * Obtiene el nombre del fichero de clave.
+     * Obtiene el nombre del fichero de clave.txt.
      *
-     * @return El nombre del fichero de clave.
+     * @return El nombre del fichero de clave.txt.
      */
     public String getFicheroClave() {
         return ficheroClave;
     }
 
     /**
-     * Establece el nombre del fichero de clave.
+     * Establece el nombre del fichero de clave.txt.
      *
-     * @param ficheroClave El nombre del fichero de clave a establecer.
+     * @param ficheroClave El nombre del fichero de clave.txt a establecer.
      */
     public void setFicheroClave(String ficheroClave) {
         this.ficheroClave = ficheroClave;

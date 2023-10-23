@@ -1,0 +1,25 @@
+#comienza el fichero de configuracion de P1 SI 2023
+
+#probando los comandos
+
+# formatear la entrada
+& ficherosalida quijoteformateado.txt
+& ficheroentrada quijote1.txt
+& formateaentrada 
+ 
+& clave clave.txt
+#Fichero a codificar
+& ficheroentrada quijoteformateado.txt
+& ficherosalida quijotecifrado.txt
+@ codifica ON
+& hill
+
+#Vamos a recuperar el original descifrando
+& ficheroentrada quijotecifrado.txt
+& ficherosalida quijoteRestaurado.txt
+@ codifica OFF
+& hill
+
+
+
+# fin del fichero de configuracion
