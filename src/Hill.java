@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Objects;
-
+import java.util.Random;
 public class Hill {
     // Texto plano sin cifrar/descifrar
     private String entrada = "";
@@ -96,8 +96,12 @@ public class Hill {
         String[] splitTexto = this.entrada.split("");
 
         // Asegura que la longitud de splitTexto sea un múltiplo de 9, rellenando con 'A' si es necesario
+        // Crear una instancia de Random
+        Random random = new Random();
+
+// Generar un número aleatorio en el rango de 0 a 25 (incluyendo 0 y 25)
         while ((splitTexto.length % 9) != 0) {
-            this.entrada = this.entrada + "A";
+            this.entrada = this.entrada + listaLetras[random.nextInt(26)];
             splitTexto = this.entrada.split("");
         }
 
@@ -114,7 +118,8 @@ public class Hill {
                     contador++;
                 }
             }
-            listaMatrices.addFirst(matrizAux);
+            listaMatrices.add(matrizAux);
+            matrizAux = new Integer[3][3];
         }
     }
 
