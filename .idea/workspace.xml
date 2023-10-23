@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Primera version casi okk">
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Primera version para SEI okk">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quijote1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/quijote1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EntradaSalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntradaSalida.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +95,7 @@
       <workItem from="1697558883464" duration="975000" />
       <workItem from="1697613940014" duration="25000" />
       <workItem from="1697731099439" duration="10321000" />
-      <workItem from="1698069639214" duration="3777000" />
+      <workItem from="1698069639214" duration="4258000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -225,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698072736071</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Primera version para SEI okk">
+      <option name="closed" value="true" />
+      <created>1698073492446</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1698073492446</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,18 +267,8 @@
     <MESSAGE value="Multiplicacion de matrices" />
     <MESSAGE value="Cifrado OK" />
     <MESSAGE value="Primera version casi okk" />
-    <option name="LAST_COMMIT_MESSAGE" value="Primera version casi okk" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Hill.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Primera version para SEI okk" />
+    <option name="LAST_COMMIT_MESSAGE" value="Primera version para SEI okk" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

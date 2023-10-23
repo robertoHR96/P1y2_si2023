@@ -38,7 +38,10 @@ public class Controller {
         String strng = null;
         try {
             // Abrir el archivo de configuración para lectura.
-            obj = new BufferedReader(new FileReader(doc));
+            //obj = new BufferedReader(new FileReader(doc));
+            obj = new BufferedReader(new InputStreamReader(new FileInputStream(doc), "UTF-8"));
+            // Resto del código de lectura...
+
 
             // Leer el archivo línea por línea hasta llegar al final.
             while (true) {
@@ -51,6 +54,8 @@ public class Controller {
                 }
             }
         } catch (FileNotFoundException e) {
+            System.err.println("Error al leer el fichero de entrada");
+        } catch (IOException e) {
             System.err.println("Error al leer el fichero de entrada");
         } finally {
             // Cerrar el archivo de configuración al finalizar.

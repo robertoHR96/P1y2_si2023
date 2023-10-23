@@ -37,7 +37,7 @@ public class EntradaSalida {
         // StringBuilder para almacenar el contenido del archivo
         StringBuilder contenido = new StringBuilder();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(this.ficheroEntrada))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(ficheroEntrada), "UTF-8"))) {
             // Imprime un mensaje informando que se está leyendo el archivo de entrada
             print("-------------------------------------");
             print("Leyendo fichero de entrada: " + ficheroEntrada);
@@ -79,7 +79,9 @@ public class EntradaSalida {
             // Creamos un nuevo archivo
             archivo.createNewFile();
 
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo), "UTF-8"))) {
+                // Resto del código de escritura...
+
                 bw.write(salida);
             }
         } catch (IOException e) {
@@ -96,7 +98,7 @@ public class EntradaSalida {
         // Crea una matriz de 3x3 para almacenar la clave.txt
         Integer[][] matriz = new Integer[3][3];
 
-        try (BufferedReader br = new BufferedReader(new FileReader(ficheroClave))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(ficheroClave), "UTF-8"))) {
             // Lee el fichero de clave.txt línea por línea
             String linea = br.readLine();
             StringTokenizer tokenizer = new StringTokenizer(linea);
@@ -158,6 +160,7 @@ public class EntradaSalida {
 
         return inversa;
     }
+
     /**
      * Calcula el inverso del determinante utilizando el algoritmo extendido de Euclides.
      *
