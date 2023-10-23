@@ -1,6 +1,6 @@
 # Descripción del Proyecto
 
-Este proyecto consta de tres clases en Java que realizan operaciones de cifrado y descifrado de texto utilizando una clave de matriz 3x3. **Es condición necesaria y suficiente para que la inversa exista que su determinante sea distinto de 0 (todo modulo 27)**. El programa principal se encuentra en la clase `Main`, que permite configurar y ejecutar el cifrado/descifrado. La clase `EntradaSalida` se encarga de leer y escribir archivos de entrada y salida, mientras que la clase `Hill` realiza las operaciones de cifrado y descifrado.
+Este proyecto consta de tres clases en Java que realizan operaciones de cifrado y descifrado de texto utilizando una clave de matriz 3x3. **Es condición necesaria y suficiente para que la inversa exista que su determinante sea distinto de 0 (todo modulo 27)**. El programa principal se encuentra en la clase `Main`, que permite configurar y ejecutar el cifrado/descifrado.La clase `controller` es la encargada de la gestion/ejecución del fichero de configuración, la clase `EntradaSalida` se encarga de leer y escribir archivos de entrada y salida, mientras que la clase `Hill` realiza las operaciones de cifrado y descifrado.
 
 ## Clase Main
 
