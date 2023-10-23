@@ -236,19 +236,19 @@ public class Hill {
     public void setClaveDefault() {
         // Valores de la primera fila
 
-        clave[0][0] = 2;
-        clave[0][1] = 0;
-        clave[0][2] = 1;
+        clave[0][0] = 1;
+        clave[0][1] = 2;
+        clave[0][2] = 3;
 
         // Valores de la segunda fila
-        clave[1][0] = 3;
-        clave[1][1] = 0;
-        clave[1][2] = 0;
+        clave[1][0] = 0;
+        clave[1][1] = 4;
+        clave[1][2] = 5;
 
         // valores de la tercera fila
-        clave[2][0] = 5;
-        clave[2][1] = 1;
-        clave[2][2] = 1;
+        clave[2][0] = 1;
+        clave[2][1] = 0;
+        clave[2][2] = 6;
         EntradaSalida es = new EntradaSalida();
         setClaveInversa(es.calcularMatrizInversa(this.clave));
     }

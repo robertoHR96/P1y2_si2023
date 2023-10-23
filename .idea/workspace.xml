@@ -9,14 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Cambios lectura y escritura de ficheros">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/P1y2_si2023_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entrada.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Primera versión FIN2">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EntradaSalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntradaSalida.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hill.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
@@ -38,6 +33,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Hill.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2WKucNdQiEtbrHvyQ0kSg9YGA2P" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -108,7 +106,7 @@
       <workItem from="1697558883464" duration="975000" />
       <workItem from="1697613940014" duration="25000" />
       <workItem from="1697731099439" duration="10321000" />
-      <workItem from="1698069639214" duration="7357000" />
+      <workItem from="1698069639214" duration="13004000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -254,7 +252,23 @@
       <option name="project" value="LOCAL" />
       <updated>1698073961947</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Primera versión FIN">
+      <option name="closed" value="true" />
+      <created>1698077169671</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1698077169671</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Primera versión FIN2">
+      <option name="closed" value="true" />
+      <created>1698077203783</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1698077203783</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,7 +304,9 @@
     <MESSAGE value="Primera version casi okk" />
     <MESSAGE value="Primera version para SEI okk" />
     <MESSAGE value="Cambios lectura y escritura de ficheros" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambios lectura y escritura de ficheros" />
+    <MESSAGE value="Primera versión FIN" />
+    <MESSAGE value="Primera versión FIN2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Primera versión FIN2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

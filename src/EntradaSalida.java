@@ -58,7 +58,7 @@ public class EntradaSalida {
             }
         } catch (IOException e) {
             // En caso de un error de lectura, imprime un mensaje de error
-            print("  -- Error: Fichero de entrada no válido");
+            print("Error: Fichero de entrada no válido");
         }
 
         // Convierte el contenido del archivo en una cadena y la devuelve
@@ -118,10 +118,10 @@ public class EntradaSalida {
             }
         } catch (FileNotFoundException e) {
             // Maneja la excepción si el fichero de clave.txt no se encuentra
-            print("  -- Error: Fichero de clave.txt no válido");
+            print("Error: Fichero de clave.txt no válido");
         } catch (IOException e) {
             // Maneja la excepción si ocurre un error de lectura en el fichero de clave.txt
-            print("  -- Error: Fichero de clave.txt no válido");
+            print("Error: Fichero de clave.txt no válido");
         }
 
         // Devuelve la matriz de clave.txt procesada
@@ -151,7 +151,7 @@ public class EntradaSalida {
 
         // Verifica si la matriz es invertible (determinante no igual a 0).
         if (det == 0) {
-            System.out.println("  -- Error: La matriz no es invertible, el determinante es 0");
+            System.out.println("Error: La matriz no es invertible, el determinante es 0");
             return null; // La matriz no es invertible, por lo que no se puede calcular la inversa.
         } else {
             // Calcula los elementos de la matriz inversa dividiendo los elementos de la adjunta por el determinante.
@@ -191,7 +191,7 @@ public class EntradaSalida {
     public int calcularDeterminante(Integer[][] matriz) {
         int det = 0;
         if (matriz.length != 3 || matriz[0].length != 3)
-            print("  -- Error: (Calculo determinante) La matriz ha de ser de 3x3");
+            print("Error: (Calculo determinante) La matriz ha de ser de 3x3");
         else {
             // Calcula el determinante usando la fórmula específica para matrices 3x3.
             det = matriz[0][0] * mod27(matriz[1][1] * matriz[2][2] - matriz[1][2] * matriz[2][1])
@@ -209,7 +209,7 @@ public class EntradaSalida {
      */
     public Integer[][] calcularMatrizAdjunta(Integer[][] matriz) {
         Integer[][] matrizAdjunta = new Integer[3][3];
-        if (matriz.length != 3 || matriz[0].length != 3) print("  -- Error: (Calculo adjunta) La matriz ha de ser de 3x3");
+        if (matriz.length != 3 || matriz[0].length != 3) print("Error: (Calculo adjunta) La matriz ha de ser de 3x3");
         else {
             // Calcula la matriz adjunta utilizando la fórmula específica para matrices 3x3.
             matrizAdjunta[0][0] = mod27(matriz[1][1] * matriz[2][2] - matriz[1][2] * matriz[2][1]);
