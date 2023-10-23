@@ -3,20 +3,20 @@
 #probando los comandos
 
 # formatear la entrada
-& ficherosalida quijoteformateado.txt
-& ficheroentrada quijote1.txt
+#& ficherosalida quijoteformateado.txt
+#& ficheroentrada quijote1.txt
 & formateaentrada 
  
 & clave clave.txt
 #Fichero a codificar
-& ficheroentrada quijoteformateado.txt
-& ficherosalida quijotecifrado.txt
+& ficheroentrada salida.txt
+& ficherosalida salida.txt
 @ codifica ON
 & hill
 
 #Vamos a recuperar el original descifrando
-& ficheroentrada quijotecifrado.txt
-& ficherosalida quijoteRestaurado.txt
+& ficheroentrada salida.txt
+& ficherosalida salida2.txt
 @ codifica OFF
 & hill
 

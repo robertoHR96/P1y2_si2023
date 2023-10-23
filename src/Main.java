@@ -25,11 +25,34 @@ public class Main {
                         "-h : Para obtener ayuda.\n" +
                         "");
                 break;
-
+            default:
+                System.out.println("" +
+                        "Error de argumentos.\n" +
+                        "-f fichero: Para ejecutar el programa.\n" +
+                        "-h : Para obtener ayuda.\n" +
+                        "");
+                break;
         }
     }
 
     static void mostrarAyuda() {
         System.out.println("-- Ayuda --");
+        System.out.println("" +
+                "Para inicializar el programa debe ejecutarse con el argumento -f seguido del nombre del fichero de configuración" +
+                "Ejem: P1y2_si2023 -f config.txt" +
+                "El fichero de configuracion puede ejecutar los siguientes comandos: " +
+                "& ficheroentrada <nombre-fichero-entrada> para selecionar el fichero donde se encuentra" +
+                "el texto a cifrar/descifrar, en caso de no seleccionar fichero" +
+                "la entrada se tomara de entrada.txt" +
+                "& ficherosalida <nombre-fichero-salida> para selecionar el fichero donde se quiere" +
+                "alojar el texto cifrado/descifrado, en caso de no seleccionar fichero" +
+                "la slaida se guardara en salida.txt" +
+                "& clave <fichero-clave> para selecionar el fichero con la clave" +
+                "en caso de no selecionar una clave esta por defecto sera -> 2 0 1 3 0 0 5 1 1 " +
+                "& hill siver para ejecutar el cifrado o descifrado en base al texto alojada en & ficheroentrada" +
+                "& formateaentrada sirve para formatear la entrada del ficheroentrada y guardarla en ficherosalida" +
+                "@ traza ON / OFF selecciona si se desea que se muestre la traza de la ejecucion del programa" +
+                "@ codfica ON / OFF selecciona si se va a cifrar o descifrar texto" +
+                "");
     }
 }

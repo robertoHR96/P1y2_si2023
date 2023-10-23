@@ -50,19 +50,19 @@ public class Controller {
                     if ((strng = obj.readLine()) == null) break; // Si no hay más líneas, salir del bucle.
                     if (!strng.equals("")) ejecutarOrden(strng);
                 } catch (IOException e) {
-                    System.err.println("Error al leer el fichero de entrada");
+                    System.err.println("	 -- Error al leer el fichero de entrada");
                 }
             }
         } catch (FileNotFoundException e) {
-            System.err.println("Error al leer el fichero de entrada");
+            System.err.println("	 -- Error al leer el fichero de entrada");
         } catch (IOException e) {
-            System.err.println("Error al leer el fichero de entrada");
+            System.err.println("	 -- Error al leer el fichero de entrada");
         } finally {
             // Cerrar el archivo de configuración al finalizar.
             try {
                 if (obj != null) obj.close();
             } catch (IOException e) {
-                System.err.println("Error al cerrar el fichero de entrada");
+                System.err.println("	 -- Error al cerrar el fichero de entrada");
             }
         }
     }
@@ -77,7 +77,6 @@ public class Controller {
      * @param strng La cadena de entrada que contiene el comando y sus argumentos, separados por espacios.
      */
     public void ejecutarOrden(String strng) {
-        print(strng);
         // Se estraen los tokens del string
         StringTokenizer tokenizerStrng = new StringTokenizer(strng);
         ArrayList<String> tokensList = new ArrayList<>();
@@ -105,8 +104,8 @@ public class Controller {
                 if (splitLinea[0].equals("&")) seleccionarComando(splitLinea);
             }
         } else {
-            if (!strng.equals("")) {
-                print("Error: Instrucción no valida: " + strng);
+            if (!strng.equals(" ")) {
+                print("	 -- Error: Instrucción no valida: " + strng);
             }
         }
     }
@@ -119,7 +118,7 @@ public class Controller {
     public void seleccionarComando(String[] splitLinea) {
         // Verifica si el array splitLinea tiene al menos 2 elementos
         if (splitLinea.length < 2) {
-            print("Error: Comando no válido");
+            print("	 -- Error: Comando no válido");
             return;
         }
         // Obtiene el segundo elemento del array como el comando
@@ -136,7 +135,7 @@ public class Controller {
                     print("-------------------------------------");
                     print("Seleccionado fichero de salida: " + splitLinea[2]);
                     entradaSalida.setFicheroSalida(splitLinea[2]);
-                } else print("Error: Comando 'ficherosalida' requiere 2 argumentos");
+                } else print("	 -- Error: Comando 'ficherosalida' requiere 2 argumentos");
                 break;
             case "ficheroentrada":
                 // Establece el fichero de entrada en la clase entradaSalida
@@ -144,12 +143,12 @@ public class Controller {
                     print("-------------------------------------");
                     print("Seleccionado fichero de entrada: " + splitLinea[2]);
                     entradaSalida.setFicheroEntrada(splitLinea[2]);
-                } else print("Error: Comando 'ficheroentrada' requiere 2 argumentos");
+                } else print("  -- Error: Comando 'ficheroentrada' requiere 2 argumentos");
                 break;
             case "clave":
                 // Llama a la función seleccionarClave con el tercer argumento
                 if (splitLinea.length == 3) seleccionarClave(splitLinea[2]);
-                else print("Error: Comando 'clave.txt' requiere 2 argumentos");
+                else print("  -- Error: Comando 'clave.txt' requiere 2 argumentos");
                 break;
             case "formateaentrada":
                 // Llama a la función formatearEntrada
@@ -157,7 +156,7 @@ public class Controller {
                 break;
             default:
                 // Maneja cualquier otro comando desconocido
-                print("Error: Comando no válido: " + comando);
+                print("	 -- Error: Comando no válido: " + comando);
         }
     }
 
@@ -202,7 +201,7 @@ public class Controller {
         else if (estadoBandera.equals("OFF")) estadoBnd = false;
         else {
             // Si el estado de la bandera no es válido, muestra un mensaje de error y retorna
-            print("Error: Estado de bandera no válido");
+            print("	 -- Error: Estado de bandera no válido");
             return;
         }
 
@@ -222,7 +221,7 @@ public class Controller {
                 break;
             default:
                 // Maneja cualquier otro tipo de bandera no válida y muestra un mensaje de error
-                print("Error: Tipo de bandera no válido");
+                print("	 -- Error: Tipo de bandera no válido");
         }
     }
 
@@ -291,9 +290,11 @@ public class Controller {
      * @return El texto formateado sin espacios en blanco y en mayúsculas.
      */
     public String formatearTexto(String texto) {
-        // Eliminar espacios en blanco y convertir a mayúsculas
-        return texto.replaceAll("\\s+", "").toUpperCase();
+        // Utilizar una expresión regular para filtrar solo letras de la "a" a la "z" (incluyendo la "ñ")
+        // y luego convertir a mayúsculas
+        return texto.replaceAll("[^a-zA-ZñÑ]", "").toUpperCase();
     }
+
 
     /****************** Getter, Setter, hascode, equlas and toString *****************/
     /******************************************************/
