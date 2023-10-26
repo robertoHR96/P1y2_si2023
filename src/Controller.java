@@ -13,8 +13,8 @@ public class Controller {
     // Variable de estado para la bandera "TRAZA" (inicializada en "true" por defecto)
     private boolean traza = true;
 
-    // Objeto para gestionar Hill (inicializado con una nueva instancia)
-    private Hill hill = new Hill();
+    // Objeto para gestionar AES (inicializado con una nueva instancia)
+    private AES Aes = new AES();
 
     // Objeto para gestionar EntradaSalida (inicializado con una nueva instancia)
     private EntradaSalida entradaSalida = new EntradaSalida();
@@ -24,9 +24,9 @@ public class Controller {
      */
     public Controller() {
         this.traza = true;
-        hill.setTraza(true);
-        hill.setCodifica(true);
-        hill.setClaveDefault();
+        Aes.setTraza(true);
+        Aes.setCodifica(true);
+        //Aes.setClaveDefault();
         entradaSalida.setTraza(true);
         entradaSalida.setFicheroEntrada("entrada.txt");
         entradaSalida.setFicheroSalida("salida.txt");
@@ -133,8 +133,8 @@ public class Controller {
 
         // Utiliza un switch para manejar diferentes comandos
         switch (comando) {
-            case "hill":
-                ejecutarHill();
+            case "AES":
+                ejecutarAES(splitLinea);
                 break;
             case "ficherosalida":
                 // Establece el fichero de salida en la clase entradaSalida
@@ -152,10 +152,15 @@ public class Controller {
                     entradaSalida.setFicheroEntrada(splitLinea[2]);
                 } else print("  -- Error: Comando 'ficheroentrada' requiere 2 argumentos");
                 break;
-            case "clave":
+            case "fichero_clave":
                 // Llama a la función seleccionarClave con el tercer argumento
-                if (splitLinea.length == 3) seleccionarClave(splitLinea[2]);
+                if (splitLinea.length == 3) seleccionarClaveAES(splitLinea[2]);
                 else print("  -- Error: Comando 'clave.txt' requiere 2 argumentos");
+                break;
+            case "Carga_Clave":
+                if(splitLinea.length == 3){
+                    cargaClaveDeFichero();
+                }else print("  -- Error: comando no valido");
                 break;
             case "formateaentrada":
                 // Llama a la función formatearEntrada
@@ -167,23 +172,30 @@ public class Controller {
         }
     }
 
+    public void cargaClaveDeFichero(){
+        String clave = entradaSalida.leerClave();
+        // ahora se carga la clave en el AES
+    }
+    public void ejecutarAES(String[] splitLinea) {
+        switch (splitLinea[2]) {
+            case "ConRelleno":
+                break;
+            case "SinRelleno":
+                break;
+            default:
+                print("  -- Error: Comando no valido");
+                break;
+        }
+    }
 
     /**
      * Selecciona la clave.txt para cifrar y descifrar desde un fichero
      *
      * @param ficheroClave String con el nombre del fichero que contiene la clave.txt
      */
-    public void seleccionarClave(String ficheroClave) {
+    public void seleccionarClaveAES(String ficheroClave) {
         // Se selecciona el fichero con la clave.txt en el objeto entradaSalida
         entradaSalida.setFicheroClave(ficheroClave);
-        // Se lee la clave.txt de entradaSalida y se las asignamos a hill
-        Integer[][] clave = entradaSalida.leerClave();
-        if (clave != null) {
-            if (clave[0][0] != null) {
-                hill.setClave(clave);
-                hill.setClaveInversa(entradaSalida.leerClaveInversa());
-            }
-        }
     }
 
     /**
@@ -192,10 +204,10 @@ public class Controller {
      */
     public void ejecutarHill() {
         // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
-        hill.setEntrada(entradaSalida.leerEntrada());
+        Aes.setEntrada(entradaSalida.leerEntrada());
 
         // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
-        entradaSalida.escribirSalida(hill.cifrar());
+        entradaSalida.escribirSalida(Aes.cifrar());
     }
 
     /**
@@ -229,7 +241,7 @@ public class Controller {
                 // Actualiza el estado correspondiente de la instancia de la clase Hill y muestra un mensaje de actualización
                 print("-------------------------------------");
                 print("Actualizando estado de la bandera CODIFICA: " + estadoBandera);
-                hill.setCodifica(estadoBnd);
+                Aes.setCodifica(estadoBnd);
                 break;
             default:
                 // Maneja cualquier otro tipo de bandera no válida y muestra un mensaje de error
@@ -247,7 +259,7 @@ public class Controller {
         // Se establece el valor de la variable traza propia
         this.traza = estadoBnd;
         // Se establece el valor del atributo traza de la instancia de la clase hill
-        hill.setTraza(estadoBnd);
+        Aes.setTraza(estadoBnd);
         // Se establece el valor del atributo traza de la instancia de la clase entradaSalida
         entradaSalida.setTraza(estadoBnd);
     }
@@ -281,11 +293,11 @@ public class Controller {
 
         // Habilitar la traza global
         this.traza = true;
-        hill.setTraza(true);
+        Aes.setTraza(true);
 
         // Configurar el algoritmo Hill Cipher
-        hill.setCodifica(true);
-        hill.setClaveDefault();
+        Aes.setCodifica(true);
+        //Aes.setClaveDefault();
 
         // Habilitar la traza para las operaciones de entrada y salida
         entradaSalida.setTraza(true);
@@ -350,21 +362,21 @@ public class Controller {
     }
 
     /**
-     * Obtiene una instancia de la clase Hill.
+     * Obtiene una instancia de la clase AES.
      *
-     * @return Una instancia de la clase Hill.
+     * @return Una instancia de la clase AES.
      */
-    public Hill getHill() {
-        return hill;
+    public AES getAes() {
+        return this.Aes;
     }
 
     /**
-     * Establece una instancia de la clase Hill.
+     * Establece una instancia de la clase AES.
      *
-     * @param hill La instancia de la clase Hill a establecer.
+     * @param Aes La instancia de la clase AES a establecer.
      */
-    public void setHill(Hill hill) {
-        this.hill = hill;
+    public void setAes(AES Aes) {
+        this.Aes = Aes.copy();
     }
 
     /**
@@ -382,7 +394,7 @@ public class Controller {
      * @param entradaSalida La instancia de la clase EntradaSalida a establecer.
      */
     public void setEntradaSalida(EntradaSalida entradaSalida) {
-        this.entradaSalida = entradaSalida;
+        this.entradaSalida = entradaSalida.copy();
     }
 
 
