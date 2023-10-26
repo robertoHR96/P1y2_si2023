@@ -9,9 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Update README.md">
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Mostrar salidas texto cifrado y sin cifrar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +26,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -106,7 +111,9 @@
       <workItem from="1698069639214" duration="16102000" />
       <workItem from="1698087254236" duration="3145000" />
       <workItem from="1698140058527" duration="25000" />
-      <workItem from="1698331017144" duration="367000" />
+      <workItem from="1698331017144" duration="424000" />
+      <workItem from="1698336642300" duration="83000" />
+      <workItem from="1698336903880" duration="60000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -292,7 +299,23 @@
       <option name="project" value="LOCAL" />
       <updated>1698090363365</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Mostrar salidas texto cifrado y sin cifrar">
+      <option name="closed" value="true" />
+      <created>1698331406635</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1698331406636</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Mostrar salidas texto cifrado y sin cifrar">
+      <option name="closed" value="true" />
+      <created>1698331411245</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1698331411245</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,7 +356,8 @@
     <MESSAGE value="Fin" />
     <MESSAGE value="Fin Pasando test" />
     <MESSAGE value="Update README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update README.md" />
+    <MESSAGE value="Mostrar salidas texto cifrado y sin cifrar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mostrar salidas texto cifrado y sin cifrar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

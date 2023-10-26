@@ -18,7 +18,6 @@ public class Main {
             mostrarErrorDeArgumentos();
         }
     }
-
     static void mostrarAyuda() {
         System.out.println("-- Ayuda --");
         System.out.println("Para inicializar el programa, ejecute con el argumento -f seguido del nombre del fichero de configuración.");
