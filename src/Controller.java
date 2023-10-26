@@ -214,8 +214,10 @@ public class Controller {
     public void ejecutarAES(String[] splitLinea) {
         switch (splitLinea[2]) {
             case "ConRelleno":
+                Aes.cifrar(true);
                 break;
             case "SinRelleno":
+                Aes.cifrar(false);
                 break;
             default:
                 print("  -- Error: Comando no valido");

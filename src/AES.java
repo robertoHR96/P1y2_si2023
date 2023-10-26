@@ -30,10 +30,16 @@ public class AES {
         this.codifica = codifica;
     }
 
-    public String cifrar(){
+    public String cifrar(boolean conRelleno){
         String salida = "";
+        if(conRelleno){
+            anadirRelleno();
+        }
 
         return salida;
+    }
+    public void anadirRelleno(){
+
     }
 
     public String getEntrada() {
