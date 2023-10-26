@@ -84,11 +84,9 @@ public class Hill {
         this.salida = generarTextoSalida(listaMatricesCifradas);
 
         print("-------------------------------------");
-        if (codifica) print("Texto sin cifrado: " + this.entrada);
-        else print("Texto sin des-cifrado: " + this.entrada);
+        System.out.println("Texto sin des-cifrado: " + this.entrada);
         print("-------------------------------------");
-        if (codifica) print("Texto cifrado: " + this.salida);
-        else print("Texto des-cifrado: " + this.salida);
+        System.out.println("Texto des-cifrado: " + this.salida);
 
     }
 
