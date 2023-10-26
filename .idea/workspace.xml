@@ -9,9 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="init-Mod para la practica 3 - 2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AES.java" afterDir="false" />
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="init-Mod para la practica 3 - 3">
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +112,7 @@
       <workItem from="1698140058527" duration="25000" />
       <workItem from="1698331017144" duration="424000" />
       <workItem from="1698336642300" duration="83000" />
-      <workItem from="1698336903880" duration="5702000" />
+      <workItem from="1698336903880" duration="5790000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -340,7 +338,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698342641926</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="init-Mod para la practica 3 - 3">
+      <option name="closed" value="true" />
+      <created>1698342999007</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1698342999007</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +364,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update controller" />
     <MESSAGE value="update if s" />
     <MESSAGE value="update controller and hill" />
     <MESSAGE value="String Tokenizer en vez de split" />
@@ -383,7 +388,8 @@
     <MESSAGE value="Init P3" />
     <MESSAGE value="init-Mod para la practica 3" />
     <MESSAGE value="init-Mod para la practica 3 - 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="init-Mod para la practica 3 - 2" />
+    <MESSAGE value="init-Mod para la practica 3 - 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="init-Mod para la practica 3 - 3" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

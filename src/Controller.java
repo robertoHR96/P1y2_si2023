@@ -211,13 +211,23 @@ public class Controller {
         // ahora se carga la clave en el AES
     }
 
+    /**
+     * Realiza el proceso de cifrado/descifrado, recoge la salida de este y la guarda en el fichero
+     * de salida.
+     */
     public void ejecutarAES(String[] splitLinea) {
         switch (splitLinea[2]) {
             case "ConRelleno":
-                Aes.cifrar(true);
+                // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
+                Aes.setEntrada(entradaSalida.leerEntrada());
+                // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
+                entradaSalida.escribirSalida(Aes.cifrar(true));
                 break;
             case "SinRelleno":
-                Aes.cifrar(false);
+                // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
+                Aes.setEntrada(entradaSalida.leerEntrada());
+                // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
+                entradaSalida.escribirSalida(Aes.cifrar(false));
                 break;
             default:
                 print("  -- Error: Comando no valido");
@@ -233,18 +243,6 @@ public class Controller {
     public void seleccionarFicheroClaveAES(String ficheroClave) {
         // Se selecciona el fichero con la clave.txt en el objeto entradaSalida
         entradaSalida.setFicheroClave(ficheroClave);
-    }
-
-    /**
-     * Realiza el proceso de cifrado/descifrado, recoge la salida de este y la guarda en el fichero
-     * de salida.
-     */
-    public void ejecutarHill() {
-        // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
-        Aes.setEntrada(entradaSalida.leerEntrada());
-
-        // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
-        entradaSalida.escribirSalida(Aes.cifrar());
     }
 
     /**
