@@ -7,7 +7,7 @@ import java.io.IOException;
 
 /**
  * Clase que gestiona la entrada y salida de datos, incluyendo la lectura de ficheros y escritura en ficheros.
- * Además, proporciona funcionalidad para trabajar con ficheros de clave.txt y realizar cálculos relacionados con el cifrado Hill Cipher.
+ * Además, proporciona funcionalidad para trabajar con ficheros de clave.txt y realizar cálculos relacionados con el cifrado AES.
  */
 public class EntradaSalida {
     /**

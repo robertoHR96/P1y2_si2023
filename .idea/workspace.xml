@@ -9,8 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="Init P3">
-      <change afterPath="$PROJECT_DIR$/src/AES.java" afterDir="false" />
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="init-Mod para la practica 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EntradaSalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntradaSalida.java" afterDir="false" />
@@ -115,7 +114,7 @@
       <workItem from="1698140058527" duration="25000" />
       <workItem from="1698331017144" duration="424000" />
       <workItem from="1698336642300" duration="83000" />
-      <workItem from="1698336903880" duration="3874000" />
+      <workItem from="1698336903880" duration="5338000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -325,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698336976610</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="init-Mod para la practica 3">
+      <option name="closed" value="true" />
+      <created>1698341187384</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1698341187384</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,7 +350,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Main, Controller.run" />
     <MESSAGE value="Add Controller" />
     <MESSAGE value="update controller" />
     <MESSAGE value="update if s" />
@@ -368,7 +374,8 @@
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Mostrar salidas texto cifrado y sin cifrar" />
     <MESSAGE value="Init P3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init P3" />
+    <MESSAGE value="init-Mod para la practica 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="init-Mod para la practica 3" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

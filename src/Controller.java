@@ -134,7 +134,9 @@ public class Controller {
         // Utiliza un switch para manejar diferentes comandos
         switch (comando) {
             case "AES":
-                ejecutarAES(splitLinea);
+                // se comprueba que el comando este bien
+                if (splitLinea.length == 3) ejecutarAES(splitLinea);
+                else print("  -- Error: comando 'AES' no valido");
                 break;
             case "ficherosalida":
                 // Establece el fichero de salida en la clase entradaSalida
@@ -154,14 +156,37 @@ public class Controller {
                 break;
             case "fichero_clave":
                 // Llama a la función seleccionarClave con el tercer argumento
-                if (splitLinea.length == 3) seleccionarClaveAES(splitLinea[2]);
-                else print("  -- Error: Comando 'clave.txt' requiere 2 argumentos");
+                if (splitLinea.length == 3) seleccionarFicheroClaveAES(splitLinea[2]);
+                else print("  -- Error: Comando 'fichero_clave' requiere especificar el nombre del fichero");
                 break;
             case "Carga_Clave":
-                if(splitLinea.length == 3){
-                    cargaClaveDeFichero();
-                }else print("  -- Error: comando no valido");
+                // Se comprueba que el comando esté bien
+                if (splitLinea.length == 3) {
+                    // Se comprueba que el comando esté bien
+                    if (splitLinea[2].equals("AES")) {
+                        cargaClaveDeFichero();
+                    } else print("  -- Error: comando 'Carga_Clave' no valido");
+                } else print("  -- Error: comando 'Carga_Clave' no valido");
                 break;
+            case "Genera_Clave":
+                // Se hace un switch para ver la opción del comando
+                switch (splitLinea.length) {
+                    case 4:
+                        // Se comprueba que el comando esté bien
+                        if (splitLinea[2].equals("AES")) {
+                            String claveGenerada = generarCalveAES();
+                            seleccionarClaveAES(splitLinea[2], claveGenerada);
+                        } else print("  -- Error: comando 'Genera_Clave' no valido");
+                        break;
+                    case 5:
+                        // Se comprueba que el comando esté bien
+                        if (splitLinea[2].equals("AES")) {
+                            seleccionarClaveAES(splitLinea[2], splitLinea[3]);
+                        } else print("  -- Error: comando 'Genera_Clave' no valido");
+                        break;
+                    default:
+                        print("  -- Error: comando 'Genera_Clave' no valido");
+                }
             case "formateaentrada":
                 // Llama a la función formatearEntrada
                 formatearEntrada();
@@ -172,10 +197,20 @@ public class Controller {
         }
     }
 
-    public void cargaClaveDeFichero(){
+    public String generarCalveAES() {
+        String clave = "";
+        return clave;
+    }
+
+    public void seleccionarClaveAES(String tamaño, String clave) {
+
+    }
+
+    public void cargaClaveDeFichero() {
         String clave = entradaSalida.leerClave();
         // ahora se carga la clave en el AES
     }
+
     public void ejecutarAES(String[] splitLinea) {
         switch (splitLinea[2]) {
             case "ConRelleno":
@@ -193,7 +228,7 @@ public class Controller {
      *
      * @param ficheroClave String con el nombre del fichero que contiene la clave.txt
      */
-    public void seleccionarClaveAES(String ficheroClave) {
+    public void seleccionarFicheroClaveAES(String ficheroClave) {
         // Se selecciona el fichero con la clave.txt en el objeto entradaSalida
         entradaSalida.setFicheroClave(ficheroClave);
     }
