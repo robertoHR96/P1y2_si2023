@@ -1,7 +1,6 @@
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
+import java.util.Objects;
 
-public class AES {
+public class CBC {
     // Texto plano sin cifrar/descifrar
     private String entrada = "";
     // Texto cifrado/desCifrado
@@ -10,36 +9,14 @@ public class AES {
     private boolean traza = true;
     // Variable de estado para la bandera "CODIFICA" (inicializada en "false" por defecto)
     private boolean codifica = true;
+    private AES aes = new AES();
+    private String [] vectorInicializacion = new String[16];
 
-    /**
-     * Constructor por defecto de la clase
-     */
-    public AES() {}
-
-    /**
-     * Constructor parametrizado de la clase
-     * @param entrada Texto de entrada a cifrar/des-cifrar
-     * @param salida Texto de salida cifrado/des-cifrado
-     * @param traza Bandera para mostrar traza
-     * @param codifica Bandera para cifrar/des-cifrar
-     */
-    public AES(String entrada, String salida, boolean traza, boolean codifica) {
-        this.entrada = entrada;
-        this.salida = salida;
-        this.traza = traza;
-        this.codifica = codifica;
+    public void codifica() {
+        String ss = "";
+        this.salida = ss;
     }
 
-    public void cifrar(boolean conRelleno){
-        String salida = "";
-        if(conRelleno){
-            anadirRelleno();
-        }
-        this.salida = salida;
-    }
-    public void anadirRelleno(){
-
-    }
 
     public String getEntrada() {
         return entrada;
@@ -73,7 +50,19 @@ public class AES {
         this.codifica = codifica;
     }
 
-    public AES copy(){
-        return new AES(this.entrada, this.salida, this.traza, this.codifica);
+    public AES getAes() {
+        return aes;
+    }
+
+    public void setAes(AES aes) {
+        this.aes = aes;
+    }
+
+    public String[] getVectorInicializacion() {
+        return vectorInicializacion;
+    }
+
+    public void setVectorInicializacion(String[] vectorInicializacion) {
+        this.vectorInicializacion = vectorInicializacion;
     }
 }

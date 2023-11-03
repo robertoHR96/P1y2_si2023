@@ -1,5 +1,11 @@
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
+import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 /**
@@ -16,6 +22,10 @@ public class Controller {
     // Objeto para gestionar AES (inicializado con una nueva instancia)
     private AES Aes = new AES();
 
+    private CBC Cbc = new CBC();
+
+    SecretKey claveAES;
+
     // Objeto para gestionar EntradaSalida (inicializado con una nueva instancia)
     private EntradaSalida entradaSalida = new EntradaSalida();
 
@@ -26,10 +36,15 @@ public class Controller {
         this.traza = true;
         Aes.setTraza(true);
         Aes.setCodifica(true);
+
+        Cbc.setTraza(true);
+        Cbc.setCodifica(true);
         //Aes.setClaveDefault();
         entradaSalida.setTraza(true);
         entradaSalida.setFicheroEntrada("entrada.txt");
         entradaSalida.setFicheroSalida("salida.txt");
+
+        this.clave = "";
     }
 
     /**
@@ -133,6 +148,14 @@ public class Controller {
 
         // Utiliza un switch para manejar diferentes comandos
         switch (comando) {
+            case "CBC":
+                // Se comprueba que el vector de inicialización este ok
+                if (splitLinea.length == 18) {
+                    print("-------------------------------------");
+                    print("Cargando vector de inicializacion");
+                    guardaCBC(splitLinea);
+                } else print(" -- Error: el comando CBC necesita un vector de inicaliación de 16 bytes");
+                break;
             case "AES":
                 // se comprueba que el comando este bien
                 if (splitLinea.length == 3) ejecutarAES(splitLinea);
@@ -156,7 +179,7 @@ public class Controller {
                 break;
             case "fichero_clave":
                 // Llama a la función seleccionarClave con el tercer argumento
-                if (splitLinea.length == 3) seleccionarFicheroClaveAES(splitLinea[2]);
+                if (splitLinea.length == 3) seleccionarFicheroClave(splitLinea[2]);
                 else print("  -- Error: Comando 'fichero_clave' requiere especificar el nombre del fichero");
                 break;
             case "Carga_Clave":
@@ -169,24 +192,24 @@ public class Controller {
                 } else print("  -- Error: comando 'Carga_Clave' no valido");
                 break;
             case "Genera_Clave":
-                // Se hace un switch para ver la opción del comando
-                switch (splitLinea.length) {
-                    case 4:
-                        // Se comprueba que el comando esté bien
-                        if (splitLinea[2].equals("AES")) {
-                            String claveGenerada = generarCalveAES();
-                            seleccionarClaveAES(splitLinea[2], claveGenerada);
-                        } else print("  -- Error: comando 'Genera_Clave' no valido");
-                        break;
-                    case 5:
-                        // Se comprueba que el comando esté bien
-                        if (splitLinea[2].equals("AES")) {
-                            seleccionarClaveAES(splitLinea[2], splitLinea[3]);
-                        } else print("  -- Error: comando 'Genera_Clave' no valido");
-                        break;
-                    default:
-                        print("  -- Error: comando 'Genera_Clave' no valido");
+                if (splitLinea[3].equals("AES")) {
+                    // si el tamaño es 4 o la cadena no tiene min 16 caracteres se genera una aletoria
+                    if (splitLinea.length == 4 || ((splitLinea.length == 5) && (splitLinea[4].length() < 16))) {
+                        String claveGenerada = generarCalveAES();
+                        seleccionarClaveAES(splitLinea[2], claveGenerada);
+                    } else {
+                        // si teine tamaño 5 y el tamaño de la cadena es min 16
+                        // se genera la clave con esa cadena
+                        if ((splitLinea.length == 5) && (splitLinea[4].length() > 15)) {
+                            seleccionarClaveAES(splitLinea[2], splitLinea[4]);
+                        } else {
+                            print("  -- Error: comando 'Genera_Clave' no valido");
+                        }
+                    }
+                }else{
+                    print("  -- Error: comando 'Genera_Clave' no valido");
                 }
+                break;
             case "formateaentrada":
                 // Llama a la función formatearEntrada
                 formatearEntrada();
@@ -197,12 +220,61 @@ public class Controller {
         }
     }
 
-    public String generarCalveAES() {
-        String clave = "";
-        return clave;
+
+    public void guardaCBC(String[] splitLinea) {
+        String[] vectorInicializacion = cargaCBC(splitLinea);
+        if (vectorInicializacion != null) {
+            Cbc.setEntrada(entradaSalida.leerEntrada());
+            Cbc.codifica();
+            entradaSalida.escribirSalida(Cbc.getSalida());
+        }
     }
 
-    public void seleccionarClaveAES(String tamaño, String clave) {
+    public String[] cargaCBC(String[] splitLinea) {
+        String[] vectorInicializacion = new String[16];
+        for (int i = 2; i < 18; i++) {
+            if (splitLinea[i].length() == 1) {
+                vectorInicializacion[i - 2] = splitLinea[i];
+            } else {
+                print("  -- Error: byte no valido en en vector de inicialización");
+                return null;
+            }
+        }
+        return vectorInicializacion;
+    }
+
+    public String generarCalveAES() {
+        int longitudCadena = 16;
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(longitudCadena);
+
+        for (int i = 0; i < longitudCadena; i++) {
+            int index = random.nextInt(caracteres.length());
+            sb.append(caracteres.charAt(index));
+        }
+
+        return sb.toString();
+    }
+
+    public void seleccionarClaveAES(String tamanio, String clave) {
+        try{
+            Integer tam = Integer.parseInt(tamanio);
+
+            if(clave.length() >= 16){
+                byte[] usuarioClaveByte = null;
+                usuarioClaveByte = clave.getBytes("UTF-8");
+                MessageDigest sh = MessageDigest.getInstance("SHA-1");
+                usuarioClaveByte = sh.digest(usuarioClaveByte);
+                usuarioClaveByte = Arrays.copyOf(usuarioClaveByte, 16);
+                claveAES = new SecretKeySpec(usuarioClaveByte, 0 , tam, "AES");
+            }else{
+                KeyGenerator generadorAES = KeyGenerator.getInstance("")
+            }
+
+        }catch (Exception e) {
+            print(" -- Error: El tamaño introducido como calve no es valido");
+        }
 
     }
 
@@ -221,13 +293,16 @@ public class Controller {
                 // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
                 Aes.setEntrada(entradaSalida.leerEntrada());
                 // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
-                entradaSalida.escribirSalida(Aes.cifrar(true));
+                Aes.cifrar(true);
+                entradaSalida.escribirSalida(Aes.getSalida());
+
                 break;
             case "SinRelleno":
                 // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
                 Aes.setEntrada(entradaSalida.leerEntrada());
                 // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
-                entradaSalida.escribirSalida(Aes.cifrar(false));
+               Aes.cifrar(false);
+                entradaSalida.escribirSalida(Aes.getSalida());
                 break;
             default:
                 print("  -- Error: Comando no valido");
@@ -240,7 +315,7 @@ public class Controller {
      *
      * @param ficheroClave String con el nombre del fichero que contiene la clave.txt
      */
-    public void seleccionarFicheroClaveAES(String ficheroClave) {
+    public void seleccionarFicheroClave(String ficheroClave) {
         // Se selecciona el fichero con la clave.txt en el objeto entradaSalida
         entradaSalida.setFicheroClave(ficheroClave);
     }
@@ -277,6 +352,7 @@ public class Controller {
                 print("-------------------------------------");
                 print("Actualizando estado de la bandera CODIFICA: " + estadoBandera);
                 Aes.setCodifica(estadoBnd);
+                Cbc.setCodifica(estadoBnd);
                 break;
             default:
                 // Maneja cualquier otro tipo de bandera no válida y muestra un mensaje de error
@@ -295,6 +371,7 @@ public class Controller {
         this.traza = estadoBnd;
         // Se establece el valor del atributo traza de la instancia de la clase hill
         Aes.setTraza(estadoBnd);
+        Cbc.setTraza(estadoBnd);
         // Se establece el valor del atributo traza de la instancia de la clase entradaSalida
         entradaSalida.setTraza(estadoBnd);
     }
@@ -432,6 +509,21 @@ public class Controller {
         this.entradaSalida = entradaSalida.copy();
     }
 
+    public CBC getCbc() {
+        return Cbc;
+    }
+
+    public void setCbc(CBC cbc) {
+        Cbc = cbc;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
 
     /**
      * Imprime un texto en la consola si la bandera "TRAZA" está activada.
