@@ -40,6 +40,10 @@ public class EntradaSalida {
 
     }
 
+    public byte[] leerEntradaBytes(){
+        byte [] salida = new byte[15];
+        return salida;
+    }
     /**
      * Lee la entrada desde un fichero.
      *
@@ -77,7 +81,7 @@ public class EntradaSalida {
      *
      * @param salida La cadena a escribir en el fichero de salida.
      */
-    public void escribirSalida(String salida, String extension) {
+    public void escribirSalida(String salida) {
         print("-------------------------------------");
         print("Escribiendo en fichero de salia: " + ficheroSalida);
         try {
@@ -88,7 +92,7 @@ public class EntradaSalida {
             }
             // Creamos un nuevo archivo
             archivo.createNewFile();
-            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo+extension), "UTF-8"))) {
+            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo), "UTF-8"))) {
                 bw.write(salida);
             }
         } catch (IOException e) {

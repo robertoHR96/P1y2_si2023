@@ -6,7 +6,7 @@ import java.util.Base64;
 
 public class AES {
     // Texto plano sin cifrar/descifrar
-    private String entrada = "";
+    private byte [] entrada;
     // Texto cifrado/desCifrado
     private String salida = "";
     // Variable de estado para la bandera "TRAZA" (inicializada en "true" por defecto)
@@ -39,15 +39,24 @@ public class AES {
     public String cifrar(boolean conRelleno, SecretKey clave){
         String salida = null;
         try {
-            // Se inicializa el cifrador en modo cifrado o descifrado según conRelleno
+            // si se cifra con relleno se añade algo al final para saer cuanto se ha rellenado
+
+            /**
+             *
+             * cifrar con relleno da igual, si se cifra sin relleno n%16 y si se descifra siempre n%16
+             *
+             */
+
+            // Se inicializa el cifrador en modo cifrado con relleno o sin el
+            if(!conRelleno) cifrador = Cipher.getInstance ("AES/ECB/PKCS5Padding");
+            else cifrador = Cipher.getInstance ("AES/ECB/NOPadding");
+
+            // Se inicializa en modo cifrar o descifrar
             if(codifica) cifrador.init(Cipher.ENCRYPT_MODE, clave);
             else cifrador.init(Cipher.DECRYPT_MODE, clave);
 
-            if (conRelleno) {
-                anadirRelleno();
-            }
             byte[] bufferCifrado = null;
-            bufferCifrado = cifrador.doFinal(entrada.getBytes());
+            bufferCifrado = cifrador.doFinal(entrada);
             salida = Base64.getEncoder().encodeToString(bufferCifrado);
             return salida;
         }catch ( Exception e){
@@ -59,12 +68,20 @@ public class AES {
 
     }
 
-    public String getEntrada() {
+    public byte[] getEntrada() {
         return entrada;
     }
 
-    public void setEntrada(String entrada) {
+    public void setEntrada(byte[] entrada) {
         this.entrada = entrada;
+    }
+
+    public Cipher getCifrador() {
+        return cifrador;
+    }
+
+    public void setCifrador(Cipher cifrador) {
+        this.cifrador = cifrador;
     }
 
     public String getSalida() {
@@ -91,9 +108,6 @@ public class AES {
         this.codifica = codifica;
     }
 
-    public AES copy(){
-        return new AES(this.entrada, this.salida, this.traza, this.codifica);
-    }
 
     public void print(String text) {
         if (traza) System.out.println(text);

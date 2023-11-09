@@ -227,13 +227,14 @@ public class Controller {
         if (vectorInicializacion != null) {
 
             // se carga la entrada que se va a codificar
-            Cbc.setEntrada(entradaSalida.leerEntrada());
+            if(codifica) Cbc.setEntrada(entradaSalida.leerEntrada().getBytes());
+            else Cbc.setEntrada(entradaSalida.leerEntradaBytes());
             // se carga el vestor de inizializacion
             Cbc.setVectorInicializacion(vectorInicializacion);
             // se le dice que codificique / descodificque segun este la flag
             Cbc.codifica();
             // se escribe la salida en el fichero seleccionado como tal
-            entradaSalida.escribirSalida(Cbc.getSalida(), "");
+            entradaSalida.escribirSalida(Cbc.getSalida());
         }
     }
 
@@ -271,30 +272,30 @@ public class Controller {
     }
 
     public void seleccionarClaveAES(String tamanio, String clave) {
-        try {
-            Integer tamClave = Integer.parseInt(tamanio);
-            if (clave.length() >= 16) {
-                if (tamClave == 128 || tamClave == 192 || tamClave == 256 || (tamClave % 4 == 0)) {
+        Integer tamClave = Integer.parseInt((tamanio));
+        if (tamClave == 128 || tamClave == 192 || tamClave == 256 || (tamClave % 4 == 0)) {
+            try {
+
+                if (clave.length() >= 16) { // ??
+
                     byte[] usuarioClaveByte = clave.getBytes("UTF-8");
-                    MessageDigest sh = MessageDigest.getInstance("SHA-1");
+                    // se usa sha-256 para que el array de bytes sea de 32 bytes ya que la sha-1 da un array de 20 bytes
+                    MessageDigest sh = MessageDigest.getInstance("SHA-256");
                     usuarioClaveByte = sh.digest(usuarioClaveByte);
-                    usuarioClaveByte = Arrays.copyOf(usuarioClaveByte, tamClave / 8); // Determina el tamaño basado en      tamClave
+                    usuarioClaveByte = Arrays.copyOf(usuarioClaveByte, tamClave / 8); // Determina el tamaño basado en tamClave
 
                     claveAES = new SecretKeySpec(usuarioClaveByte, "AES");
                 } else {
-                    print(" -- Error: Tamaño de clave no válido para AES. Debe ser 128, 192 o 256 bits o un numero múltiplo de 4.");
-                }
-            } else {
-                if (tamClave == 128 || tamClave == 192 || tamClave == 256 || (tamClave % 4 == 0)) {
                     KeyGenerator generadorAES = KeyGenerator.getInstance("AES");
                     generadorAES.init(tamClave);
                     claveAES = generadorAES.generateKey();
-                } else {
-                    print(" -- Error: Tamaño de clave no válido para AES. Debe ser 128, 192 o 256 bits o un numero múltiplo de 4.");
+
                 }
+            } catch (Exception e) {
+                print(" -- Error: El tamaño introducido como calve no es valido");
             }
-        } catch (Exception e) {
-            print(" -- Error: El tamaño introducido como calve no es valido");
+        } else {
+            print(" -- Error: Tamaño de clave no válido para AES. Debe ser 128, 192 o 256 bits o un numero múltiplo de 4.");
         }
 
     }
@@ -310,35 +311,28 @@ public class Controller {
      */
     public void ejecutarAES(String[] splitLinea) {
         String salida = null;
-        String extension = "";
-        // se comprueba el extado de la extension segun si se quiere codificar o descodificar
-        /*
-        String extension = null;
-        if (codifica) extension = ".dat";
-        else extension = ".txt";
-         */
 
+
+        // se comprueba como leer la entrada en fucnion de la bandera codifica
+        if(codifica) Aes.setEntrada(entradaSalida.leerEntrada().getBytes());
+        else Aes.setEntrada(entradaSalida.leerEntradaBytes());
+        // segun si se va hacer con relleno o no, cmabia la inicializacion del chiper de AES
         switch (splitLinea[2]) {
             case "ConRelleno":
-                // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
-                Aes.setEntrada(entradaSalida.leerEntrada());
                 // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
                 salida = Aes.cifrar(true, claveAES);
-                // si salida es diferente de null se escirbe en el fichero de salida
-                if (salida != null) entradaSalida.escribirSalida(salida, extension);
+                if (salida != null) entradaSalida.escribirSalida(salida);
                 break;
             case "SinRelleno":
-                // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
-                Aes.setEntrada(entradaSalida.leerEntrada());
                 // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
                 salida = Aes.cifrar(false, claveAES);
-                // si salida es diferente de null se escirbe en el fichero de salida
-                if (salida != null) entradaSalida.escribirSalida(salida, extension);
+                if (salida != null) entradaSalida.escribirSalida(salida);
                 break;
             default:
                 print("  -- Error: Comando no valido");
                 break;
         }
+        // si salida es diferente de null se escirbe en el fichero de salida
     }
 
     /**
@@ -419,7 +413,7 @@ public class Controller {
         print("Formateando entrada del fichero: " + entradaSalida.getFicheroEntrada());
         dataFicheroEntrada = formatearTexto(dataFicheroEntrada);
         // Se guarda el texto en el fichero de salida
-        entradaSalida.escribirSalida(dataFicheroEntrada, "");
+        entradaSalida.escribirSalida(dataFicheroEntrada);
     }
 
     /**
@@ -514,14 +508,7 @@ public class Controller {
         return this.Aes;
     }
 
-    /**
-     * Establece una instancia de la clase AES.
-     *
-     * @param Aes La instancia de la clase AES a establecer.
-     */
-    public void setAes(AES Aes) {
-        this.Aes = Aes.copy();
-    }
+
 
     /**
      * Obtiene una instancia de la clase EntradaSalida.

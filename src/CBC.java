@@ -2,7 +2,7 @@ import java.util.Objects;
 
 public class CBC {
     // Texto plano sin cifrar/descifrar
-    private String entrada = "";
+    private byte [] entrada;
     // Texto cifrado/desCifrado
     private String salida = "";
     // Variable de estado para la bandera "TRAZA" (inicializada en "true" por defecto)
@@ -17,12 +17,11 @@ public class CBC {
         this.salida = ss;
     }
 
-
-    public String getEntrada() {
+    public byte[] getEntrada() {
         return entrada;
     }
 
-    public void setEntrada(String entrada) {
+    public void setEntrada(byte[] entrada) {
         this.entrada = entrada;
     }
 
