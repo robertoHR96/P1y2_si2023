@@ -267,7 +267,7 @@ public class Controller {
 
     public void seleccionarClaveAES(String tamanio, String clave) {
         try {
-            Integer tam = Integer.parseInt(tamanio);
+            Integer tamClave = Integer.parseInt(tamanio);
 
             if (clave.length() >= 16) {
                 byte[] usuarioClaveByte = null;
@@ -275,9 +275,11 @@ public class Controller {
                 MessageDigest sh = MessageDigest.getInstance("SHA-1");
                 usuarioClaveByte = sh.digest(usuarioClaveByte);
                 usuarioClaveByte = Arrays.copyOf(usuarioClaveByte, 16);
-                claveAES = new SecretKeySpec(usuarioClaveByte, 0, tam, "AES");
+                claveAES = new SecretKeySpec(usuarioClaveByte, "AES");
             } else {
-                KeyGenerator generadorAES = KeyGenerator.getInstance("");
+                KeyGenerator generadorAES = KeyGenerator.getInstance("AES");
+                generadorAES.init(tamClave);
+                claveAES = generadorAES.generateKey();
             }
 
         } catch (Exception e) {

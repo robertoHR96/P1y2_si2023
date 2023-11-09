@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="avances p3">
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="avances p3 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EntradaSalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntradaSalida.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +32,19 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="b687ace6-8764-4d7d-8c74-168577846ddb" />
+        <option name="url" value="https://github.com/robertoHR96/P1y2_si2023.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Hill.java" root0="FORCE_HIGHLIGHTING" />
@@ -125,7 +137,7 @@
       <workItem from="1699347373953" duration="825000" />
       <workItem from="1699353154656" duration="64000" />
       <workItem from="1699519303221" duration="226000" />
-      <workItem from="1699519541253" duration="387000" />
+      <workItem from="1699519541253" duration="923000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -375,7 +387,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698999168640</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="avances p3 2">
+      <option name="closed" value="true" />
+      <created>1699519945148</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1699519945148</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,7 +413,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="String Tokenizer en vez de split" />
     <MESSAGE value="Comentarios and documentación" />
     <MESSAGE value="Optimizaciones varias" />
     <MESSAGE value="Avances" />
@@ -418,7 +437,8 @@
     <MESSAGE value="init-Mod para la practica 3 - 3" />
     <MESSAGE value="init-Mod para la practica 3 - 4" />
     <MESSAGE value="avances p3" />
-    <option name="LAST_COMMIT_MESSAGE" value="avances p3" />
+    <MESSAGE value="avances p3 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="avances p3 2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
