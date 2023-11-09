@@ -1,5 +1,7 @@
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.security.MessageDigest;
@@ -18,6 +20,7 @@ public class Controller {
 
     // Variable de estado para la bandera "TRAZA" (inicializada en "true" por defecto)
     private boolean traza = true;
+    private boolean codifica = true;
 
     // Objeto para gestionar AES (inicializado con una nueva instancia)
     private AES Aes = new AES();
@@ -90,7 +93,7 @@ public class Controller {
 
     /**
      * Ejecuta una orden basada en un comando en formato de cadena.
-     *
+     * <p>
      * Esta función analiza la cadena de entrada, divide los elementos separados por espacios
      * y ejecuta acciones según el comando especificado en la primera posición de la cadena.
      *
@@ -222,6 +225,7 @@ public class Controller {
     public void guardaCBC(String[] splitLinea) {
         String[] vectorInicializacion = cargaCBC(splitLinea);
         if (vectorInicializacion != null) {
+
             // se carga la entrada que se va a codificar
             Cbc.setEntrada(entradaSalida.leerEntrada());
             // se carga el vestor de inizializacion
@@ -229,12 +233,13 @@ public class Controller {
             // se le dice que codificique / descodificque segun este la flag
             Cbc.codifica();
             // se escribe la salida en el fichero seleccionado como tal
-            entradaSalida.escribirSalida(Cbc.getSalida());
+            entradaSalida.escribirSalida(Cbc.getSalida(), "");
         }
     }
 
     /**
      * Genera un vector de inicialización para CBC
+     *
      * @param splitLinea Array de string con el comando seleccionado
      * @return String [] Vector de inicialización para CBC
      */
@@ -268,20 +273,26 @@ public class Controller {
     public void seleccionarClaveAES(String tamanio, String clave) {
         try {
             Integer tamClave = Integer.parseInt(tamanio);
-
             if (clave.length() >= 16) {
-                byte[] usuarioClaveByte = null;
-                usuarioClaveByte = clave.getBytes("UTF-8");
-                MessageDigest sh = MessageDigest.getInstance("SHA-1");
-                usuarioClaveByte = sh.digest(usuarioClaveByte);
-                usuarioClaveByte = Arrays.copyOf(usuarioClaveByte, 16);
-                claveAES = new SecretKeySpec(usuarioClaveByte, "AES");
-            } else {
-                KeyGenerator generadorAES = KeyGenerator.getInstance("AES");
-                generadorAES.init(tamClave);
-                claveAES = generadorAES.generateKey();
-            }
+                if (tamClave == 128 || tamClave == 192 || tamClave == 256 || (tamClave % 4 == 0)) {
+                    byte[] usuarioClaveByte = clave.getBytes("UTF-8");
+                    MessageDigest sh = MessageDigest.getInstance("SHA-1");
+                    usuarioClaveByte = sh.digest(usuarioClaveByte);
+                    usuarioClaveByte = Arrays.copyOf(usuarioClaveByte, tamClave / 8); // Determina el tamaño basado en      tamClave
 
+                    claveAES = new SecretKeySpec(usuarioClaveByte, "AES");
+                } else {
+                    print(" -- Error: Tamaño de clave no válido para AES. Debe ser 128, 192 o 256 bits o un numero múltiplo de 4.");
+                }
+            } else {
+                if (tamClave == 128 || tamClave == 192 || tamClave == 256 || (tamClave % 4 == 0)) {
+                    KeyGenerator generadorAES = KeyGenerator.getInstance("AES");
+                    generadorAES.init(tamClave);
+                    claveAES = generadorAES.generateKey();
+                } else {
+                    print(" -- Error: Tamaño de clave no válido para AES. Debe ser 128, 192 o 256 bits o un numero múltiplo de 4.");
+                }
+            }
         } catch (Exception e) {
             print(" -- Error: El tamaño introducido como calve no es valido");
         }
@@ -298,21 +309,31 @@ public class Controller {
      * de salida.
      */
     public void ejecutarAES(String[] splitLinea) {
+        String salida = null;
+        String extension = "";
+        // se comprueba el extado de la extension segun si se quiere codificar o descodificar
+        /*
+        String extension = null;
+        if (codifica) extension = ".dat";
+        else extension = ".txt";
+         */
+
         switch (splitLinea[2]) {
             case "ConRelleno":
                 // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
                 Aes.setEntrada(entradaSalida.leerEntrada());
                 // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
-                Aes.cifrar(true);
-                entradaSalida.escribirSalida(Aes.getSalida());
-
+                salida = Aes.cifrar(true, claveAES);
+                // si salida es diferente de null se escirbe en el fichero de salida
+                if (salida != null) entradaSalida.escribirSalida(salida, extension);
                 break;
             case "SinRelleno":
                 // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
                 Aes.setEntrada(entradaSalida.leerEntrada());
                 // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
-                Aes.cifrar(false);
-                entradaSalida.escribirSalida(Aes.getSalida());
+                salida = Aes.cifrar(false, claveAES);
+                // si salida es diferente de null se escirbe en el fichero de salida
+                if (salida != null) entradaSalida.escribirSalida(salida, extension);
                 break;
             default:
                 print("  -- Error: Comando no valido");
@@ -363,6 +384,7 @@ public class Controller {
                 print("Actualizando estado de la bandera CODIFICA: " + estadoBandera);
                 Aes.setCodifica(estadoBnd);
                 Cbc.setCodifica(estadoBnd);
+                this.codifica = estadoBnd;
                 break;
             default:
                 // Maneja cualquier otro tipo de bandera no válida y muestra un mensaje de error
@@ -397,7 +419,7 @@ public class Controller {
         print("Formateando entrada del fichero: " + entradaSalida.getFicheroEntrada());
         dataFicheroEntrada = formatearTexto(dataFicheroEntrada);
         // Se guarda el texto en el fichero de salida
-        entradaSalida.escribirSalida(dataFicheroEntrada);
+        entradaSalida.escribirSalida(dataFicheroEntrada, "");
     }
 
     /**
