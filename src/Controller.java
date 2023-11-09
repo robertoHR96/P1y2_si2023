@@ -43,8 +43,6 @@ public class Controller {
         entradaSalida.setTraza(true);
         entradaSalida.setFicheroEntrada("entrada.txt");
         entradaSalida.setFicheroSalida("salida.txt");
-
-        this.clave = "";
     }
 
     /**
@@ -92,7 +90,7 @@ public class Controller {
 
     /**
      * Ejecuta una orden basada en un comando en formato de cadena.
-     * <p>
+     *
      * Esta función analiza la cadena de entrada, divide los elementos separados por espacios
      * y ejecuta acciones según el comando especificado en la primera posición de la cadena.
      *
@@ -206,7 +204,7 @@ public class Controller {
                             print("  -- Error: comando 'Genera_Clave' no valido");
                         }
                     }
-                }else{
+                } else {
                     print("  -- Error: comando 'Genera_Clave' no valido");
                 }
                 break;
@@ -224,12 +222,22 @@ public class Controller {
     public void guardaCBC(String[] splitLinea) {
         String[] vectorInicializacion = cargaCBC(splitLinea);
         if (vectorInicializacion != null) {
+            // se carga la entrada que se va a codificar
             Cbc.setEntrada(entradaSalida.leerEntrada());
+            // se carga el vestor de inizializacion
+            Cbc.setVectorInicializacion(vectorInicializacion);
+            // se le dice que codificique / descodificque segun este la flag
             Cbc.codifica();
+            // se escribe la salida en el fichero seleccionado como tal
             entradaSalida.escribirSalida(Cbc.getSalida());
         }
     }
 
+    /**
+     * Genera un vector de inicialización para CBC
+     * @param splitLinea Array de string con el comando seleccionado
+     * @return String [] Vector de inicialización para CBC
+     */
     public String[] cargaCBC(String[] splitLinea) {
         String[] vectorInicializacion = new String[16];
         for (int i = 2; i < 18; i++) {
@@ -258,21 +266,21 @@ public class Controller {
     }
 
     public void seleccionarClaveAES(String tamanio, String clave) {
-        try{
+        try {
             Integer tam = Integer.parseInt(tamanio);
 
-            if(clave.length() >= 16){
+            if (clave.length() >= 16) {
                 byte[] usuarioClaveByte = null;
                 usuarioClaveByte = clave.getBytes("UTF-8");
                 MessageDigest sh = MessageDigest.getInstance("SHA-1");
                 usuarioClaveByte = sh.digest(usuarioClaveByte);
                 usuarioClaveByte = Arrays.copyOf(usuarioClaveByte, 16);
-                claveAES = new SecretKeySpec(usuarioClaveByte, 0 , tam, "AES");
-            }else{
-                KeyGenerator generadorAES = KeyGenerator.getInstance("")
+                claveAES = new SecretKeySpec(usuarioClaveByte, 0, tam, "AES");
+            } else {
+                KeyGenerator generadorAES = KeyGenerator.getInstance("");
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             print(" -- Error: El tamaño introducido como calve no es valido");
         }
 
@@ -301,7 +309,7 @@ public class Controller {
                 // Se guarda en el objeto hill el texto desde el fichero de entrada que se halla seleccionado
                 Aes.setEntrada(entradaSalida.leerEntrada());
                 // Se escribe el fichero de salida a través del método escribirSalida del objeto entradaSalida
-               Aes.cifrar(false);
+                Aes.cifrar(false);
                 entradaSalida.escribirSalida(Aes.getSalida());
                 break;
             default:
@@ -517,12 +525,12 @@ public class Controller {
         Cbc = cbc;
     }
 
-    public String getClave() {
-        return clave;
+    public SecretKey getClaveAES() {
+        return claveAES;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setClaveAES(SecretKey claveAES) {
+        this.claveAES = claveAES;
     }
 
     /**

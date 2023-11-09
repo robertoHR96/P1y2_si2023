@@ -96,9 +96,9 @@ public class EntradaSalida {
         }
     }
     /**
-     * Lee una matriz de enteros (clave.txt) desde un fichero.
+     * Lee una clave de enteros (clave.txt) desde un fichero.
      *
-     * @return Una matriz de enteros 3x3 que representa la clave.txt.
+     * @return Clave
      */
     public String leerClave() {
         // Crea una matriz de 3x3 para almacenar la clave.txt
