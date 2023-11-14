@@ -4,8 +4,8 @@
  */
 public class Main {
     public static void main(String[] args) {
-        Controller controller = new Controller();
 
+        Controller controller = new Controller();
         if (args.length == 2 && args[0].equals("-f")) {
             // Si se proporcionan 2 argumentos y el primero es "-f", configurar el fichero de configuración y ejecutar.
             controller.setFicheroConfig(args[1]);

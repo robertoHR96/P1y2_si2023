@@ -1,3 +1,4 @@
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -6,7 +7,7 @@ import java.util.Base64;
 
 public class AES {
     // Texto plano sin cifrar/descifrar
-    private byte [] entrada;
+    private byte[] entrada;
     // Texto cifrado/desCifrado
     private String salida = "";
     // Variable de estado para la bandera "TRAZA" (inicializada en "true" por defecto)
@@ -19,52 +20,103 @@ public class AES {
     /**
      * Constructor por defecto de la clase
      */
-    public AES() {}
+    public AES() {
+    }
 
     /**
      * Constructor parametrizado de la clase
-     * @param entrada Texto de entrada a cifrar/des-cifrar
-     * @param salida Texto de salida cifrado/des-cifrado
-     * @param traza Bandera para mostrar traza
+     *
+     * @param entrada  Texto de entrada a cifrar/des-cifrar
+     * @param salida   Texto de salida cifrado/des-cifrado
+     * @param traza    Bandera para mostrar traza
      * @param codifica Bandera para cifrar/des-cifrar
      */
     public AES(String entrada, String salida, boolean traza, boolean codifica) {
-        this.entrada = entrada;
         this.salida = salida;
         this.traza = traza;
         this.codifica = codifica;
         this.cifrador = null;
     }
 
-    public String cifrar(boolean conRelleno, SecretKey clave){
-        String salida = null;
+    public String descifrar(boolean conRelleno, SecretKey clave) {
         try {
-            // si se cifra con relleno se añade algo al final para saer cuanto se ha rellenado
+            if (conRelleno) {
+                cifrador = Cipher.getInstance("AES/ECB/PKCS5Padding");
+                System.out.println("-------------------------------------");
+                System.out.println("----- Des-cifrando con relleno ------");
+            } else {
+                cifrador = Cipher.getInstance("AES/ECB/NOPadding");
+                System.out.println("-------------------------------------");
+                System.out.println("----- Des-cifrando sin relleno ------");
+            }
 
+            cifrador.init(Cipher.DECRYPT_MODE, clave);
+
+            byte[] bufferCifrado = null;
+
+            bufferCifrado = cifrador.doFinal(entrada);
+
+            String salida = new String(bufferCifrado);
+
+            System.out.println("📜 \u001B[34mTexto cifrado: " + Base64.getEncoder().encodeToString(entrada));
+            System.out.println("📃 \u001B[32mTexto plano des-cifrado: " + salida);
+            System.out.println("\u001B[0m-------------------------------------");
+
+            return salida;
+        } catch (BadPaddingException e) {
+            print("❌ Error: Dado el bloque final no se rellena correctamente. Estos problemas pueden surgir si se utiliza una clave incorrecta durante el descifrado.");
+            return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            print("❌ Error al des-cifrar");
+            return null;
+        }
+    }
+
+    public byte[] cifrar(boolean conRelleno, SecretKey clave) {
+        try {
+
+
+            // si se cifra con relleno se añade algo al final para saer cuanto se ha rellenado
             /**
              *
              * cifrar con relleno da igual, si se cifra sin relleno n%16 y si se descifra siempre n%16
              *
              */
-
             // Se inicializa el cifrador en modo cifrado con relleno o sin el
-            if(!conRelleno) cifrador = Cipher.getInstance ("AES/ECB/PKCS5Padding");
-            else cifrador = Cipher.getInstance ("AES/ECB/NOPadding");
+
+            if (conRelleno) {
+                cifrador = Cipher.getInstance("AES/ECB/PKCS5Padding");
+                System.out.println("-------------------------------------");
+                System.out.println("------- Cifrando con relleno --------");
+            } else {
+                cifrador = Cipher.getInstance("AES/ECB/NOPadding");
+                System.out.println("-------------------------------------");
+                System.out.println("------- Cifrando sin relleno --------");
+            }
 
             // Se inicializa en modo cifrar o descifrar
-            if(codifica) cifrador.init(Cipher.ENCRYPT_MODE, clave);
-            else cifrador.init(Cipher.DECRYPT_MODE, clave);
-
+            cifrador.init(Cipher.ENCRYPT_MODE, clave);
             byte[] bufferCifrado = null;
+
             bufferCifrado = cifrador.doFinal(entrada);
-            salida = Base64.getEncoder().encodeToString(bufferCifrado);
-            return salida;
-        }catch ( Exception e){
-            print("-- Error al cifrar");
+
+            String ent = new String(entrada);
+
+            System.out.println("📃 \u001B[32mTexto sin cifrar: " + ent);
+            System.out.println("📜 \u001B[34mTexto cifrado: " + Base64.getEncoder().encodeToString(bufferCifrado));
+            System.out.println("\u001B[0m-------------------------------------");
+
+            return bufferCifrado;
+        } catch (Exception e) {
+            e.printStackTrace();
+            print("❌ Error al cifrar");
             return null;
         }
     }
-    public void anadirRelleno(){
+
+    public void anadirRelleno() {
 
     }
 

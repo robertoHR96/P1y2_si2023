@@ -1,0 +1,24 @@
+
+& fichero_clave CLAVE_AES.dat
+
+& Carga_Clave AES
+
+& ficheroentrada textoPlano.txt
+
+& ficherosalida textoCifrado.txt
+
+& AES ConRelleno
+
+#& fichero_clave ficheroClave.dat
+#& Carga_Clave AES
+
+@ codifica OFF
+
+& ficheroentrada textoCifrado.txt
+
+& ficherosalida textoDesCifrado.txt
+
+& AES ConRelleno
+
+
+
