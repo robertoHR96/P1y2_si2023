@@ -267,10 +267,12 @@ public class Controller {
                     MessageDigest sh = MessageDigest.getInstance("SHA-256");
                     usuarioClaveByte = sh.digest(usuarioClaveByte);
                     usuarioClaveByte = Arrays.copyOf(usuarioClaveByte, tamClave / 8); // Determina el tamaño basado en tamClave
-
                     claveSecret = new SecretKeySpec(usuarioClaveByte, "AES");
-                } else {
+                    //arrayClave=claveSecret.getEncoded();
+                    //System.out.printf("%x:",arrayClave[i]);
+                    // puede dar problemas si arrayClave[i] == FF
                     entradaSalida.escribirClave(claveSecret);
+                } else {
                     KeyGenerator generadorAES = KeyGenerator.getInstance("AES");
                     generadorAES.init(tamClave);
                     claveSecret = generadorAES.generateKey();

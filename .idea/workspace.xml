@@ -9,12 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="avances p3 6 (falta CBC)">
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="avances p3 7 (colores)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AES.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textoPlano.txt" beforeDir="false" afterPath="$PROJECT_DIR$/textoPlano.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +157,8 @@
       <workItem from="1699545789070" duration="4843000" />
       <workItem from="1699699614994" duration="155000" />
       <workItem from="1699866384781" duration="372000" />
-      <workItem from="1699948503829" duration="14976000" />
+      <workItem from="1699948503829" duration="15638000" />
+      <workItem from="1699977556273" duration="542000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -450,7 +448,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699962947623</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="avances p3 7 (colores)">
+      <option name="closed" value="true" />
+      <created>1699964467218</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1699964467218</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -468,7 +474,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Mod27 en calcula de matrizes" />
     <MESSAGE value="Update entrada y salida de datos" />
     <MESSAGE value="Comentarios y javaDoc" />
     <MESSAGE value="Multiplicacion de matrices" />
@@ -493,7 +498,8 @@
     <MESSAGE value="avances p3 4" />
     <MESSAGE value="avances p3 5 (dudas resueltas)" />
     <MESSAGE value="avances p3 6 (falta CBC)" />
-    <option name="LAST_COMMIT_MESSAGE" value="avances p3 6 (falta CBC)" />
+    <MESSAGE value="avances p3 7 (colores)" />
+    <option name="LAST_COMMIT_MESSAGE" value="avances p3 7 (colores)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
