@@ -3,6 +3,8 @@
 
 & Carga_Clave AES
 
+@ traza OFF
+
 & ficheroentrada textoPlano.txt
 
 & ficherosalida textoCifrado.txt
@@ -13,6 +15,7 @@
 #& Carga_Clave AES
 
 @ codifica OFF
+@ traza ON
 
 & ficheroentrada textoCifrado.txt
 

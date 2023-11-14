@@ -383,9 +383,15 @@ public class Controller {
         switch (bandera) {
             case "traza":
                 // Actualiza el estado correspondiente y muestra un mensaje de actualización
-                print("-------------------------------------");
-                print(iconEstado + " Actualizando estado de la bandera TRAZA: " + estadoBandera);
-                updateEstadoTraza(estadoBnd);
+                if( estadoBnd){
+                    updateEstadoTraza(estadoBnd);
+                    print("-------------------------------------");
+                    print(iconEstado + " Actualizando estado de la bandera TRAZA: " + estadoBandera);
+                }else{
+                    print("-------------------------------------");
+                    print(iconEstado + " Actualizando estado de la bandera TRAZA: " + estadoBandera);
+                    updateEstadoTraza(estadoBnd);
+                }
                 break;
             case "codifica":
                 // Actualiza el estado correspondiente de la instancia de la clase Hill y muestra un mensaje de actualización

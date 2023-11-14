@@ -42,12 +42,12 @@ public class AES {
         try {
             if (conRelleno) {
                 cifrador = Cipher.getInstance("AES/ECB/PKCS5Padding");
-                System.out.println("-------------------------------------");
-                System.out.println("----- Des-cifrando con relleno ------");
+                System.out.println("\u001B[35m------------------------------------- \u001B[0m");
+                System.out.println("\u001B[35m-----\u001B[0m Des-cifrando con relleno \u001B[35m------\u001B[0m");
             } else {
                 cifrador = Cipher.getInstance("AES/ECB/NOPadding");
-                System.out.println("-------------------------------------");
-                System.out.println("----- Des-cifrando sin relleno ------");
+                System.out.println("\u001B[35m------------------------------------- \u001B[0m");
+                System.out.println("\u001B[35m-----\u001B[0m Des-cifrando sin relleno \u001B[35m------\u001B[0m");
             }
 
             cifrador.init(Cipher.DECRYPT_MODE, clave);
@@ -60,7 +60,7 @@ public class AES {
 
             System.out.println("📜 \u001B[34mTexto cifrado: " + Base64.getEncoder().encodeToString(entrada));
             System.out.println("📃 \u001B[32mTexto plano des-cifrado: " + salida);
-            System.out.println("\u001B[0m-------------------------------------");
+            System.out.println("\u001B[35m------------------------------------- \u001B[0m");
 
             return salida;
         } catch (BadPaddingException e) {
@@ -88,12 +88,12 @@ public class AES {
 
             if (conRelleno) {
                 cifrador = Cipher.getInstance("AES/ECB/PKCS5Padding");
-                System.out.println("-------------------------------------");
-                System.out.println("------- Cifrando con relleno --------");
+                System.out.println("\u001B[35m------------------------------------- \u001B[0m");
+                System.out.println("\u001B[35m-------\u001B[0m Cifrando con relleno \u001B[35m--------\u001B[0m");
             } else {
                 cifrador = Cipher.getInstance("AES/ECB/NOPadding");
-                System.out.println("-------------------------------------");
-                System.out.println("------- Cifrando sin relleno --------");
+                System.out.println("\u001B[35m------------------------------------- \u001B[0m");
+                System.out.println("\u001B[35m-------\u001B[0m Cifrando sin relleno \u001B[35m--------\u001B[0m");
             }
 
             // Se inicializa en modo cifrar o descifrar
@@ -106,7 +106,7 @@ public class AES {
 
             System.out.println("📃 \u001B[32mTexto sin cifrar: " + ent);
             System.out.println("📜 \u001B[34mTexto cifrado: " + Base64.getEncoder().encodeToString(bufferCifrado));
-            System.out.println("\u001B[0m-------------------------------------");
+            System.out.println("\u001B[35m------------------------------------- \u001B[0m");
 
             return bufferCifrado;
         } catch (Exception e) {
