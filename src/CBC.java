@@ -1,4 +1,5 @@
 import javax.crypto.SecretKey;
+import java.util.Base64;
 import java.util.Objects;
 
 public class CBC {
@@ -13,41 +14,70 @@ public class CBC {
     private AES aes = new AES();
     private byte[] vectorInicializacion = new byte[16];
 
-    public void codifica(SecretKey clave) {
-        if (codifica) {
-            int numBloques = entrada.length % 16;
-            byte[] cbcCifrado = new byte[entrada.length];
-            if (numBloques == 0) {
-                // Se inicializa la clave del aes
-                for (int i = 0; i < numBloques; i++) {
-                    byte[] bloque = new byte[16];
-                    byte[] bloqueAnterior = new byte[16];
-                    if(i == 0) {
-                        System.arraycopy(entrada, i, bloque, 0, 16);
-                        bloque = xorEntrada(bloque, vectorInicializacion);
-                    }
-                    else{
-                        System.arraycopy(cbcCifrado, i, vectorInicializacion, 0, 16);
-                        bloque = xorEntrada(bloque, vectorInicializacion);
-                    }
-                    // se selecciona la entrada para AES con el bloque anterior
-                    aes.setEntrada(bloque);
-                    // se cifra y se saca el bloque cifrado
-                    bloque = aes.cifrar(false, clave);
-                    // se añade el bloque al array de bytes final
-                    // usar arraycpy
-                    //cbcCifrado = anadirBoque(bloque, cbcCifrado, i);
+    public byte[] cifra(SecretKey clave) {
+        int numBloques = entrada.length % 16;
+        byte[] cbcCifrado = new byte[entrada.length];
+        if ((numBloques >= 0) || (numBloques < 16)) {
+            // Se inicializa la clave del aes
+            for (int i = 0; i < (entrada.length / 16); i++) {
+                byte[] bloque = new byte[16];
+                if (i == 0) {
+                    System.arraycopy(entrada, 0, bloque, 0, 16);
+                    bloque = xorEntrada(bloque, vectorInicializacion);
+                } else {
+                    System.arraycopy(cbcCifrado, ((i - 1) * 16), vectorInicializacion, 0, 16);
+                    System.arraycopy(entrada, (i * 16), bloque, 0, 16);
+                    bloque = xorEntrada(bloque, vectorInicializacion);
                 }
-            } else {
-                print("❌ Error: La entrada debe ser múltiplo de 16");
+                // se selecciona la entrada para AES con el bloque anterior
+                aes.setEntrada(bloque);
+                // se cifra y se saca el bloque cifrado
+                bloque = aes.cifrarCBC(clave);
+                // se añade el bloque al array de bytes final
+                System.arraycopy(bloque, 0, cbcCifrado, i * 16, 16);
             }
+
+            System.out.println("\u001B[35m------------------------------------- \u001B[0m");
+            System.out.println("\u001B[35m-------\u001B[0m Cifrando con CBC \u001B[35m--------\u001B[0m");
+            System.out.println("📃 \u001B[32mTexto sin cifrar: " + new String(entrada) );
+            System.out.println("📜 \u001B[34mTexto cifrado: " + Base64.getEncoder().encodeToString(cbcCifrado));
+            System.out.println("\u001B[35m------------------------------------- \u001B[0m");
+        } else {
+            print("❌ Error: La entrada debe ser múltiplo de 16");
         }
-        String ss = "";
-        this.salida = ss;
+        return cbcCifrado;
     }
 
-    public byte [] xorEntrada (byte [] arrayBytes1, byte [] arrayBytes2){
-        byte [] resultadoXOR = new byte[16];
+    public String descifra(SecretKey clave) {
+        int numBloques = entrada.length % 16;
+        byte[] cbcCifrado = new byte[entrada.length];
+        if ((numBloques >= 0) || (numBloques < 16)) {
+            // Se inicializa la clave del aes
+            for (int i = 0; i < (entrada.length / 16); i++) {
+                byte[] bloque = new byte[16];
+                System.arraycopy(entrada, (i * 16), bloque, 0, 16);
+                aes.setEntrada(bloque);
+                byte[] salidaDes_cifrada = aes.descifrarCBC(clave);
+                if (i != 0) {
+                    System.arraycopy(entrada, ((i - 1) * 16), vectorInicializacion, 0, 16);
+                }
+                bloque = xorEntrada(salidaDes_cifrada, vectorInicializacion);
+                System.arraycopy(bloque, 0, cbcCifrado, i * 16, 16);
+            }
+            System.out.println("\u001B[35m------------------------------------- \u001B[0m");
+            System.out.println("\u001B[35m-------\u001B[0m Des-Cifrando con CBC \u001B[35m--------\u001B[0m");
+            System.out.println("📜 \u001B[34mTexto cifrado: " + Base64.getEncoder().encodeToString(entrada));
+            System.out.println("📃 \u001B[32mTexto des-cifrar: " + new String(cbcCifrado) );
+            System.out.println("\u001B[35m------------------------------------- \u001B[0m");
+        } else {
+            print("❌ Error: La entrada debe ser múltiplo de 16");
+        }
+
+        return new String(cbcCifrado);
+    }
+
+    public byte[] xorEntrada(byte[] arrayBytes1, byte[] arrayBytes2) {
+        byte[] resultadoXOR = new byte[16];
         for (int i = 0; i < 16; i++) {
             resultadoXOR[i] = (byte) (arrayBytes1[i] ^ arrayBytes2[i]);
         }

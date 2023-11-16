@@ -54,15 +54,37 @@ public class AES {
 
             byte[] bufferCifrado = null;
 
+
             bufferCifrado = cifrador.doFinal(entrada);
+
 
             String salida = new String(bufferCifrado);
 
-            System.out.println("📜 \u001B[34mTexto cifrado: " + Base64.getEncoder().encodeToString(entrada));
+            System.out.println("📜 \u001B[34mTexto cifrado: " + Base64.getEncoder().encodeToString(bufferCifrado));
             System.out.println("📃 \u001B[32mTexto plano des-cifrado: " + salida);
             System.out.println("\u001B[35m------------------------------------- \u001B[0m");
 
             return salida;
+        } catch (BadPaddingException e) {
+            print("❌ Error: Dado el bloque final no se rellena correctamente. Estos problemas pueden surgir si se utiliza una clave incorrecta durante el descifrado.");
+            return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            print("❌ Error al des-cifrar");
+            return null;
+        }
+    }
+
+    public byte[] descifrarCBC(SecretKey clave) {
+        try {
+
+            cifrador = Cipher.getInstance("AES/ECB/NOPadding");
+
+            cifrador.init(Cipher.DECRYPT_MODE, clave);
+
+            return cifrador.doFinal(entrada);
+
         } catch (BadPaddingException e) {
             print("❌ Error: Dado el bloque final no se rellena correctamente. Estos problemas pueden surgir si se utiliza una clave incorrecta durante el descifrado.");
             return null;
@@ -105,6 +127,22 @@ public class AES {
             System.out.println("📃 \u001B[32mTexto sin cifrar: " + ent);
             System.out.println("📜 \u001B[34mTexto cifrado: " + Base64.getEncoder().encodeToString(bufferCifrado));
             System.out.println("\u001B[35m------------------------------------- \u001B[0m");
+
+            return bufferCifrado;
+        } catch (Exception e) {
+            e.printStackTrace();
+            print("❌ Error al cifrar");
+            return null;
+        }
+    }
+
+    public byte [] cifrarCBC(SecretKey clave){
+        try {
+
+            cifrador = Cipher.getInstance("AES/ECB/NOPadding");
+            // Se inicializa en modo cifrar o descifrar
+            cifrador.init(Cipher.ENCRYPT_MODE, clave);
+            byte[] bufferCifrado = cifrador.doFinal(entrada);
 
             return bufferCifrado;
         } catch (Exception e) {

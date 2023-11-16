@@ -1,0 +1,15 @@
+#comienza el fichero de configuracion de P2 SI 2023. AES  JAVA
+# genera Clave AES
+& fichero_clave clave_Aes.dat
+& genera_clave 128 AES 1234567890123456
+& ficheroentrada textoPlano.txt
+& ficherosalida criptograma.dat
+@ codifica ON
+& CBC  67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21
+& ficheroentrada criptograma.dat
+& ficherosalida quijoterecuperado.txt
+@ codifica OFF
+& CBC  67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21
+
+
+# fin del fichero de configuracion

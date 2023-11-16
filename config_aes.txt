@@ -1,6 +1,6 @@
 #comienza el fichero de configuracion de P3 SI 2023. AES  JAVA
 & fichero_clave clave_aes.dat
-& genera_clave 192 AES 12345678901234567890123456789012345678901234
+& genera_clave 256 AES 12345678901234567890123456789012345678901234
 
 & carga_clave AES
 & ficheroentrada textoPlano.txt

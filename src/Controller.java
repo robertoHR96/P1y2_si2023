@@ -209,13 +209,19 @@ public class Controller {
     public void guardaCBC(String[] splitLinea) {
         byte [] vectorInicializacion = cargaCBC(splitLinea);
         if (vectorInicializacion != null) {
-            // se carga la entrada que se va a codificar
-            if (codifica) Cbc.setEntrada(entradaSalida.leerEntradaCifrar().getBytes());
-            else Cbc.setEntrada(entradaSalida.leerEntradaDesCifrar());
             // se carga el vestor de inizializacion
             Cbc.setVectorInicializacion(vectorInicializacion);
+            if (codifica){
+                // se carga la entrada que se va a codificar
+                Cbc.setEntrada(entradaSalida.leerEntradaCifrar().getBytes());
+                entradaSalida.escribirSalidaCifrar( Cbc.cifra(claveAES));
+            }
+            else{
+                Cbc.setEntrada(entradaSalida.leerEntradaDesCifrar());
+                entradaSalida.escribirSalidaDescifrar(getCbc().descifra(claveAES));
+            }
+
             // se le dice que codificique / descodificque segun este la flag
-            Cbc.codifica(claveAES);
             // se escribe la salida en el fichero seleccionado como tal
             //entradaSalida.escribirSalida(Cbc.getSalida());
         }
@@ -230,12 +236,14 @@ public class Controller {
     public byte [] cargaCBC(String[] splitLinea) {
         byte [] vectorInicializacionByte = new byte[16];
         for (int i = 2; i < 18; i++) {
+            vectorInicializacionByte[i - 2] = splitLinea[i].getBytes()[0];
+            /*
             if (splitLinea[i].getBytes().length == 1) {
-                vectorInicializacionByte[i - 2] = splitLinea[i].getBytes()[0];
             } else {
                 print("❌ Error: byte no valido en en vector de inicialización");
                 return null;
             }
+             */
         }
         return vectorInicializacionByte;
     }
@@ -264,6 +272,7 @@ public class Controller {
                     claveSecret = generadorAES.generateKey();
                     entradaSalida.escribirClave(claveSecret);
                 }
+                cargaClaveDeFichero();
             } catch (Exception e) {
                 print("❌ Error: El tamaño introducido como calve no es valido");
             }
