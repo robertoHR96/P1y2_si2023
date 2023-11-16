@@ -9,15 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="avances p3 8 (mostrar clave)">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/P1y2_si2023_jar2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/unnamed.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config_aes.txt" afterDir="false" />
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="avances p3 8 (Mostrar clave)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CLAVE_AES.DAT" beforeDir="false" afterPath="$PROJECT_DIR$/CLAVE_AES.DAT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config_aes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config_aes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AES.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EntradaSalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntradaSalida.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,27 +64,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "P3",
-    "last_opened_file_path": "/Users/roberto/Documents/GitHub/P1y2_si2023",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "/Users/roberto/Documents/Universidad/SEI/Practica_SEI/P1y2_si2023/src/Main.java",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;P3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/roberto/Documents/GitHub/P1y2_si2023&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/roberto/Documents/Universidad/SEI/Practica_SEI/P1y2_si2023/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -171,7 +169,9 @@
       <workItem from="1700049854480" duration="368000" />
       <workItem from="1700078343885" duration="51000" />
       <workItem from="1700128434654" duration="4832000" />
-      <workItem from="1700136593154" duration="156000" />
+      <workItem from="1700136593154" duration="360000" />
+      <workItem from="1700138410215" duration="595000" />
+      <workItem from="1700143409784" duration="2232000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -477,7 +477,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699978168846</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="avances p3 8 (Mostrar clave)">
+      <option name="closed" value="true" />
+      <created>1700136755421</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1700136755421</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -495,7 +503,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Comentarios y javaDoc" />
     <MESSAGE value="Multiplicacion de matrices" />
     <MESSAGE value="Cifrado OK" />
     <MESSAGE value="Primera version casi okk" />
@@ -520,7 +527,8 @@
     <MESSAGE value="avances p3 6 (falta CBC)" />
     <MESSAGE value="avances p3 7 (colores)" />
     <MESSAGE value="avances p3 8 (mostrar clave)" />
-    <option name="LAST_COMMIT_MESSAGE" value="avances p3 8 (mostrar clave)" />
+    <MESSAGE value="avances p3 8 (Mostrar clave)" />
+    <option name="LAST_COMMIT_MESSAGE" value="avances p3 8 (Mostrar clave)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

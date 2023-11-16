@@ -3,10 +3,10 @@
 & genera_clave 192 AES 12345678901234567890123456789012345678901234
 
 & carga_clave AES
-& ficheroentrada quijote.txt
+& ficheroentrada textoPlano.txt
 & ficherosalida criptograma.dat
 @ codifica ON
-& AES sinRelleno
+& AES conRelleno
 & ficheroentrada criptograma.dat
 & ficherosalida quijoterecuperado.txt
 @ codifica OFF

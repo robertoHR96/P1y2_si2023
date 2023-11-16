@@ -98,9 +98,7 @@ public class AES {
 
             // Se inicializa en modo cifrar o descifrar
             cifrador.init(Cipher.ENCRYPT_MODE, clave);
-            byte[] bufferCifrado = null;
-
-            bufferCifrado = cifrador.doFinal(entrada);
+            byte[] bufferCifrado = cifrador.doFinal(entrada);
 
             String ent = new String(entrada);
 

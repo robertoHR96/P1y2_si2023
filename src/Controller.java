@@ -207,7 +207,7 @@ public class Controller {
 
 
     public void guardaCBC(String[] splitLinea) {
-        String[] vectorInicializacion = cargaCBC(splitLinea);
+        byte [] vectorInicializacion = cargaCBC(splitLinea);
         if (vectorInicializacion != null) {
             // se carga la entrada que se va a codificar
             if (codifica) Cbc.setEntrada(entradaSalida.leerEntradaCifrar().getBytes());
@@ -215,7 +215,7 @@ public class Controller {
             // se carga el vestor de inizializacion
             Cbc.setVectorInicializacion(vectorInicializacion);
             // se le dice que codificique / descodificque segun este la flag
-            Cbc.codifica();
+            Cbc.codifica(claveAES);
             // se escribe la salida en el fichero seleccionado como tal
             //entradaSalida.escribirSalida(Cbc.getSalida());
         }
@@ -227,17 +227,17 @@ public class Controller {
      * @param splitLinea Array de string con el comando seleccionado
      * @return String [] Vector de inicialización para CBC
      */
-    public String[] cargaCBC(String[] splitLinea) {
-        String[] vectorInicializacion = new String[16];
+    public byte [] cargaCBC(String[] splitLinea) {
+        byte [] vectorInicializacionByte = new byte[16];
         for (int i = 2; i < 18; i++) {
-            if (splitLinea[i].length() == 1) {
-                vectorInicializacion[i - 2] = splitLinea[i];
+            if (splitLinea[i].getBytes().length == 1) {
+                vectorInicializacionByte[i - 2] = splitLinea[i].getBytes()[0];
             } else {
                 print("❌ Error: byte no valido en en vector de inicialización");
                 return null;
             }
         }
-        return vectorInicializacion;
+        return vectorInicializacionByte;
     }
 
     public void seleccionarClaveAES(String tamanio, String clave) {
