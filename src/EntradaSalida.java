@@ -141,7 +141,8 @@ public class EntradaSalida {
         SecretKey clave = null;
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(ficheroClave))) {
             clave = (SecretKey) in.readObject();
-            print("Clave leída desde el archivo: " + ficheroClave);
+            print("-------------------------------------");
+            print("\uD83D\uDD0FClave leída desde el archivo: " + ficheroClave);
         } catch (IOException | ClassNotFoundException e) {
             print("Error: Fichero de clave " + ficheroClave + " no válido");
         }
@@ -150,7 +151,8 @@ public class EntradaSalida {
     public void escribirClave(SecretKey clave){
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ficheroClave))) {
             out.writeObject(clave);
-            print("Clave guardada en el archivo: " + ficheroClave);
+            print("-------------------------------------");
+            print("\uD83D\uDD10Clave guardada en el archivo: " + ficheroClave);
         } catch (IOException e) {
             print("Error: Fichero de clave " + ficheroClave + " no válido");
         }

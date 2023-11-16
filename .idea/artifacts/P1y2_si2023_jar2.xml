@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="P1y2_si2023:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/P1y2_si2023_jar2</output-path>
+    <root id="archive" name="P1y2_si2023.jar">
+      <element id="module-output" name="P1y2_si2023" />
+    </root>
+  </artifact>
+</component>

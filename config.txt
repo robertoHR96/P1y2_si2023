@@ -1,9 +1,12 @@
 
+@ traza OFF
+
 & fichero_clave CLAVE_AES.dat
+
+& Genera_Clave 128 AES 12345678901234567890123456789012345678901234
 
 & Carga_Clave AES
 
-@ traza OFF
 
 & ficheroentrada textoPlano.txt
 
@@ -14,8 +17,12 @@
 #& fichero_clave ficheroClave.dat
 #& Carga_Clave AES
 
-@ codifica OFF
 @ traza ON
+
+& Genera_Clave 128 AES 12345678901234567890123456789012345678901234
+& Carga_Clave AES
+
+@ codifica OFF
 
 & ficheroentrada textoCifrado.txt
 

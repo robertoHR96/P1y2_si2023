@@ -180,7 +180,7 @@ public class Controller {
                 if (splitLinea.length == 3) seleccionarFicheroClave(splitLinea[2]);
                 else print("❌ Error: Comando 'fichero_clave' requiere especificar el nombre del fichero");
                 break;
-            case "Carga_Clave":
+            case "carga_clave":
                 // Se comprueba que el comando esté bien
                 if (splitLinea.length == 3) {
                     // Se comprueba que el comando esté bien
@@ -189,7 +189,7 @@ public class Controller {
                     } else print("❌ Error: comando 'Carga_Clave' no valido");
                 } else print("❌ Error: comando 'Carga_Clave' no valido");
                 break;
-            case "Genera_Clave":
+            case "genera_clave":
                 if (splitLinea[3].equals("AES")) {
                     // si el tamaño es 4 o la cadena no tiene min 16 caracteres se genera una aletoria
                     if (splitLinea.length == 4) seleccionarClaveAES(splitLinea[2], "");
@@ -240,20 +240,6 @@ public class Controller {
         return vectorInicializacion;
     }
 
-    public String generarCalveAES() {
-        int longitudCadena = 16;
-        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        Random random = new Random();
-        StringBuilder sb = new StringBuilder(longitudCadena);
-
-        for (int i = 0; i < longitudCadena; i++) {
-            int index = random.nextInt(caracteres.length());
-            sb.append(caracteres.charAt(index));
-        }
-
-        return sb.toString();
-    }
-
     public void seleccionarClaveAES(String tamanio, String clave) {
         SecretKey claveSecret = null;
         Integer tamClave = Integer.parseInt((tamanio));
@@ -288,7 +274,16 @@ public class Controller {
     }
 
     public void cargaClaveDeFichero() {
-        claveAES = entradaSalida.leerClave();
+        //System.out.println(Base64.getEncoder().encodeToString(entradaSalida.leerClave().getEncoded()));
+        SecretKey sck = entradaSalida.leerClave();
+        byte[] listaBytesClave = sck.getEncoded();
+        for (int i = 0; i < listaBytesClave.length; i++) {
+            if (i == 0) System.out.print("\u001B[36m-------------------------------------\n\uD83D\uDD11Clave: ");
+            System.out.printf("%x", listaBytesClave[i]);
+            if ( i < listaBytesClave.length - 1 ) System.out.print(":");
+        }
+        System.out.println("\n-------------------------------------\u001B[0m");
+        claveAES = sck;
         // ahora se carga la clave en el AES
     }
 
@@ -304,10 +299,10 @@ public class Controller {
 
         // Según si se va a realizar con relleno o no, se cambia la inicialización del Cipher de AES
         switch (splitLinea[2]) {
-            case "ConRelleno":
+            case "conRelleno":
                 procesarAES(true, Aes.getEntrada());
                 break;
-            case "SinRelleno":
+            case "sinRelleno":
                 procesarAES(false, Aes.getEntrada());
                 break;
             default:
@@ -362,20 +357,18 @@ public class Controller {
      */
     public void updateBandera(String bandera, String estadoBandera) {
         boolean estadoBnd;
-        String iconEstado="";
+        String iconEstado = "";
 
 
         // Verifica si el estado de la bandera es "ON"
-        if (estadoBandera.equals("ON")){
+        if (estadoBandera.equals("ON")) {
             estadoBnd = true;
-            iconEstado="🟩";
-        }
-        else if (estadoBandera.equals("OFF")){
+            iconEstado = "🟩";
+        } else if (estadoBandera.equals("OFF")) {
             // Si no es "ON", verifica si el estado de la bandera es "OFF"
             estadoBnd = false;
-            iconEstado="🟥";
-        }
-        else {
+            iconEstado = "🟥";
+        } else {
             // Si el estado de la bandera no es válido, muestra un mensaje de error y retorna
             print("❌ Error: Estado de bandera no válido");
             return;
@@ -385,11 +378,11 @@ public class Controller {
         switch (bandera) {
             case "traza":
                 // Actualiza el estado correspondiente y muestra un mensaje de actualización
-                if( estadoBnd){
+                if (estadoBnd) {
                     updateEstadoTraza(estadoBnd);
                     print("-------------------------------------");
                     print(iconEstado + " Actualizando estado de la bandera TRAZA: " + estadoBandera);
-                }else{
+                } else {
                     print("-------------------------------------");
                     print(iconEstado + " Actualizando estado de la bandera TRAZA: " + estadoBandera);
                     updateEstadoTraza(estadoBnd);
