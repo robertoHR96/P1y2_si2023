@@ -1,6 +1,6 @@
 /**
  * La clase `Main` es la clase principal del programa que inicia la aplicación de cifrado/descifrado
- * basada en el cifrado Hill. Acepta argumentos de línea de comandos para configurar y ejecutar el programa.
+ * basada en el cifrado AES. Acepta argumentos de línea de comandos para configurar y ejecutar el programa.
  */
 public class Main {
     public static void main(String[] args) {
@@ -23,11 +23,18 @@ public class Main {
         System.out.println("Para inicializar el programa, ejecute con el argumento -f seguido del nombre del fichero de configuración.");
         System.out.println("Ejemplo: java Main -f config.txt");
         System.out.println("El fichero de configuración puede contener los siguientes comandos:");
+
         System.out.println("& ficheroentrada <nombre-fichero-entrada>: Especifica el archivo de entrada. Por defecto: entrada.txt");
         System.out.println("& ficherosalida <nombre-fichero-salida>: Especifica el archivo de salida. Por defecto: salida.txt");
+        System.out.println("& fichero_clave <nombre-fichero-clave>: Especifica el archivo de salida para la clave. Por defecto: Clave.dat");
+
+        System.out.println("& Genera_Clave AES <tamaño> <cadena>: Genera una clave en base al tamaño especificado con la cadena especificada, si esta esta vacia generara una aleotoria");
         System.out.println("& clave <fichero-clave>: Especifica el archivo con la clave. Por defecto: 1 2 3 0 4 5 1 0 6");
-        System.out.println("& hill : Ejecuta el cifrado o descifrado basado en el archivo de entrada.");
-        System.out.println("& formateaentrada: Formatea la entrada y la guarda en el archivo de salida.");
+        System.out.println("& AES conrelleno: Ejecuta el cifrado o descifrado basado en el archivo de entrada.");
+        System.out.println("& AES sinrelleno: Ejecuta el cifrado o descifrado basado en el archivo de entrada.");
+        System.out.println("& & CBC <lista de 16 bytes>: & cbc 67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21");
+
+
         System.out.println("@ traza ON / OFF: Activa o desactiva la traza de la ejecución del programa (por defecto: ON).");
         System.out.println("@ codifica ON / OFF: Cifra o descifra texto (por defecto: ON).");
     }

@@ -1,0 +1,108 @@
+#comienza el fichero de configuracion de P3 SI 2023 para corregir la practica adelantada
+#version 21 de noviembre de 2023
+
+comienza el fichero de configuracion de P3 SI 2023   CON TRAZA
+ @ traza ON
+& ficheroentrada entrada.txt
+
+
+#probando los comandos
+# comando siguiente debe dar error
+& genera_clave 128 AES    
+& fichero_clave ./finales/clave_examen.cla
+& genera_clave 192 AES CLAVEDECIENTONOVENTAYDOSYMUCHOMATEXTO
+& carga_clave AES
+& ficheroentrada .\fuentes/quijote1.txt
+& ficherosalida .\finales\criptograma1.dat
+@ codifica ON
+& AES ConRelleno
+& ficheroentrada .\finales\criptograma1.dat
+& ficherosalida .\finales\quijote1recuperado.txt
+& carga_clave AES
+@ codifica OFF
+& AES ConRelleno
+
+
+#probando los comandos
+# comando siguiente debe dar error
+& genera_clave 128 AES
+& fichero_clave ./1juan_adelantada/finales/clave_examen.cla
+& genera_clave 192 AES CLAVEDECIENTONOVENTAYDOSYMUCHOMATEXTO
+& carga_clave AES
+& ficheroentrada ./1juan_adelantada/fuentes/quijote1.txt
+& ficherosalida ./1juan_adelantada/finales/criptograma1.dat
+@ codifica ON
+& AES conRelleno
+& ficheroentrada ./1juan_adelantada/finales/criptograma1.dat
+& ficherosalida ./1juan_adelantada/finales/quijote1recuperado.txt
+& carga_clave AES
+@ codifica OFF
+& AES sinRelleno
+
+& fichero_clave .\fuentes\claveFuenteJuan.cla
+& carga_clave AES
+& ficheroentrada .\fuentes\quijote2.txt
+& ficherosalida .\finales\criptograma2.dat
+@ codifica ON
+& AES ConRelleno
+& ficheroentrada .\finales\criptograma2.dat
+& ficherosalida .\finales\quijote2recuperado.txt
+& carga_clave AES
+@ codifica OFF
+& AES ConRelleno
+
+# fin del fichero de configuracion
+
+
+
+& fichero_clave ./1juan_adelantada/fuentes/claveFuenteJuan.cla
+& carga_clave AES
+& ficheroentrada ./1juan_adelantada/fuentes/quijote1.txt
+& ficherosalida ./1juan_adelantada/finales/criptograma3.dat
+@ codifica ON
+& CBC  67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21
+& ficheroentrada ./1juan_adelantada/finales/criptograma3.dat
+& ficherosalida ./1juan_adelantada/finales/quijote2recuperado.txt
+& carga_clave AES
+@ codifica OFF
+& CBC  67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21
+
+
+&# fin del fichero de configuracion
+
+
+
+
+
+& fichero_clave ./1juan_adelantada/fuentes/claveFuenteJuan.cla
+& carga_clave AES
+& ficheroentrada ./1juan_adelantada/fuentes/quijote1.txt
+& ficherosalida ./1juan_adelantada/finales/criptograma3.dat
+@ codifica ON
+& CBC  67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21
+& ficheroentrada ./1juan_adelantada/finales/criptograma3.dat
+& ficherosalida ./1juan_adelantada/finales/quijote2recuperado.txt
+& carga_clave AES
+@ codifica OFF
+& CBC  67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21
+
+
+
+
+
+& fichero_clave ./1juan_adelantada/fuentes/claveFuenteJuan.cla
+& carga_clave AES
+& ficheroentrada
+& ficheroentrada ./1juan_adelantada/fuentes/quijote1.txt
+& ficherosalida
+&& ficherosalida ./1juan_adelantada/finales/criptograma3.dat
+@ codifica ON
+& CBC  67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21
+& ficheroentrada ./1juan_adelantada/finales/criptograma3.dat
+& ficherosalida ./1juan_adelantada/finales/quijote2recuperado.txt
+& carga_clave AES
+@ codifica OFF
+& CBC  67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21
+
+
+# fin del fichero de configuracion

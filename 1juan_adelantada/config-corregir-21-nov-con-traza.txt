@@ -1,0 +1,28 @@
+#comienza el fichero de configuracion de P3 SI 2023 para corregir la practica adelantada
+#version 21 de noviembre de 2023
+
+comienza el fichero de configuracion de P3 SI 2023   CON TRAZA
+@ traza OFf
+& genera_clave 128 AES
+& fichero_clave ./finales/clave_examen.cla
+& genera_clave 192 AES CLAVEDECIENTONOVENTAYDOSYMUCHOMATEXTO
+& ficheroentrada ./1juan_adelantada/fuentes/quijote3.txt
+& ficherosalida ./1juan_adelantada/finales/criptograma2.dat
+@ codifica ON
+& AES sinRelleno
+& ficheroentrada ./1juan_adelantada/finales/criptograma2.dat
+& ficherosalida ./1juan_adelantada/finales/quijote3recuperado.txt
+& carga_clave AES
+@ codifica OFF
+& AES SiNRelleno
+
+& fichero_clave ./1juan_adelantada/fuentes/claveFuenteJuan.cla
+& carga_clave AES
+& ficheroentrada ./1juan_adelantada/fuentes/quijote1.txt
+& ficherosalida ./1juan_adelantada/finales/criptograma3.dat
+@ codifica ON
+& CBC  67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21
+& ficheroentrada ./1juan_adelantada/finales/criptograma3.dat
+& ficherosalida ./1juan_adelantada/finales/quijote2recuperado.txt
+@ codifica OFF
+& CBC  67 78 31 1233 99 34 33 21 67 78 31 1233 99 34 33 21

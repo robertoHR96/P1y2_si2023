@@ -41,7 +41,43 @@ public class EntradaSalida {
 
     }
 
+
     public byte[] leerEntradaDesCifrar() {
+        File fichero;
+        try {
+            fichero = new File(ficheroEntrada);
+            FileInputStream ficheroLeer = new FileInputStream(fichero);
+            print("-------------------------------------");
+            print("📖 Leyendo fichero de entrada: " + ficheroEntrada);
+
+            byte[] buffer = new byte[1024]; // Tamaño del buffer, puedes ajustarlo según tus necesidades
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+            int bytesRead;
+            while ((bytesRead = ficheroLeer.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            byte[] ciptogram = outputStream.toByteArray();
+            outputStream.close();
+            ficheroLeer.close();
+
+            return ciptogram;
+        } catch (FileNotFoundException e) {
+            print("❌ Error 111: al leer el fichero: " + ficheroEntrada);
+        } catch (IOException e) {
+            print("❌ Error 112: al leer el fichero: " + ficheroEntrada);
+        }
+
+        return null;
+    }
+
+    /**
+     * Lee el contenido de un fichero de entrada destinado al proceso de descifrado.
+     *
+     * @return Un array de bytes que representa el contenido del fichero de entrada, o null si hay un error.
+     */
+    public byte[] leerEntradaDesCifrar_() {
         File fichero;
         try {
             fichero = new File(ficheroEntrada);
@@ -58,16 +94,16 @@ public class EntradaSalida {
             }
             return ciptogram;
         } catch (FileNotFoundException e) {
-            print("-- Error al leer el fichero");
+            print("❌ Error 111: al leer el fichero: " + ficheroEntrada);
         } catch (IOException e) {
-            print("-- Error al leer el fichero");
+            print("❌ Error 112: al leer el fichero: " + ficheroEntrada);
         }
 
         return null;
     }
 
     /**
-     * Lee la entrada desde un fichero.
+     * Lee la entrada desde un fichero de entrada destinado al proceso de cifrado
      *
      * @return El contenido del fichero de entrada como una cadena.
      */
@@ -90,26 +126,48 @@ public class EntradaSalida {
             }
         } catch (IOException e) {
             // En caso de un error de lectura, imprime un mensaje de error
-            print("Error: Fichero de entrada no válido");
+            print("❌ Error 121: Fichero de entrada no válido: " + ficheroEntrada);
+            return null;
         }
 
         // Convierte el contenido del archivo en una cadena y la devuelve
         return contenido.toString();
     }
 
+    /**
+     * Escribe el resultado cifrado en un fichero de salida.
+     *
+     * @param bufferCifrado El contenido cifrado a escribir en el fichero de salida.
+     */
     public void escribirSalidaCifrar(byte[] bufferCifrado) {
         try {
-            File fichero;
-            fichero = new File(ficheroSalida);
-            FileOutputStream ficheroSal;
-            ficheroSal = new FileOutputStream(fichero);
+            File fichero = new File(ficheroSalida);
+
+            File directorio = fichero.getParentFile(); // Obtiene el directorio del fichero
+
+            if (!directorio.exists()) {
+                // Si el directorio no existe, se crea
+                boolean directorioCreado = directorio.mkdirs();
+                if (directorioCreado) {
+                    print("📁 Directorio creado: " + directorio.getAbsolutePath());
+                    if (!fichero.exists()) {
+                        // El fichero no existe, por lo que se crea
+                        fichero.createNewFile();
+                        print("📁 Fichero creado: " + ficheroSalida);
+                    }
+                } else {
+                    print("❌ Error 131: No se pudo crear el directorio: " + directorio.getAbsolutePath());
+                }
+            }
+
+            FileOutputStream ficheroSal = new FileOutputStream(fichero);
             print("-------------------------------------");
             print("🖨️ Escribiendo fichero de salida: " + ficheroSalida);
 
             ficheroSal.write(bufferCifrado);
             ficheroSal.close();
         } catch (Exception e) {
-            print("-- Error al escribir en el fichero");
+            print("❌ Error 132: al escribir en el fichero: " + ficheroSalida);
         }
     }
 
@@ -119,6 +177,7 @@ public class EntradaSalida {
      * @param salida La cadena a escribir en el fichero de salida.
      */
     public void escribirSalidaDescifrar(String salida) {
+        if(salida != null){
         try {
             File archivo = new File(this.ficheroSalida);
             // Si el archivo ya existe, lo borramos
@@ -133,28 +192,44 @@ public class EntradaSalida {
                 bw.write(salida);
             }
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo de excepciones
+            print("❌ Error 141: ficheor de salida no valido: " + ficheroSalida);
+        }
+        }else{
+
+            print("❌ Error 141: No se ha selecionado ningun texto de salida.");
         }
     }
 
+    /**
+     * Lee una clave almacenada en un archivo y la devuelve como objeto SecretKey.
+     *
+     * @return La clave almacenada en el archivo de clave o null si hay un error o el archivo no es válido.
+     */
     public SecretKey leerClave() {
         SecretKey clave = null;
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(ficheroClave))) {
             clave = (SecretKey) in.readObject();
             print("-------------------------------------");
-            print("\uD83D\uDD0FClave leída desde el archivo: " + ficheroClave);
+            print("\uD83D\uDD0FClave seleccionada desde el archivo: " + ficheroClave);
+            return clave;
         } catch (IOException | ClassNotFoundException e) {
-            print("Error: Fichero de clave " + ficheroClave + " no válido");
+            print("❌ Error 151: Fichero de clave " + ficheroClave + " no válido");
+            return null;
         }
-        return clave;
     }
-    public void escribirClave(SecretKey clave){
+
+    /**
+     * Escribe una clave en un archivo especificado.
+     *
+     * @param clave La clave a escribir en el archivo.
+     */
+    public void escribirClave(SecretKey clave) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ficheroClave))) {
             out.writeObject(clave);
             print("-------------------------------------");
             print("\uD83D\uDD10Clave guardada en el archivo: " + ficheroClave);
         } catch (IOException e) {
-            print("Error: Fichero de clave " + ficheroClave + " no válido");
+            print("❌ Error 161: Fichero de clave " + ficheroClave + " no válido");
         }
     }
 
@@ -228,6 +303,28 @@ public class EntradaSalida {
      */
     public void setFicheroClave(String ficheroClave) {
         this.ficheroClave = ficheroClave;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EntradaSalida that)) return false;
+        return isTraza() == that.isTraza() && Objects.equals(getFicheroEntrada(), that.getFicheroEntrada()) && Objects.equals(getFicheroSalida(), that.getFicheroSalida()) && Objects.equals(getFicheroClave(), that.getFicheroClave());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFicheroEntrada(), getFicheroSalida(), getFicheroClave(), isTraza());
+    }
+
+    @Override
+    public String toString() {
+        return "EntradaSalida{" +
+                "ficheroEntrada='" + ficheroEntrada + '\'' +
+                ", ficheroSalida='" + ficheroSalida + '\'' +
+                ", ficheroClave='" + ficheroClave + '\'' +
+                ", traza=" + traza +
+                '}';
     }
 
     /**

@@ -9,18 +9,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="avances p3 8 (Inicio cbc)">
-      <change afterPath="$PROJECT_DIR$/config_aes_cbc.txt" afterDir="false" />
+    <list default="true" id="f8a25798-f9fe-4b53-b904-763a03599a59" name="Changes" comment="avances p3 8 (Pasar a mayusculas menos clave)">
+      <change afterPath="$PROJECT_DIR$/1juan_adelantada/Test-p3-adelantada-21-nov.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1juan_adelantada/_config-corregir-21-nov-con-traza.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1juan_adelantada/automatico.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1juan_adelantada/config-corregir-21-nov-con-traza.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1juan_adelantada/fuentes/CLAVEfuenteJuan.cla" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1juan_adelantada/fuentes/quijote1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1juan_adelantada/fuentes/quijote2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1juan_adelantada/fuentes/quijote3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CLAVE_AES.DAT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_aes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config_aes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salida.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mio/config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config_aes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mio/config_aes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config_aes_cbc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mio/config_aes_cbc.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AES.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/textoPlano.txt" beforeDir="false" afterPath="$PROJECT_DIR$/textoPlano.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EntradaSalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntradaSalida.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/textoPlano.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mio/textoPlano.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,33 +77,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "P3",
-    "last_opened_file_path": "/Users/roberto/Documents/GitHub/P1y2_si2023",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "/Users/roberto/Documents/Universidad/SEI/Practica_SEI/P1y2_si2023/src/Main.java",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;P3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/roberto/Documents/GitHub/P1y2_si2023/1juan_adelantada/fuentes&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/roberto/Documents/Universidad/SEI/Practica_SEI/P1y2_si2023/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/1juan_adelantada/fuentes" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/1juan_adelantada" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/mio" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -111,7 +123,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-1.8" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="P1y2_si2023" />
-      <option name="PROGRAM_PARAMETERS" value="-f config_aes_cbc.txt" />
+      <option name="PROGRAM_PARAMETERS" value="-f ./1juan_adelantada/config-corregir-21-nov-con-traza.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -178,7 +190,11 @@
       <workItem from="1700136593154" duration="360000" />
       <workItem from="1700138410215" duration="595000" />
       <workItem from="1700143409784" duration="2258000" />
-      <workItem from="1700150448585" duration="9095000" />
+      <workItem from="1700150448585" duration="9339000" />
+      <workItem from="1700479416180" duration="18000" />
+      <workItem from="1700668544090" duration="16823000" />
+      <workItem from="1700728959092" duration="5000" />
+      <workItem from="1700737164838" duration="8162000" />
     </task>
     <task id="LOCAL-00001" summary="Add Main, Controller.run">
       <option name="closed" value="true" />
@@ -500,7 +516,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700145668078</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="avances p3 8 (Pasar a mayusculas menos clave)">
+      <option name="closed" value="true" />
+      <created>1700159951951</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1700159951951</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,7 +542,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Cifrado OK" />
     <MESSAGE value="Primera version casi okk" />
     <MESSAGE value="Primera version para SEI okk" />
     <MESSAGE value="Cambios lectura y escritura de ficheros" />
@@ -543,14 +566,8 @@
     <MESSAGE value="avances p3 8 (mostrar clave)" />
     <MESSAGE value="avances p3 8 (Mostrar clave)" />
     <MESSAGE value="avances p3 8 (Inicio cbc)" />
-    <option name="LAST_COMMIT_MESSAGE" value="avances p3 8 (Inicio cbc)" />
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="entrada" language="JAVA" />
-      </configuration>
-    </watches-manager>
+    <MESSAGE value="avances p3 8 (Pasar a mayusculas menos clave)" />
+    <option name="LAST_COMMIT_MESSAGE" value="avances p3 8 (Pasar a mayusculas menos clave)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
